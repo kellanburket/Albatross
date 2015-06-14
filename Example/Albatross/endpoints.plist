@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>needle</key>
+	<dict>
+		<key>one</key>
+		<dict/>
+		<key>many</key>
+		<dict/>
+	</dict>
+	<key>stash</key>
+	<dict>
+		<key>many</key>
+		<dict/>
+		<key>one</key>
+		<dict/>
+	</dict>
+	<key>project</key>
+	<dict>
+		<key>one</key>
+		<dict/>
+		<key>many</key>
+		<dict/>
+	</dict>
+	<key>pattern</key>
+	<dict>
+		<key>many</key>
+		<dict>
+			<key>get</key>
+			<string>patterns/search.json</string>
+		</dict>
+		<key>one</key>
+		<dict>
+			<key>get</key>
+			<string>patterns/:id</string>
+			<key>projects</key>
+			<dict>
+				<key>get</key>
+				<string>projects.json</string>
+			</dict>
+			<key>comments</key>
+			<dict>
+				<key>get</key>
+				<string>comments.json</string>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

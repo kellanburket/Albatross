@@ -1,0 +1,6 @@
+framework module Wildcard {
+  umbrella header "Pods-Albatross_Example-Wildcard-umbrella.h"
+
+  export *
+  module * { export * }
+}

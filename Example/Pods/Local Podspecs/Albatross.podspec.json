@@ -1,0 +1,31 @@
+{
+  "name": "Albatross",
+  "version": "0.1.0",
+  "summary": "A short description of Albatross.",
+  "description": "                       An optional longer description of Albatross\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/Albatross",
+  "license": "MIT",
+  "authors": {
+    "Kellan Cummings": "kellan.cummings@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/Albatross.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "Albatross": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "frameworks": "UIKit",
+  "dependencies": {
+    "Wildcard": [
+
+    ]
+  }
+}

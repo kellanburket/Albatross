@@ -1,0 +1,15 @@
+
+	ViewController: UITableView--controls access to view and manages a model
+	CollectionController: UITableView--controls access to a view and manages a collection of models
+
+	ActiveRecord: calls APi and send Params string, if any
+		Api: Initiates transaction, which pulls URL, Authentication Method, RequestType, and other header information from plist
+			- Authentication Service: Builds Header (Does this need to be sent to Http class)
+			- Http receives params + headers + callback/delegate and sends request
+
+
+	User
+		Builds custom ActiveRecord Classes
+		Builds custom Collection Classes?
+		Sets up an api.plist with core api config and settings
+		Sets up an endpoints.plist with information about available api routes and security levels
