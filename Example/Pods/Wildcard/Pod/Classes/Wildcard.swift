@@ -25,54 +25,6 @@ public func =~(left: String, right: String) -> Bool {
 
 public extension String {
     
-    /**
-        Convert a string into an NSDate object. Currently supports both backslashes and hyphens in the following formats:
-        
-        * Y-m-d
-        * m-d-Y
-        * Y-n-j
-        * n-j-Y
-        
-        :returns: a date
-    */
-    public func toDate() -> NSDate? {
-
-        var patterns = [
-            "(\\d{4})[-\\/](\\d{1,2})[-\\/](\\d{1,2})": ["year", "month", "day"],
-            "(\\d{1,2})[-\\/](\\d{1,2})[-\\/](\\d{4})": ["year", "month", "day"]
-        ]
-        
-        for (pattern, map) in patterns {
-            if let matches = self.match(pattern) {
-                //println("Matches \(matches)")
-                if(matches.count == 4) {
-                    var dictionary = [String:String]()
-                    
-                    for (i, item) in enumerate(map) {
-                        dictionary[item] = matches[i + 1]
-                    }
-                    
-                    let calendar = NSCalendar.currentCalendar()
-                    let comp = NSDateComponents()
-                    
-                    if let year = dictionary["year"]?.toInt() {
-                        comp.year = year
-                        if let month = dictionary["month"]?.toInt() {
-                            comp.month = month
-                            if let day = dictionary["day"]?.toInt() {
-                                comp.day = day
-                                comp.hour = 0
-                                comp.minute = 0
-                                comp.second = 0
-                                return calendar.dateFromComponents(comp)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return nil
-    }
 
     /**
         Split a string into an array of strings by slicing at delimiter

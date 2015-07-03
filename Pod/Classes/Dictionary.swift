@@ -10,6 +10,7 @@ import Foundation
 
 func +<T, E>(left: [T: E], right: [T: E]) -> [T: E] {
     var d = [T: E]()
+    
     for (k, v) in left {
         d[k] = v
     }
@@ -17,10 +18,10 @@ func +<T, E>(left: [T: E], right: [T: E]) -> [T: E] {
     for (k, v) in right {
         d[k] = v
     }
-    
+
     return d
 }
 
-func +=<T, E>(left: [T: E], right: [T: E]) -> [T: E] {
-    return left + right
+func +=<T, E>(inout left: [T: E], right: [T: E]) {
+    left = left + right
 }

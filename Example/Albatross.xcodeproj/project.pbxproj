@@ -7,16 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D7D3B1E3E4D9E99A05F3C1B /* Pods_Albatross_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111392BD3DFAE8B2AC44C52B /* Pods_Albatross_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		231F14502B5551315C9EB2E3 /* Pods_Albatross_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A976B735422E1C6686B4CEB /* Pods_Albatross_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		66686EB934C0C33BCD3FFE2D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A350CF9AFA56AA6984BEDA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		761B10EB1B2FFC88005EB620 /* Craft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761B10EA1B2FFC88005EB620 /* Craft.swift */; };
+		7631FD591B32BE99006476DC /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; };
+		7631FD5A1B32BE99006476DC /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7631FD5B1B32BE99006476DC /* Reflektor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD581B32BE99006476DC /* Reflektor.framework */; };
+		7631FD5C1B32BE99006476DC /* Reflektor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD581B32BE99006476DC /* Reflektor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7659FEA61B406D430053E7A9 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC9DB01B2896650084749D /* Pattern.swift */; };
+		7659FEA71B406D460053E7A9 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6DE1B3D9A0F0008126A /* Project.swift */; };
+		7659FEA81B406D490053E7A9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6E41B3F268A0008126A /* User.swift */; };
+		7659FEA91B406D4B0053E7A9 /* Craft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761B10EA1B2FFC88005EB620 /* Craft.swift */; };
+		76A9B6DF1B3D9A0F0008126A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6DE1B3D9A0F0008126A /* Project.swift */; };
+		76A9B6E51B3F268A0008126A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6E41B3F268A0008126A /* User.swift */; };
 		76AC9DB11B2896650084749D /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC9DB01B2896650084749D /* Pattern.swift */; };
 		76AC9DB31B2896AB0084749D /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AC9DB21B2896AB0084749D /* endpoints.plist */; };
 		76AC9DB51B2896D80084749D /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AC9DB41B2896D80084749D /* api.plist */; };
+		76D641251B42D10900D37054 /* endpoints-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76D641241B42D10900D37054 /* endpoints-2.plist */; };
+		9416CFC44B1D565617CBBA42 /* Pods_Albatross_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE1447C3128513BE6895D6A3 /* Pods_Albatross_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +43,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7631FD5D1B32BE99006476DC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7631FD5A1B32BE99006476DC /* CommonCrypto.framework in Embed Frameworks */,
+				7631FD5C1B32BE99006476DC /* Reflektor.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		111392BD3DFAE8B2AC44C52B /* Pods_Albatross_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Albatross_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		208AC9AF42DD649EAFAB77AC /* Pods-Albatross_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Albatross_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Albatross_Example/Pods-Albatross_Example.release.xcconfig"; sourceTree = "<group>"; };
 		36DAC0EBB277E6B4417A2D9A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3D3253241466E56B38FCAB0C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		410C971144203CFB1409C59E /* Pods_Albatross_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Albatross_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A2F5E9ACA68D2B2E3CA5AA /* Pods-Albatross_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Albatross_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Albatross_Tests/Pods-Albatross_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		56A350CF9AFA56AA6984BEDA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* Albatross_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Albatross_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,13 +74,21 @@
 		607FACE51AFB9204008FA782 /* Albatross_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Albatross_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		761B10EA1B2FFC88005EB620 /* Craft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Craft.swift; sourceTree = "<group>"; };
+		7631FD571B32BE99006476DC /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = ../Frameworks/CommonCrypto.framework; sourceTree = "<group>"; };
+		7631FD581B32BE99006476DC /* Reflektor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reflektor.framework; path = ../Frameworks/Reflektor.framework; sourceTree = "<group>"; };
 		7668E8041B2DF14100C4ACD7 /* Tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tester.playground; sourceTree = "<group>"; };
+		76A9B6DE1B3D9A0F0008126A /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		76A9B6E41B3F268A0008126A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		76AC9DB01B2896650084749D /* Pattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		76AC9DB21B2896AB0084749D /* endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = endpoints.plist; sourceTree = "<group>"; };
 		76AC9DB41B2896D80084749D /* api.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = api.plist; sourceTree = "<group>"; };
+		76D641241B42D10900D37054 /* endpoints-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "endpoints-2.plist"; sourceTree = "<group>"; };
+		7A976B735422E1C6686B4CEB /* Pods_Albatross_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Albatross_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F64F0AF8730DFBD2A069064 /* Pods-Albatross_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Albatross_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Albatross_Example/Pods-Albatross_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		95BC4E282AC5C2B9CF4B8EC6 /* Albatross.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Albatross.podspec; path = ../Albatross.podspec; sourceTree = "<group>"; };
 		DC3B6BFB5CA7FEC172048119 /* Pods-Albatross_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Albatross_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Albatross_Tests/Pods-Albatross_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		FE1447C3128513BE6895D6A3 /* Pods_Albatross_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Albatross_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +96,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66686EB934C0C33BCD3FFE2D /* Pods.framework in Frameworks */,
+				7631FD5B1B32BE99006476DC /* Reflektor.framework in Frameworks */,
+				7631FD591B32BE99006476DC /* CommonCrypto.framework in Frameworks */,
+				9416CFC44B1D565617CBBA42 /* Pods_Albatross_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D7D3B1E3E4D9E99A05F3C1B /* Pods_Albatross_Tests.framework in Frameworks */,
+				231F14502B5551315C9EB2E3 /* Pods_Albatross_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +128,8 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				7631FD571B32BE99006476DC /* CommonCrypto.framework */,
+				7631FD581B32BE99006476DC /* Reflektor.framework */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for Albatross */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -113,8 +155,12 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				7668E8041B2DF14100C4ACD7 /* Tester.playground */,
 				76AC9DB01B2896650084749D /* Pattern.swift */,
+				76A9B6DE1B3D9A0F0008126A /* Project.swift */,
+				76A9B6E41B3F268A0008126A /* User.swift */,
+				761B10EA1B2FFC88005EB620 /* Craft.swift */,
 				76AC9DB41B2896D80084749D /* api.plist */,
 				76AC9DB21B2896AB0084749D /* endpoints.plist */,
+				76D641241B42D10900D37054 /* endpoints-2.plist */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -162,8 +208,9 @@
 		AB024B775D98632BE727A6E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				410C971144203CFB1409C59E /* Pods_Albatross_Example.framework */,
-				111392BD3DFAE8B2AC44C52B /* Pods_Albatross_Tests.framework */,
+				56A350CF9AFA56AA6984BEDA /* Pods.framework */,
+				FE1447C3128513BE6895D6A3 /* Pods_Albatross_Example.framework */,
+				7A976B735422E1C6686B4CEB /* Pods_Albatross_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -181,6 +228,7 @@
 				607FACCE1AFB9204008FA782 /* Resources */,
 				7232D8DF17E3673E4E95AD8A /* Embed Pods Frameworks */,
 				6A36B32B187CE9B1F400B2AE /* Copy Pods Resources */,
+				7631FD5D1B32BE99006476DC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,6 +304,7 @@
 			files = (
 				76AC9DB51B2896D80084749D /* api.plist in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				76D641251B42D10900D37054 /* endpoints-2.plist in Resources */,
 				76AC9DB31B2896AB0084749D /* endpoints.plist in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -344,7 +393,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Albatross_Example/Pods-Albatross_Example-frameworks.sh\"";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Albatross_Example/Pods-Albatross_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CD56F1B825E983A43859C658 /* Embed Pods Frameworks */ = {
@@ -371,6 +420,9 @@
 			files = (
 				76AC9DB11B2896650084749D /* Pattern.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				76A9B6E51B3F268A0008126A /* User.swift in Sources */,
+				761B10EB1B2FFC88005EB620 /* Craft.swift in Sources */,
+				76A9B6DF1B3D9A0F0008126A /* Project.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,7 +431,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7659FEA81B406D490053E7A9 /* User.swift in Sources */,
+				7659FEA61B406D430053E7A9 /* Pattern.swift in Sources */,
+				7659FEA91B406D4B0053E7A9 /* Craft.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				7659FEA71B406D460053E7A9 /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +563,9 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods-Albatross_Example",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods-Albatross_Tests",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Reflektor-bsygjvhdyvmvppfafwbjsawvcrrj/Build/Products/Debug-iphoneos",
+					"/Users/kellancummings/ios_workspace/CommonCrypto-Dynamic",
+					/Users/kellancummings/ios_workspace/Albatross/Frameworks,
 				);
 				INFOPLIST_FILE = Albatross/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -524,6 +583,9 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods-Albatross_Example",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods-Albatross_Tests",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Reflektor-bsygjvhdyvmvppfafwbjsawvcrrj/Build/Products/Debug-iphoneos",
+					"/Users/kellancummings/ios_workspace/CommonCrypto-Dynamic",
+					/Users/kellancummings/ios_workspace/Albatross/Frameworks,
 				);
 				INFOPLIST_FILE = Albatross/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

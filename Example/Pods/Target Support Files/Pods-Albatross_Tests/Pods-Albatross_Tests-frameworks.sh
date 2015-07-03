@@ -49,11 +49,9 @@ code_sign() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Albatross.framework'
-  install_framework 'FBSnapshotTestCase.framework'
   install_framework 'Wildcard.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Albatross.framework'
-  install_framework 'FBSnapshotTestCase.framework'
   install_framework 'Wildcard.framework'
 fi

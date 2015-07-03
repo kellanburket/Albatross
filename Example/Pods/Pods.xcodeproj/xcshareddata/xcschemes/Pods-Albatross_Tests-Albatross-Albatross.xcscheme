@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "47C1D6D45B4D85B6AA902F3D"
+               BlueprintIdentifier = "3FE53C1DB0588DF436EC3A3C"
                BuildableName = "Albatross.bundle"
                BlueprintName = "Pods-Albatross_Tests-Albatross-Albatross"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "47C1D6D45B4D85B6AA902F3D"
-            BuildableName = "Albatross.bundle"
-            BlueprintName = "Pods-Albatross_Tests-Albatross-Albatross"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

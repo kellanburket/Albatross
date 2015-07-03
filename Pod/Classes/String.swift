@@ -23,16 +23,74 @@ public let WhitelistedPercentEncodingCharacters: [UnicodeScalar] = [
     ".", "-", "_", "~"
 ]
 
+private let consonant = "[b-df-hj-np-tv-z]"
+private let vowel = "[aeiou]"
+
+let plurals: [(String, String)] = [
+    ("(?<=f)oo(?=t)$|(?<=t)oo(?=th)$", "ee"),
+    ("(?<=i)fe$|(?<=[eao]l)f$|(?<=(l|sh)ea)f$", "ves"),
+    ("\\w{2,}[ie]x", "ices"),
+    ("[ml]ouse$", "ice"),
+    ("man$", "men"),
+    ("child$", "children"),
+    ("person$", "people"),
+    ("eau$", "eaux"),
+    ("(?<=-by)$", "s"),
+    ("(?<=[^q]\(vowel)y)$", "s"),
+    ("y$", "ies"),
+    ("(?<=s|sh|tch)$", "es"),
+    ("(?<=\(vowel)\(consonant)i)um", "a"),
+    ("(?<=\\w)$", "s")
+    //"a$": "ae",
+    //"us$": "i"
+    //"us$": "ora",
+    //"us$": "era",
+]
+
+private let identicalPlurals: [String] = [
+    "bison",
+    "buffalo",
+    "deer",
+    "duck",
+    "fish",
+    "moose",
+    "pike",
+    "plankton",
+    "salmon",
+    "sheep",
+    "squid",
+    "swine",
+    "trout",
+    "beef",
+    "wildlife",
+    "golf"
+]
+
+private let irregularPlurals: [String:String] = [
+    "potato": "potatoes",
+    "die": "dice"
+]
+
 extension String {
 
-    func toCamelcase() {
-        self.gsub("_(\\w)") { match in
-            return match.uppercaseString
+    subscript(index: Int) -> String? {
+        for (i, char) in enumerate(self) {
+            if i == index {
+                return String(char)
+            }
+        }
+
+        return nil
+    }
+    
+    func toCamelcase() -> String {
+        return self.gsub("_\\w") { match in
+            return match[1]?.uppercaseString ?? match
         }
     }
     
-    func toSnakecase() {
-        self.gsub("(\\p{L})") { match in
+    func toSnakecase() -> String {
+        return self.gsub("(\\p{L})") { match in
             return "_\(match.lowercaseString)"
         }
     }
@@ -116,6 +174,75 @@ extension String {
         return rstring
     }
     
+    func pluralize(language: String = "en/us") -> String {
+        if let plural = find(identicalPlurals, self) {
+            return self
+        }
+        
+        if let plural = irregularPlurals[self] {
+            return plural
+        }
+        
+        for (regex, mod) in plurals {
+            var replacement = self.gsubi(regex, mod)
+            if replacement != self {
+                return replacement
+            }
+        }
+        
+        return self
+    }
+
+    
+    /**
+    Convert a string into an NSDate object. Currently supports both backslashes and hyphens in the following formats:
+    
+    * Y-m-d
+    * m-d-Y
+    * Y-n-j
+    * n-j-Y
+    
+    :returns: a date
+    */
+    public func toDate() -> NSDate? {
+        
+        var patterns = [
+            "(\\d{4})[-\\/](\\d{1,2})[-\\/](\\d{1,2})": ["year", "month", "day"],
+            "(\\d{1,2})[-\\/](\\d{1,2})[-\\/](\\d{4})": ["month", "day", "year"]
+        ]
+        
+        for (pattern, map) in patterns {
+            if let matches = self.match(pattern) {
+                //println("Matches \(matches)")
+                if(matches.count == 4) {
+                    var dictionary = [String:String]()
+                    
+                    for (i, item) in enumerate(map) {
+                        dictionary[item] = matches[i + 1]
+                    }
+                    
+                    let calendar = NSCalendar.currentCalendar()
+                    let comp = NSDateComponents()
+                    
+                    if let year = dictionary["year"]?.toInt() {
+                        comp.year = year
+                        if let month = dictionary["month"]?.toInt() {
+                            comp.month = month
+                            if let day = dictionary["day"]?.toInt() {
+                                comp.day = day
+                                comp.hour = 0
+                                comp.minute = 0
+                                comp.second = 0
+                                return calendar.dateFromComponents(comp)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return nil
+    }
+
     /**
     Convert a string into an NSURL object.
     
@@ -123,5 +250,11 @@ extension String {
     */
     func toUrl() -> NSURL? {
         return NSURL(string: self)
+    }
+    
+    var decapitalize: String {
+        var prefix = self[startIndex..<advance(startIndex, 1)].lowercaseString
+        var body = self[advance(startIndex, 1)..<endIndex]
+        return "\(prefix)\(body)"
     }
 }

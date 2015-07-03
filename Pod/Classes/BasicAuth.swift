@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BasicAuth: AuthenticationService {
+public class BasicAuth: AuthorizationService {
     
     var personalKey: String = ""
     var consumerKey: String = ""
@@ -24,7 +24,7 @@ public class BasicAuth: AuthenticationService {
         super.init(args)
     }
     
-    override public func setHeader(url: NSURL, parameters: [String: AnyObject], inout request: NSMutableURLRequest) {
+    override public func setHeader(url: NSURL, inout request: NSMutableURLRequest) {
    
         let encodedAuth = "Basic " + "\(consumerKey):\(personalKey)".base64Encoded
         

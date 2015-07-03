@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "429E5E62A0D932AA3038E693"
+               BlueprintIdentifier = "BF40F3223A2C9A267019D798"
                BuildableName = "Albatross.bundle"
                BlueprintName = "Pods-Albatross_Example-Albatross-Albatross"
                ReferencedContainer = "container:Pods.xcodeproj">

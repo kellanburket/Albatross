@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
     'Albatross' => ['Pod/Assets/*.png']
   }
 
-# s.public_header_files = 'Pod/Classes/TypeReflector.h'
-  s.frameworks = 'UIKit'
-  s.dependency 'Wildcard'
+s.frameworks = 'UIKit'
+s.vendored_frameworks = 'Frameworks/Reflektor.framework', 'Frameworks/CommonCrypto.framework'
+s.dependency 'Wildcard'
 end

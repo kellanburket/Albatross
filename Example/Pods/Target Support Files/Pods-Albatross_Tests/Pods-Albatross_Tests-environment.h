@@ -12,12 +12,6 @@
 #define COCOAPODS_VERSION_MINOR_Albatross 1
 #define COCOAPODS_VERSION_PATCH_Albatross 0
 
-// FBSnapshotTestCase
-#define COCOAPODS_POD_AVAILABLE_FBSnapshotTestCase
-#define COCOAPODS_VERSION_MAJOR_FBSnapshotTestCase 1
-#define COCOAPODS_VERSION_MINOR_FBSnapshotTestCase 8
-#define COCOAPODS_VERSION_PATCH_FBSnapshotTestCase 1
-
 // Wildcard
 #define COCOAPODS_POD_AVAILABLE_Wildcard
 #define COCOAPODS_VERSION_MAJOR_Wildcard 1

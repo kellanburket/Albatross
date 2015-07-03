@@ -13,115 +13,139 @@ protocol OAuth1Delegate {
     func accessTokenHasExpired()
 }
 
-public class OAuth1: AuthenticationService {
+public class OAuth1: AuthorizationService {
     
     private var delegate: OAuth1Delegate?
     
-    private var consumerKey: String = ""
-    private var consumerSecret: String = ""
+    private var consumerKey: String
+    private var consumerSecret: String
 
-    private var requestTokenCallback: String = ""
-    private var accessTokenUrl: NSURL?
-    private var requestTokenUrl: NSURL?
-    private var authorizeUrl: NSURL?
+    private var requestTokenCallback: String
+    private var accessTokenUrl: NSURL
+    private var requestTokenUrl: NSURL
+    private var authorizeUrl: NSURL
     
     private var requestToken: String?
     private var requestTokenSecret: String?
     
-    private var accessToken: String = ""
-    private var accessTokenSecret: String = ""
+    private var accessToken: String?
+    private var accessTokenSecret: String?
     
     private var username: String?
     
-    private var signingKey: String {
-        return "\(consumerSecret.percentEncode())&\(accessTokenSecret.percentEncode())"
+    private var signingKey: String? {
+        if let secret = accessTokenSecret {
+            return "\(consumerSecret.percentEncode())&\(secret.percentEncode())"
+        }
+        
+        return nil
+    }
+    
+    private var requestHeaders: [String: String]? {
+        if let token = accessToken {
+            return [
+                "oauth_consumer_key": consumerKey,
+                "oauth_token": token,
+                "oauth_signature_method": "HMAC-SHA1",
+                "oauth_timestamp": getCurrentTimestamp(),
+                "oauth_nonce": generateNonce(),
+                "oauth_version": "1.0"
+            ]
+        }
+        return nil
     }
 
     override public init(_ args: NSDictionary) {
-        println(args);
+        
         if let consumerKey = args["consumer_key"] as? String {
             self.consumerKey = consumerKey
+        } else {
+            fatalError("Consumer Key must be provided for OAuth1 Authentication")
         }
 
         if let consumerSecret = args["consumer_secret"] as? String {
             self.consumerSecret = consumerSecret
+        } else {
+            fatalError("Consumer Secret must be provided for OAuth1 Authentication")
         }
 
         if let requestTokenCallback = args["request_token_callback"] as? String {
             self.requestTokenCallback = requestTokenCallback
+        } else {
+            fatalError("Request Token Callback must be provided for OAuth1 Authentication")
         }
 
         if let requestTokenUrl = args["request_token_url"] as? String {
             self.requestTokenUrl = NSURL(string: requestTokenUrl)!
+        } else {
+            fatalError("Request Token URL must be provided for OAuth1 Authentication")
         }
         
         if let authorizeUrl = args["authorize_url"] as? String {
             self.authorizeUrl = NSURL(string: authorizeUrl)!
+        } else {
+            fatalError("Authorization URL must be provided for OAuth1 Authentication")
         }
         
         if let accessTokenUrl = args["access_token_url"] as? String {
             self.accessTokenUrl = NSURL(string: accessTokenUrl)!
+        } else {
+            fatalError("Access Token URL must be provided for OAuth1 Authentication")
+        }
+        
+        if let accessToken = args["access_token"] as? String {
+            self.accessToken = accessToken
+        }
+        
+        if let accessTokenSecret = args["access_token_secret"] as? String {
+            self.accessTokenSecret = accessTokenSecret
         }
         
         super.init(args)
     }
 
-    override public func setSignature(url: NSURL, parameters: [String:AnyObject], method: String, inout headers: [String:String]) {
-
-        var oAuthHeaders = parameters + headers
-        
-        var newParams = [String:AnyObject]()
+    override public func setSignature(url: NSURL, parameters: [String:AnyObject], method: String, onComplete: () -> ()) {
+        //println("Setting Signature")
+        headers = [String:String]()
         
         for (key, param) in parameters {
             if let pstring = param as? String {
                 if pstring != "" {
-                    newParams[key] = pstring
+                    headers[key] = pstring
                 }
             } else {
-                newParams[key] = param
+                headers[key] = "\(param)"
             }
         }
         
-        headers["oauth_signature"] = OAuth1.buildSignature(
-            url,
-            params: oAuthHeaders,
-            signingKey: signingKey,
-            method: method
-        )!
-        
-        self.headers = headers
-    }
-    
-    override public func setHeader(url: NSURL, parameters: [String: AnyObject], inout request: NSMutableURLRequest) {
-        var header: String = "OAuth realm=\"\(url.absoluteString!)\", "
-        
-        var keys = [String](parameters.keys)
-        keys.sort { return $0 < $1 }
-        
-        for key in keys {
-            var akey = key.percentEncode()
-            var aval = "\(parameters[key]!)".percentEncode()
-            header += "\(akey)=\"\(aval)\", "
+        if let request = requestHeaders {
+            headers += request
         }
         
-        request.setValue(header.rtrim(", "), forHTTPHeaderField: "Authorization")
+        buildSignature(url, method: method) { signature in
+            self.headers["oauth_signature"] = signature
+            //println("Headers: \(self.headers)")
+            onComplete()
+        }
     }
 
-    func setAccessToken(accessToken: String, accessTokenSecret: String, username: String) {
-        self.accessToken = accessToken
-        self.username = username
-        self.accessTokenSecret = accessTokenSecret
-    }
-
-    class func buildSignature(URL: NSURL, params: [String:AnyObject], signingKey: String, method: String) -> String? {
+    func buildSignature(URL: NSURL, method: String, onComplete: (String) -> ()) {
+        //println("Building Signature")
         var output = ""
         
-        var keys = [String](params.keys)
+        //println("Getting Header Keys")
+        var keys = [String](headers.keys)
+
+        //println("Sorting Header Keys")
+        keys.sort { $0 < $1 }
         
-        keys.sort({ return $0 < $1 })
-        
+        //println("Encoding Keys")
         for key in keys {
-            output += (key.percentEncode() + "=" + "\(params[key]!)".percentEncode() + "&")
+            if let header = headers[key] {
+                output += (key.percentEncode() + "=" + "\(header)".percentEncode() + "&")
+            } else {
+                //println("Cannot Set \(key) for \(headers)")
+            }
         }
         
         output = output.rtrim("&").percentEncode()
@@ -129,61 +153,124 @@ public class OAuth1: AuthenticationService {
         
         var signatureInput = "\(method)&\(absoluteURL)&\(output)"
         
-        return signatureInput.sign(HMACAlgorithm.SHA1, key: signingKey)
+        if let key = signingKey {
+            if let input = signatureInput.sign(HMACAlgorithm.SHA1, key: key) {
+                onComplete(input)
+            }
+        } else {
+            println("Unable to Load Request Without Access Token")
+        }
     }
     
-    func fetchAccessToken(#token: String, verifier: String, username: String = "") {
+    override public func setHeader(url: NSURL, inout request: NSMutableURLRequest) {
+        var header: String = "OAuth realm=\"\(url.absoluteString!)\", "
+        
+        var keys = [String](headers.keys)
+        keys.sort { return $0 < $1 }
+        
+        for key in keys {
+            var akey = key.percentEncode()
+            var aval = "\(headers[key]!)".percentEncode()
+            header += "\(akey)=\"\(aval)\", "
+        }
+        
+        header = header.rtrim(", ")
+        //println("Header: \(header)")
+        
+        request.setValue(header, forHTTPHeaderField: "Authorization")
+    }
+
+    func setAccessToken(accessToken: String, accessTokenSecret: String, username: String) {
+        self.accessToken = accessToken
+        self.username = username
+        self.accessTokenSecret = accessTokenSecret
+    }
+    
+    private func getRequestTokenURL(onComplete: (NSURL) -> ()) {
+        var requestHeaders: [String: String] = [
+            "oauth_callback": requestTokenCallback,
+            "oauth_consumer_key": consumerKey,
+            "oauth_nonce": generateNonce(),
+            "oauth_signature_method": "HMAC-SHA1",
+            "oauth_timestamp": getCurrentTimestamp(),
+            "oauth_version": "1.0"
+        ]
+        
+        var signingKey: String = consumerSecret.percentEncode() + "&"
+        
+        let request = HttpRequest(URL: requestTokenUrl, method: HttpMethod.Get) { data in
+            
+            let query = HttpRequest.parseQuery(data, encoding: self.encoding)
+            
+            if query.count > 1 {
+                self.requestToken = query["oauth_token"]
+                self.requestTokenSecret = query["oauth_token_secret"]
+                
+                println("Request Token: \(self.requestToken)")
+                println("Request Token Secret: \(self.requestTokenSecret)")
+                
+                if  let urlString = self.authorizeUrl.absoluteString,
+                    let tokenString = self.requestToken,
+                    let url = NSURL(string: "\(urlString)?oauth_token=\(tokenString)"
+                ) {
+                    onComplete(url)
+                }
+            } else {
+                //AlertDialogueController("Error", "Purlie was unable to establish a connection with the server.").present()
+            }
+        }
+        
+        request.setHeaders(requestHeaders)
+    }
+    
+    private func fetchAccessToken(#token: String, verifier: String, username: String = "") {
         self.username = username
         
         var signingKey: String = "\(consumerSecret.percentEncode())&\(requestTokenSecret!.percentEncode())"
         
-        if let url = accessTokenUrl {
+        let request = HttpRequest(URL: accessTokenUrl, method: HttpMethod.Get) { data in
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
-            let request = HttpRequest(URL: url) { data in
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                
-                var parts = [String:String]()
-                
-                let params = String(NSString(data: data!, encoding: self.encoding)!).split("&")
+            var parts = [String:String]()
+            
+            let params = String(NSString(data: data, encoding: self.encoding)!).split("&")
 
-                for param in params {
-                    let values = param.split("=")
-                    let key: String = values[0]
-                    let value: String = values[1]
-                    parts[key] = value
-                }
-                
-                let query = HttpRequest.parseQuery(data, encoding: self.encoding)
-                
-                if let token = parts["oauth_token"] {
-                    self.accessToken = token
-                }
-                
-                if let secret = parts["oauth_token_secret"] {
-                    self.accessTokenSecret = secret
-                }
-                
-                if let delegate = self.delegate {
-                    delegate.accessTokenHasBeenFetched(
-                        self.accessToken,
-                        accessTokenSecret: self.accessTokenSecret,
-                        username: self.username!
-                    )
-                }
+            for param in params {
+                let values = param.split("=")
+                let key: String = values[0]
+                let value: String = values[1]
+                parts[key] = value
             }
             
-            request.setHeaders([
-                "oauth_consumer_key": consumerKey,
-                "oauth_nonce": generateNonce(),
-                "oauth_timestamp": getCurrentTimestamp(),
-                "oauth_signature_method": "HMAC-SHA1",
-                "oauth_token": self.requestToken!, //token,
-                "oauth_verifier": verifier,
-                "oauth_version": "1.0"
-            ])
+            let query = HttpRequest.parseQuery(data, encoding: self.encoding)
             
-            Http.post(request)
+            if let token = parts["oauth_token"] {
+                self.accessToken = token
+            }
+            
+            if let secret = parts["oauth_token_secret"] {
+                self.accessTokenSecret = secret
+            }
+            
+            if let delegate = self.delegate, token = self.accessToken, secret = self.accessTokenSecret, name = self.username {
+                delegate.accessTokenHasBeenFetched(token,
+                    accessTokenSecret: secret,
+                    username: name
+                )
+            }
         }
+        
+        request.setHeaders([
+            "oauth_consumer_key": consumerKey,
+            "oauth_nonce": generateNonce(),
+            "oauth_timestamp": getCurrentTimestamp(),
+            "oauth_signature_method": "HMAC-SHA1",
+            "oauth_token": self.requestToken!, //token,
+            "oauth_verifier": verifier,
+            "oauth_version": "1.0"
+        ])
+        
+        Http.post(request)
     }
     
     func fetchAccessToken(string: String) {
@@ -202,53 +289,5 @@ public class OAuth1: AuthenticationService {
             verifier: identifiers["oauth_verifier"]!,
             username: identifiers["username"]!
         )
-    }
-    
-    func getRequestTokenURL(onComplete: (NSURL) -> ()) {
-        var requestHeaders: [String: String] = [
-            "oauth_callback": requestTokenCallback,
-            "oauth_consumer_key": consumerKey,
-            "oauth_nonce": generateNonce(),
-            "oauth_signature_method": "HMAC-SHA1",
-            "oauth_timestamp": getCurrentTimestamp(),
-            "oauth_version": "1.0"
-        ]
-        
-        var signingKey: String = consumerSecret.percentEncode() + "&"
-        
-        if let url = requestTokenUrl {
-            
-            let request = HttpRequest(URL: url) { data in
-                
-                let query = HttpRequest.parseQuery(data, encoding: self.encoding)
-                
-                if query.count > 1 {
-                    self.requestToken = query["oauth_token"]
-                    self.requestTokenSecret = query["oauth_token_secret"]
-                    
-                    println("Request Token: \(self.requestToken)")
-                    println("Request Token Secret: \(self.requestTokenSecret)")
-                    
-                    if let urlString = self.authorizeUrl?.absoluteString, let tokenString = self.requestToken, let url = NSURL(string: "\(urlString)?oauth_token=\(tokenString)") {
-                        onComplete(url)
-                    }
-                } else {
-                    //AlertDialogueController("Error", "Purlie was unable to establish a connection with the server.").present()
-                }
-            }
-            request.setHeaders(requestHeaders)
-        }
-        
-    }
-        
-    func getRequestHeaders() -> [String: AnyObject] {
-        return [
-            "oauth_consumer_key": consumerKey,
-            "oauth_token": accessToken,
-            "oauth_signature_method": "HMAC-SHA1",
-            "oauth_timestamp": getCurrentTimestamp(),
-            "oauth_nonce": generateNonce(),
-            "oauth_version": "1.0"
-        ]
     }
 }

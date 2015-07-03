@@ -2,12 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Authorization</key>
+	<key>namespace</key>
+	<string>Albatross_Example</string>
+	<key>authentication</key>
 	<dict>
 		<key>OAuth2</key>
 		<dict/>
 		<key>OAuth1</key>
 		<dict>
+			<key>signature_method</key>
+			<string>HMAC-SHA1</string>
+			<key>access_token_secret</key>
+			<string>D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT</string>
+			<key>access_token</key>
+			<string>OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X</string>
 			<key>consumer_key</key>
 			<string>070C505B63E50C3BAD3D</string>
 			<key>consumer_secret</key>
@@ -31,7 +39,18 @@
 			<string>070C505B63E50C3BAD3D</string>
 		</dict>
 	</dict>
-	<key>URL</key>
+	<key>url</key>
 	<string>https://api.ravelry.com</string>
+	<key>version</key>
+	<string></string>
+	<key>options</key>
+	<dict>
+		<key>use_file_extensions</key>
+		<true/>
+		<key>use_accept_headers</key>
+		<false/>
+		<key>show_version_in_path</key>
+		<false/>
+	</dict>
 </dict>
 </plist>

@@ -1,12 +1,10 @@
 PODS:
   - Albatross (0.1.0):
     - Wildcard
-  - FBSnapshotTestCase (1.8.1)
   - Wildcard (1.0.5)
 
 DEPENDENCIES:
   - Albatross (from `../`)
-  - FBSnapshotTestCase
   - Wildcard
 
 EXTERNAL SOURCES:
@@ -14,8 +12,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Albatross: e37989b2ab4bc8ca1ada5e5cf162e59faab0422c
-  FBSnapshotTestCase: 3dc3899168747a0319c5278f5b3445c13a6532dd
+  Albatross: 4252180b88df641d44889fe2b30d38f9a42f269e
   Wildcard: 8279bd3eb02016240f2354012746372ad624a637
 
 COCOAPODS: 0.37.2

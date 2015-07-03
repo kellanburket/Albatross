@@ -29,7 +29,11 @@ public class Http: NSObject {
         }
         
         override func main() {
-            getSession().dataTaskWithRequest(request.prepare(method), completionHandler: request.onComplete).resume()
+            //println("Preparing Request")
+            request.prepare() { result in
+                println("Sending Request \(self.method.rawValue) \(self.request.url)")
+                self.getSession().dataTaskWithRequest(result, completionHandler: self.request.onComplete).resume()
+            }
         }
         
         func getSession() -> NSURLSession {
@@ -44,6 +48,10 @@ public class Http: NSObject {
 
     override private init() {
         super.init()
+    }
+    
+    public class func start(request: HttpRequest) {
+        Http().doAsyncRequest(request, method: request.method ?? HttpMethod.Get)
     }
     
     public class func post(request: HttpRequest) {
@@ -67,6 +75,8 @@ public class Http: NSObject {
     }
     
     func doAsyncRequest(request: HttpRequest, method: HttpMethod) {
+        //println("Doing Asynchronous Request \(method.rawValue) ... currently in queue count \(queue.operationCount)")
+        
         queue.addOperation(FetchOperation(request: request, method: method))
     }
 }

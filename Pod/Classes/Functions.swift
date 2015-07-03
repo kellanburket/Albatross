@@ -39,3 +39,9 @@ internal func jsonStringify(data: AnyObject) -> NSData? {
         return nil
     }
 }
+
+func Y<T, R>(f: (T -> R) -> (T -> R)) -> (T -> R) {
+    return { (t: T) -> R in
+        return f(Y(f))(t)
+    }
+}

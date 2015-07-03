@@ -22,17 +22,23 @@ public protocol HttpResultsDelegate {
 
 public class HttpRequest {
 
-    private var authenticationService: AuthenticationService?
+    private var authorizationService: AuthorizationService?
     private var handler: HttpResponseHandler
     
     private var headers: [String:String] = [
-        "Content-Type": HttpContentType.FormEncoded.description,
-        "Accept": HttpContentType.Json.description
+        "Content-Type": HttpMediaType.FormEncoded.description,
+        "Accept": HttpMediaType.Json.description
     ]
     
     private var parameters = [String:AnyObject]()
 
     private var baseUrl: NSURL
+    
+    public var url: String {
+        return baseUrl.absoluteString!
+    }
+    
+    public var method: HttpMethod
     
     public var contentType: String? {
         get {
@@ -56,60 +62,60 @@ public class HttpRequest {
         return handler
     }
     
-    
-
-    public init(URL: NSURL, params: [String:AnyObject], handler: HttpResponseHandler) {
+    public init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], handler: HttpResponseHandler) {
         self.baseUrl = URL
+        self.method = method
         self.parameters = params
         self.handler = handler
     }
 
-    public convenience init(URL: NSURL, params: [String:AnyObject], handler: (NSData!) -> ()) {
-        self.init(URL: URL, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(handler))
+    public convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], handler: (NSData!) -> ()) {
+        self.init(URL: URL, method: method, params: params, handler: HttpRequest.getDefaultCompletionHandler(handler))
     }
     
-    public convenience init(URL: NSURL, params: [String:AnyObject], delegate: HttpResultsDelegate) {
-        self.init(URL: URL, params: params, handler: HttpRequest.getDefaultCompletionHandler(delegate))
+    public convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], delegate: HttpResultsDelegate) {
+        self.init(URL: URL, method: method, params: params, handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
     
-    public convenience init(URL: NSURL, params: [String:AnyObject], delegate: HttpSuccessDelegate) {
-        self.init(URL: URL, params: params, handler: HttpRequest.getDefaultCompletionHandler(delegate))
+    public convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], delegate: HttpSuccessDelegate) {
+        self.init(URL: URL, method: method, params: params, handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
     
-    public convenience init(URL: NSURL, delegate: HttpResultsDelegate) {
-        self.init(URL: URL, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(delegate))
+    public convenience init(URL: NSURL, method: HttpMethod, delegate: HttpResultsDelegate) {
+        self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
     
-    public convenience init(URL: NSURL, delegate: HttpSuccessDelegate) {
-        self.init(URL: URL, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(delegate))
+    public convenience init(URL: NSURL, method: HttpMethod, delegate: HttpSuccessDelegate) {
+        self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
 
-    public convenience init(URL: NSURL, handler: (NSData!) -> ()) {
-        self.init(URL: URL, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(handler))
+    public convenience init(URL: NSURL, method: HttpMethod, handler: (NSData!) -> ()) {
+        self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(handler))
     }
 
-    public func authorize(service: AuthenticationService) {
-        self.authenticationService = service
+    public func authorize(service: AuthorizationService) {
+        self.authorizationService = service
     }
     
-    public func prepare(method: HttpMethod) -> NSMutableURLRequest {
-        
-        if let service = authenticationService {
-            service.setSignature(
-                baseUrl,
-                parameters: parameters,
-                method: method.description,
-                headers: &headers
-            )
+    public func prepare(onComplete: (NSMutableURLRequest) -> ()) {
+        //println("Preparing Request")
+        if let service = self.authorizationService {
+            //println("Prepping Authorization Service \(service)")
+            service.setSignature(self.baseUrl, parameters: self.parameters, method: method.description) {
+                //println("Signature has been set")
+                //self.headers["oauth_signature"] = signature
+                //println("Parameters: \(self.parameters)")
+                
+                var request = self.generateRequestObject()
+                
+                service.setHeader(self.baseUrl, request: &request)
+                
+                onComplete(request)
+            }
+        } else {
+            //println("Returning Generated Request Object")
+            onComplete(self.generateRequestObject())
         }
-        
-        var request = generateRequestObject(method)
-
-        if let service = authenticationService {
-            service.setHeader(baseUrl, parameters: parameters, request: &request)
-        }
-        
-        return request
     }
     
     public class func parseQuery(data: NSData, encoding: UInt) -> [String:String] {
@@ -149,7 +155,7 @@ public class HttpRequest {
         return String(format:"---------------------------%@", generateNonce(digits: 12))
     }
         
-    private func generateRequestObject(method: HttpMethod) -> NSMutableURLRequest {
+    private func generateRequestObject() -> NSMutableURLRequest {
 
         if method == HttpMethod.Get {
             baseUrl = NSURL(string: getAbsoluteURL())!
@@ -166,11 +172,8 @@ public class HttpRequest {
 
         setRequestHeaders(&request)
 
-        switch method {
-            case HttpMethod.Get:
-                baseUrl = NSURL(string: getAbsoluteURL())!
-            default:
-                prepareBody(&request)
+        if method != HttpMethod.Get {
+            prepareBody(&request)
         }
 
         return request
@@ -260,21 +263,24 @@ public class HttpRequest {
                 var statusCode = r.statusCode
                 switch statusCode {
                     case 200:
-                        //println("Success: 200")
-                        //println(data.toString())
+                        println("Success: 200")
                         handler(data)
+                    case 401:
+                        println("(401) Unauthorized")
                     case 403:
-                        println("403: Resource Forbidden")
+                        println("(403) Resource Forbidden")
                         //AlertDialogueController("Resource Forbidden", "You are not permitted to access the selected resource.").present()
                     case 404:
-                        println("404: Resource Not Found")
+                        println("(404) Resource Not Found")
                         //AlertDialogueController("Resource Not Found", "The selected resource cannot be found.").present()
                     case 408:
-                        println("408: Network Timeout")
+                        println("(408) Network Timeout")
                         //AlertDialogueController("Network Timeout", "The network timed out while attempting to complete your request.").present()
                     case 415:
-                        println("415: Unsupported Media Type")
+                        println("(415) Unsupported Media Type")
                         //AlertDialogueController("Unsupported Media Type", "You are attempting to upload an unsupported media type. The requested action cannot be completed.").present()
+                    case 500:
+                        println("(500) Server Error")
                     default:
                         //AlertDialogueController("Something went wrong.", "Please try your request again later.").present()
                         println("Status: \(statusCode)")
