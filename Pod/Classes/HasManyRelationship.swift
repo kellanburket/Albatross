@@ -10,20 +10,26 @@ import Foundation
 
 public class HasManyRelationship<T: Passenger>: PassengerRelationship<T>, HasManyRouter {
  
-    public var passengers = [Passenger]()
+    public var passengers = [Int: Passenger]()    
     
-    override public init(_ owner: Passenger) {
-        super.init(owner)
+    override public init() {
+        super.init()
     }
 
     override internal func getClassName() -> String {
         return ("\(T.self)".split(".").last ?? "").pluralize()
     }
+    
+    public var parent: Router? {
+        return owner
+    }
 
     public func list(onComplete: [T]? -> ()) {
         Api.shared.list(self) { records in
             if let passengers = records as? [T] {
-                self.passengers = passengers
+                for passenger in passengers {
+                    self.registerPassenger(passenger)
+                }
                 onComplete(passengers)
             } else {
                 onComplete(nil)
@@ -34,7 +40,7 @@ public class HasManyRelationship<T: Passenger>: PassengerRelationship<T>, HasMan
     public func create(params: [String: AnyObject], onComplete: T? -> Void) {
         Api.shared.create(self, data: params) { record in
             if let passenger = record as? T {
-                self.append(passenger)
+                self.registerPassenger(passenger)
                 onComplete(passenger)
             } else {
                 onComplete(nil)
@@ -43,60 +49,60 @@ public class HasManyRelationship<T: Passenger>: PassengerRelationship<T>, HasMan
     }
     
     public func find(id: Int, onComplete: T? -> Void) {
-        Api.shared.find(self) { record in
-            if let passenger = record as? T {
-                self.append(passenger)
-                onComplete(passenger)
-            } else {
-                onComplete(nil)
+        let passenger = T(["id": id])
+        registerPassenger(passenger)
+        
+        if let router = passenger as? Router {
+            Api.shared.find(router) { record in
+                if let passenger = record as? T {
+                    self.registerPassenger(passenger)
+                    onComplete(passenger)
+                } else {
+                    onComplete(nil)
+                }
             }
+        } else {
+            fatalError("'\(T.self)' is not compatible with `Router` protocol.")
         }
+    }
+
+    public func getOwnershipHierarchy() -> [Router] {
+        var components: [Router] = [self]
+        var router: Router = self
+        
+        while let parent = router.parent {
+            components.append(parent)
+            router = parent
+        }
+        
+        return components.reverse()
     }
 
     public override func serialize() -> [String: AnyObject] {
         var serial = [String: AnyObject]()
-        for passenger in passengers {
-            serial["\(passenger.id)"] = passenger.serialize()
+        for (id, passenger) in passengers {
+            serial["\(id)"] = passenger.serialize()
         }
         return serial
     }
-    
-    public override func setPathVariables(var path: String) -> String {
-        if let matches = path.scan("(?<=:)[\\w_\\.\\d]+(?=\\/|$)") {
-            println("Setting Path Variables \(matches)")
-            for arrMatch in matches {
-                for match in arrMatch {
-                    var submatch = match.split(".")
-                    if submatch.count == 2 {
-                        let type = submatch[0]
-                        let field = submatch[1]
-                        if let value: AnyObject = owner.getFieldValue(field) {
-                            path = path.gsub(":\(match)", "\(value)")
-                        }
-                    }
-                }
-            }
-        }
         
-        return path
-    }
-    
-    public func append(passenger: Passenger) {
-        if let passenger = passenger as? T {
-            let method = owner.asMethodName()
-            if let relationship = passenger.belongsToRelationships[method] {
+    public func registerPassenger(passenger: Passenger) {
+        if let passenger = passenger as? T, method = owner?.asMethodName() {
+ 
+            if let relationship = passenger.belongsToRelationships[method], owner = owner {
                 relationship.registerPassenger(owner)
+                passengers[passenger.id] = passenger
+            } else {
+                fatalError("'Has Many' relationship ('\(owner?.dynamicType.className)' has many '\(passenger.asMethodName().pluralize())') must register '\(passenger.dynamicType.className)' with corresponding 'Belongs To' ('\(passenger.dynamicType.className)' belongs to '\(method)') relationship.")
             }
+        } else {
+            fatalError("Cannot register passenger of type '\(passenger.self)'.")
         }
     }
 
-    public subscript(index: Int) -> Passenger? {
+    public subscript(id: Int) -> Passenger? {
         get {
-            if passengers.count > index {
-                return passengers[index]
-            }
-            
-            return nil
+            return passengers[id]
         }
     }
 }

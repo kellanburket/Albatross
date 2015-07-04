@@ -89,7 +89,6 @@ public class RegExp {
         var matches: [String] = [String]()
         
         getFirstMatch(input) { result in
-
             var numRanges = result.numberOfRanges
             
             for i in 0..<numRanges {
@@ -100,8 +99,10 @@ public class RegExp {
         }
         
         switch matches.count {
-            case 0: return nil
-            default: return matches
+            case 0:
+                return nil
+            default:
+                return matches
         }
     }
 

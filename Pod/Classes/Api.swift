@@ -168,7 +168,7 @@ public class Api: NSObject {
     public func save(router: Router, data: [String: AnyObject], onComplete: (Bool) -> ()) {
 
         var handler: (AnyObject?) -> () = { raw in
-            println("Handling Save Request \(raw)")
+            //println("Handling Save Request \(raw)")
             if let record = raw as? Passenger {
                 onComplete(true)
             } else {
@@ -239,7 +239,7 @@ public class Api: NSObject {
  
         let routepath = route.applyArguments(router)
         
-        println("ROUTE PATH: \(routepath)")
+        //println("ROUTE PATH: \(routepath)")
         
         var fileExtension = ""
 
@@ -268,28 +268,20 @@ public class Api: NSObject {
     private func getEndpoint(var router: Router?) -> Endpoint? {
         var endpoints = self.endpoints
         var lastEndpoint: Endpoint? = nil
-        //println("Endpoints \(endpoints)")
-        //println("COMPONENTS \(components)")
-        var components: [Router] = [router!]
+
+        var components: [Router] = router?.getOwnershipHierarchy() ?? [Router]()
         
-        while let parent = router?.parent {
-            components.append(parent)
-            router = router?.parent
-        }
-        
-        components = components.reverse()
+        println(components)
         
         for component in components {
-            //println("Getting Endpoint for \(component)")
-            if let passenger = component as? Passenger {
-                if let endpoint = endpoints[passenger.asMethodName()] {
-                    lastEndpoint = endpoint
-                    endpoints = lastEndpoint!.endpoints
-                    //println("Next Endpoints \(endpoints)")
-                } else if let endpoint = endpoints[passenger.asMethodName().pluralize()] {
-                    lastEndpoint = endpoint
-                    endpoints = lastEndpoint!.endpoints
-                }
+            let clz = component.asEndpointPath()
+            if let endpoint = endpoints[clz] {
+                lastEndpoint = endpoint
+                endpoints = lastEndpoint!.endpoints
+                //println("Next Endpoints \(endpoints)")
+            } else if let endpoint = endpoints[clz.pluralize()] {
+                lastEndpoint = endpoint
+                endpoints = lastEndpoint!.endpoints
             }
         }
         

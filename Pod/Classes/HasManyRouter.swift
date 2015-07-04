@@ -8,6 +8,6 @@
 
 import Foundation
 
-public protocol HasManyRouter: Router {
-    var passengers: [Passenger] { get set }
+public protocol HasManyRouter: RelationshipRouter {
+    var passengers: [Int: Passenger] { get set }
 }

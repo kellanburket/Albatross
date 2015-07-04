@@ -12,21 +12,28 @@ public class HasOneRelationship<T: Passenger>: PassengerRelationship<T>, HasOneR
 
     public var passenger: Passenger? {
         didSet {
-            if let p = passenger as? T {
-                let method = owner.asMethodName()
-                if let relationship = p.belongsToRelationships[method] {
+            if let p = passenger as? T, method = owner?.asMethodName() {
+                if let relationship = p.belongsToRelationships[method], owner = owner {
                     relationship.registerPassenger(owner)
+                } else {
+                    fatalError("'Has One' relationship must register passengers with corresponding 'Belongs To' relationship.")
                 }
+            } else {
+                fatalError("Something went wrong and passenger was not set for 'Has One' relationship.")
             }
         }
     }
     
+    public var parent: Router? {
+        return owner
+    }
+
     override public var id: Int {
         return passenger?.id ?? 0
     }
     
-    override public init(_ owner: Passenger) {
-        super.init(owner)
+    override public init() {
+        super.init()
     }
     
     public func create(params: [String: AnyObject], onComplete: Passenger? -> Void) {
@@ -72,30 +79,7 @@ public class HasOneRelationship<T: Passenger>: PassengerRelationship<T>, HasOneR
             passenger.save(onComplete)
         }
     }
-    
-    public override func setPathVariables(var path: String) -> String {
-        println("Path: \(path)")
-        if let matches = path.scan("(?<=:)[\\w_\\.\\d]+(?=\\/|$)") {
-            println("Setting Path Variables \(matches)")
-            for arrMatch in matches {
-                for match in arrMatch {
-                    if let submatch = match.match("\\.") {
-                        let type = submatch[0]
-                        let field = submatch[1]
-                        if let value: AnyObject = owner.getFieldValue(field) {
-                            path = path.gsub(":\(match)", "\(value)")
-                        }
-                        
-                    } else if let passenger = self.passenger {
-                        path = passenger.setPathVariables(path)
-                    }
-                }
-            }
-        }
         
-        return path
-    }
-    
     override public func serialize() -> [String: AnyObject] {
         
         if let passenger = self.passenger {
@@ -104,4 +88,21 @@ public class HasOneRelationship<T: Passenger>: PassengerRelationship<T>, HasOneR
         
         return [String: AnyObject]()
     }
+
+    public func getOwnershipHierarchy() -> [Router] {
+        var components: [Router] = [self]
+        var router: Router = self
+        
+        while let parent = router.parent {
+            components.append(parent)
+            router = parent
+        }
+        
+        return components.reverse()
+    }
+
+    public func registerPassenger(passenger: Passenger) {
+        self.passenger = passenger
+    }
+
 }

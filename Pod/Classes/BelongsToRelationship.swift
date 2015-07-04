@@ -12,15 +12,28 @@ public class BelongsToRelationship<T: Passenger>: PassengerRelationship<T>, Belo
  
     public var passenger: Passenger?
     
-    override public init(_ owner: Passenger) {
-        super.init(owner)
+    override public init() {
+        super.init()
     }
-    
+
+    public func getOwnershipHierarchy() -> [Router] {
+        var components: [Router] = [self]
+        var router: Router? = self
+        
+        while let parent = router?.parent {
+            println("\tparent: \(parent)")
+            components.append(parent)
+            router = router?.parent
+        }
+        
+        return components.reverse()
+    }
+
     public func registerPassenger(passenger: Passenger) {
         self.passenger = passenger
     }
 
-    override public var parent: Router? {
+    public var parent: Router? {
         return passenger
     }
 }

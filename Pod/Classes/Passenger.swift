@@ -8,6 +8,7 @@
 
 import Foundation
 import Reflektor
+import Wildcard
 
 /**
     When extending the Passenger class, please note that all so-called primitive types with the exception of String (e.g., Int, Float, Double, Bool) must be declared as non-optionals or an `NSUnknownKeyException` will be thrown when attempting to set values. We hope that future releases of Swift will expand the reflection API and allow for more robust key-value coding.
@@ -34,9 +35,9 @@ public class Passenger: NSObject, Router {
     }
     
     internal func asMethodName() -> String {
-        return "\(self.self)".split(".").last?.decapitalize ?? ""
+        return "\(self.dynamicType)".split(".").last?.decapitalize ?? ""
     }
-
+    
     public lazy var hasManyRelationships: [String: HasManyRouter] = {
         return self.getRelationships(HasManyRouter.self)
     }()
@@ -49,7 +50,7 @@ public class Passenger: NSObject, Router {
         return self.getRelationships(BelongsToRouter.self)
     }()
     
-    internal lazy var mirrors: [String: MirrorType] = {
+    internal var mirrors: [String: MirrorType] {
         var mirrors = [String: MirrorType]()
         let reflection = reflect(self)
   
@@ -69,15 +70,14 @@ public class Passenger: NSObject, Router {
         Y(writeMirrors)(reflection)
         
         return mirrors
-    }()
+    }
     
     private func getRelationships<T>(type: T.Type) -> [String: T] {
         var relationships = [String: T]()
+        //println("RELATIONSHIP: \(Optional<T>.self)")
         for (name, mirror) in self.mirrors {
-            if mirror.valueType is T {
-                if let value = getMirrorValue(mirror) as? T {
-                    relationships[name] = value
-                }
+            if let relationship = mirror.value as? T {
+                relationships[name] = relationship
             }
         }
         
@@ -85,12 +85,21 @@ public class Passenger: NSObject, Router {
     }
     
     private class func getRouter(params: [String: AnyObject] = [String: AnyObject]()) -> Router {
-        return PseudoRouter(type: self, components: [self.className])
+        return PseudoRouter(type: self)
     }
     
     required public init(_ properties: [String: AnyObject]) {
         super.init()
         unserialize(properties)
+        
+        for (name, mirror) in mirrors {
+            if var relationship = mirror.value as? RelationshipRouter {
+                //println("RELATIONSHIP \(name) : \(relationship)")
+                relationship.owner = self
+            } else {
+                
+            }
+        }
     }
 
     final public func save(onComplete: (Bool) -> ()) {
@@ -145,15 +154,43 @@ public class Passenger: NSObject, Router {
         }
     }
     
+    final public class func upload() {
+        requestUploadToken { (data, response, error) in
+            //println("Request Token Upload")
+            if let json = data.toJSON() {
+                if let token = json["upload_token"] as? String {
+                    //println("Request Token Returned: \(token)")
+                    self.uploadImage(token, filepath: filepath) { (data, response, error) in
+                        if let morejson = data.toJSON() {
+                            if let uploads = morejson["uploads"] as? NSDictionary {
+                                if let file0 = uploads["file0"] as? NSDictionary {
+                                    if let imageId = file0["image_id"] as? Int {
+                                        //println("Image ID Returned: \(imageId)")
+                                        Http.post(
+                                            URL,
+                                            params: ["image_id": imageId],
+                                            delegate: delegate,
+                                            action: action
+                                        )
+                                    }
+                                }
+                            }
+                        } else {
+                            //println("Data is null")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     private func unserialize(var data: [String:AnyObject]) {
         if let d = data[self.dynamicType.className.lowercaseString] as? [String:AnyObject]  {
             data = d
         }
         
-        let copy = reflect(self)
-        for index in 0 ..< copy.count {
-            let (fieldName, fieldMirror) = copy[index]
-            setMirrorValue(fieldName, mirror: fieldMirror, data: data)
+        for (name, mirror) in mirrors {
+            setMirrorValue(name, mirror: mirror, data: data)
         }
     }
     
@@ -161,17 +198,8 @@ public class Passenger: NSObject, Router {
         var serial = [String: AnyObject]()
         
         for (fieldName, fieldMirror) in mirrors {
-            if fieldName == "super" && fieldMirror.count > 0 {
-                for i in 1..<fieldMirror.count {
-                    var (parentFieldName, parentFieldMirror) = fieldMirror[i]
-                    if let parentFieldValue: AnyObject = getMirrorValue(parentFieldMirror) {
-                        serial[parentFieldName] = parentFieldValue
-                    }
-                }
-            } else {
-                if let value: AnyObject = getMirrorValue(fieldMirror) {
-                    serial[fieldName] = value
-                }
+            if let value: AnyObject = getMirrorValue(fieldMirror) {
+                serial[fieldName] = value
             }
         }
         
@@ -184,15 +212,6 @@ public class Passenger: NSObject, Router {
         
         //println("Setting \(name) : \(type)")
         //println("Fetching \(name) : \(data[name])")
-        
-        if name == "super" {
-            if mirror.count > 0 {
-                for i in 0..<mirror.count {
-                    let (fieldName, fieldMirror) = mirror[i]
-                    setMirrorValue(fieldName, mirror: fieldMirror, data: data)
-                }
-            }
-        }
         
         if let value = data[name] as? Int {
             //println("Setting Mirror (Int) \(name) : \(value)")
@@ -210,10 +229,17 @@ public class Passenger: NSObject, Router {
             } else if type is Character.Type {
                 self.setValue(value, forKey: name)
             } else if type is NSDate.Type || type is Optional<NSDate>.Type {
+                //println("value: \(value) -> \(value.toDate())")
                 if let date = value.toDate() {
                     //println("Setting NSDate \(name) : \(value)")
                     self.setValue(date, forKey: name)
                 }
+            } else if type is Image.Type || type is Optional<Image>.Type {
+                //Load New Media
+                if let url = "\(value)".toUrl() {
+                    self.setValue(Image(url: url), forKey: name)
+                }
+                
             } else if type is NSURL.Type || type is Optional<NSURL>.Type {
                 if let url = value.toUrl() {
                     //println("Setting NSURL \(name) : \(value)")
@@ -232,11 +258,17 @@ public class Passenger: NSObject, Router {
             }
         } else if let values = data[name] as? NSDictionary {
             let clzName = "\(Api.shared.namespace).\(name.capitalizedString)"
-            //println("Setting (\(clzName))")
-            if let obj = ClassReflektor.create(clzName, initializer: "init:", argument: values) as? Passenger {
-                self.setValue(obj, forKey: name)
-            } else {
-                //For Dictionaries
+            //println("Setting (\(clzName)) \(type)")
+            if type is Router {
+                if let obj = ClassReflektor.create(clzName, initializer: "init:", argument: values) as? Passenger {
+                    if let relationship = mirror.value as? RelationshipRouter {
+                        relationship.registerPassenger(obj)
+                    } else if mirror.value is Optional<Passenger>.Type {
+                        self.setValue(obj, forKey: name)
+                    }
+                } else {
+                    //For Dictionaries
+                }
             }
         } else if let value = data[name] as? Passenger {
             //println("Setting \(name) : \(value)")
@@ -250,13 +282,31 @@ public class Passenger: NSObject, Router {
         }
     }
 
+    private func getMirrorObject(fieldMirror: MirrorType) -> Router? {
+        //println("GET MIRROR OBJECT: \(fieldMirror). \(fieldMirror[0].0). \(fieldMirror.count)")
+        if let passenger = fieldMirror.value as? Router {
+            return passenger
+        } else if fieldMirror.disposition == .Optional && fieldMirror.count > 0 {
+            switch fieldMirror.count {
+            case 1:
+                //println("Setting Optional: \(fieldName)")
+                if fieldMirror[0].0 == "Some" {
+                    if let value = fieldMirror[0].1.value as? Router {
+                        return value
+                    }
+                }
+            default:
+                var arr = [AnyObject]()
+            }
+        }
+        
+        return nil
+    }
+    
     private func getMirrorValue(fieldMirror: MirrorType) -> AnyObject? {
         if let value = fieldMirror.value as? Passenger {
             //println("setting AnyObject \(fieldName): \(value)")
             return value.serialize()
-        } else if let value: AnyObject = fieldMirror.value as? AnyObject {
-            //println("setting AnyObject \(fieldName): \(value)")
-            return value
         } else if fieldMirror.disposition == .Optional && fieldMirror.count > 0 {
             switch fieldMirror.count {
             case 1:
@@ -280,6 +330,9 @@ public class Passenger: NSObject, Router {
                 //}
             }
             //println(fieldMirror[0].1)
+        } else if let value: AnyObject = fieldMirror.value as? AnyObject {
+            //println("setting AnyObject \(fieldName): \(value)")
+            return value
         } else {
             //println("Not Setting \(fieldName)")
         }
@@ -308,10 +361,6 @@ public class Passenger: NSObject, Router {
         return self.self(json)
     }
     
-    public func getRouteComponents() -> [String] {
-        return [self.dynamicType.className]
-    }
-    
     public func getType() -> Passenger.Type {
         return self.dynamicType
     }
@@ -324,33 +373,31 @@ public class Passenger: NSObject, Router {
         return nil
     }
     
-    public func setPathVariables(var path: String) -> String {
-        if let matches = path.scan("(?<=:)[\\w_\\.\\d]+(?=\\/|$)") {
-            //println("Matches: \(matches)")
-            for arrMatch in matches {
-                for match in arrMatch {
-                    //println("Match \(match)")
-                    println(mirrors[match])
-
-                    if let mirror = mirrors[match], value: AnyObject = getMirrorValue(mirror) {
-                        println("Setting Match \(value)")
-                        path = path.gsub(":\(match)", "\(value)")
-                    }
-                }
-            }
-        }
-        
-        return path
+    public func asEndpointPath() -> String {
+        return self.dynamicType.className
     }
-    
+        
     public var parent: Router? {
         
         for (name, relationship) in belongsToRelationships {
+            println("\(self.dynamicType.className) has relationship to \(name)")
             if let passenger = relationship.passenger {
                 return passenger
             }
         }
         
         return nil
+    }
+    
+    public func getOwnershipHierarchy() -> [Router] {
+        var components: [Router] = [self]
+        var router: Router = self
+        
+        while let parent = router.parent {
+            components.append(parent)
+            router = parent
+        }
+        
+        return components.reverse()
     }
 }

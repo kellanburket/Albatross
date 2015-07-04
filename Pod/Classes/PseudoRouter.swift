@@ -8,15 +8,13 @@
 
 import Foundation
 
-class PseudoRouter: Router {
+class PseudoRouter: NSObject, Router {
     
     var id: Int = 0
     private var type: Passenger.Type
-    private var components: [String]
     
-    init(type: Passenger.Type, components: [String]) {
+    init(type: Passenger.Type) {
         self.type = type
-        self.components = components
     }
 
     internal var parent: Router? {
@@ -26,25 +24,12 @@ class PseudoRouter: Router {
     func getType() -> Passenger.Type {
         return type
     }
-    
-    func setPathVariables(var path: String) -> String {
-        println("Path: \(path)")
-        if let matches = path.scan("(?<=:)[\\w_\\.\\d]+(?=\\/|$)") {
-            println("Matches: \(matches)")
-            for arrMatch in matches {
-                for match in arrMatch {
-                    println("Match \(match)")
-                    /*
-                    if let mirror = mirrors[match], value: AnyObject = getMirrorValue(mirror) {
-                        println("Setting Match \(value)")
-                        path = path.gsub(":\(match)", "\(value)")
-                    }
-                    */
-                }
-            }
-        }
-        
-        return path
-    }
 
+    func asEndpointPath() -> String {
+        return getType().className
+    }
+    
+    func getOwnershipHierarchy() -> [Router] {
+        return [self]
+    }
 }

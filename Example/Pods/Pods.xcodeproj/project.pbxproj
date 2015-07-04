@@ -51,6 +51,18 @@
 		6780B303C2507438621D1313 /* HttpMediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3481E64E7B79603DB8082436 /* HttpMediaType.swift */; };
 		6D1C7319FFC477857F26E489 /* Pods-Albatross_Tests-Wildcard-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CF1CFC4634D67EF923451CB /* Pods-Albatross_Tests-Wildcard-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70C6994B08EC493E771CBE74 /* RegExpMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03032FD27D82C26B075A1CA7 /* RegExpMatch.swift */; };
+		7602438E1B474EFE00ADD2CC /* RelationshipRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602438D1B474EFE00ADD2CC /* RelationshipRouter.swift */; };
+		7602438F1B474F3500ADD2CC /* RelationshipRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602438D1B474EFE00ADD2CC /* RelationshipRouter.swift */; };
+		760243901B474F3600ADD2CC /* RelationshipRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602438D1B474EFE00ADD2CC /* RelationshipRouter.swift */; };
+		760243921B47962400ADD2CC /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243911B47962400ADD2CC /* Media.swift */; };
+		760243941B47B08200ADD2CC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243931B47B08200ADD2CC /* Image.swift */; };
+		760243961B47B0EE00ADD2CC /* ImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243951B47B0EE00ADD2CC /* ImageSet.swift */; };
+		760243981B47C5B800ADD2CC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243931B47B08200ADD2CC /* Image.swift */; };
+		760243991B47C5B900ADD2CC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243931B47B08200ADD2CC /* Image.swift */; };
+		7602439A1B47C5BB00ADD2CC /* ImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243951B47B0EE00ADD2CC /* ImageSet.swift */; };
+		7602439B1B47C5BE00ADD2CC /* ImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243951B47B0EE00ADD2CC /* ImageSet.swift */; };
+		7602439C1B47C5C100ADD2CC /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243911B47962400ADD2CC /* Media.swift */; };
+		7602439D1B47C5C300ADD2CC /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243911B47962400ADD2CC /* Media.swift */; };
 		7631FD2A1B32A9C5006476DC /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126B9639FA1A38F52CEFE67 /* Passenger.swift */; };
 		7631FD2B1B32A9C9006476DC /* ActiveUrlPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC28C4937F05323FB564BBA3 /* ActiveUrlPath.swift */; };
 		7631FD2C1B32A9CD006476DC /* Albatross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0327EDAF55C6BB828C8FB3E9 /* Albatross.swift */; };
@@ -314,6 +326,10 @@
 		6C9FA4CCB415A15A049C9904 /* HttpMethod.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		70B7AE5ED0765E4400442598 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		736DB6E5488D9D8C4A73EAC7 /* NSData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NSData.swift; sourceTree = "<group>"; };
+		7602438D1B474EFE00ADD2CC /* RelationshipRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipRouter.swift; sourceTree = "<group>"; };
+		760243911B47962400ADD2CC /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		760243931B47B08200ADD2CC /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		760243951B47B0EE00ADD2CC /* ImageSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSet.swift; sourceTree = "<group>"; };
 		7631FD4A1B32BE4B006476DC /* Reflektor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reflektor.framework; path = ../../Frameworks/Reflektor.framework; sourceTree = "<group>"; };
 		7631FD4B1B32BE4B006476DC /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = ../../Frameworks/CommonCrypto.framework; sourceTree = "<group>"; };
 		7632337608EAC27F7019D84A /* Pods-Albatross_Tests-Wildcard-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Albatross_Tests-Wildcard-Private.xcconfig"; path = "../Pods-Albatross_Tests-Wildcard/Pods-Albatross_Tests-Wildcard-Private.xcconfig"; sourceTree = "<group>"; };
@@ -600,6 +616,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		760243971B47B10800ADD2CC /* media */ = {
+			isa = PBXGroup;
+			children = (
+				760243931B47B08200ADD2CC /* Image.swift */,
+				760243951B47B0EE00ADD2CC /* ImageSet.swift */,
+				760243911B47962400ADD2CC /* Media.swift */,
+			);
+			name = media;
+			sourceTree = "<group>";
+		};
 		76A9B6E61B3F63080008126A /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -639,6 +665,7 @@
 		76D6413F1B44397300D37054 /* Passenger */ = {
 			isa = PBXGroup;
 			children = (
+				760243971B47B10800ADD2CC /* media */,
 				768069301B40D8BF00CD9A69 /* Flight.swift */,
 				76D641261B42EDE100D37054 /* HasManyRelationship.swift */,
 				76D6412C1B42EE0000D37054 /* PassengerRelationship.swift */,
@@ -648,6 +675,7 @@
 				76D641451B46264100D37054 /* BelongsToRouter.swift */,
 				76D641491B46264A00D37054 /* HasOneRouter.swift */,
 				76D641361B43AF9F00D37054 /* Router.swift */,
+				7602438D1B474EFE00ADD2CC /* RelationshipRouter.swift */,
 				C126B9639FA1A38F52CEFE67 /* Passenger.swift */,
 				76D6413A1B442EC700D37054 /* PseudoRouter.swift */,
 			);
@@ -1258,10 +1286,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7602439A1B47C5BB00ADD2CC /* ImageSet.swift in Sources */,
 				76D6412E1B42EE8A00D37054 /* PassengerRelationship.swift in Sources */,
 				BBBCDD9402D86B3D95E5D7D0 /* Passenger.swift in Sources */,
 				76D641431B46263700D37054 /* HasManyRouter.swift in Sources */,
 				A2FF74E1412254CCEF146A6F /* ActiveUrlPath.swift in Sources */,
+				7602438F1B474F3500ADD2CC /* RelationshipRouter.swift in Sources */,
 				20BEB2CDADB605446C9024EC /* Albatross.swift in Sources */,
 				4645213E05CF6311F0F1C0D1 /* Api.swift in Sources */,
 				76D641381B43AF9F00D37054 /* Router.swift in Sources */,
@@ -1270,6 +1300,8 @@
 				46312091A2FFB853FDBD07AD /* AuthorizationService.swift in Sources */,
 				4080A60AFC921D17F7621E67 /* BasicAuth.swift in Sources */,
 				3E437F1C3B431F1E9744D0FB /* Dictionary.swift in Sources */,
+				7602439C1B47C5C100ADD2CC /* Media.swift in Sources */,
+				760243981B47C5B800ADD2CC /* Image.swift in Sources */,
 				E829A332C10B9C1290EF0D7F /* Endpoint.swift in Sources */,
 				7680692E1B40C7DC00CD9A69 /* HttpAction.swift in Sources */,
 				CEF625ED18713E2E9B8324E2 /* Environment.swift in Sources */,
@@ -1362,6 +1394,7 @@
 				7631FD2A1B32A9C5006476DC /* Passenger.swift in Sources */,
 				76D641421B46263700D37054 /* HasManyRouter.swift in Sources */,
 				7631FD2F1B32A9D8006476DC /* AuthorizationService.swift in Sources */,
+				7602438E1B474EFE00ADD2CC /* RelationshipRouter.swift in Sources */,
 				76D6412B1B42EDF100D37054 /* BelongsToRelationship.swift in Sources */,
 				7631FD371B32A9F6006476DC /* HttpMediaType.swift in Sources */,
 				76D641371B43AF9F00D37054 /* Router.swift in Sources */,
@@ -1376,9 +1409,12 @@
 				76D6413B1B442EC700D37054 /* PseudoRouter.swift in Sources */,
 				7631FD3F1B32AA13006476DC /* Route.swift in Sources */,
 				76D641461B46264100D37054 /* BelongsToRouter.swift in Sources */,
+				760243941B47B08200ADD2CC /* Image.swift in Sources */,
+				760243921B47962400ADD2CC /* Media.swift in Sources */,
 				7631FD3D1B32AA0B006476DC /* OAuth1.swift in Sources */,
 				7631FD311B32A9DF006476DC /* Dictionary.swift in Sources */,
 				76D6414A1B46264A00D37054 /* HasOneRouter.swift in Sources */,
+				760243961B47B0EE00ADD2CC /* ImageSet.swift in Sources */,
 				7631FD331B32A9E6006476DC /* Environment.swift in Sources */,
 				7631FD3E1B32AA0F006476DC /* String.swift in Sources */,
 				7631FD2D1B32A9D1006476DC /* Api.swift in Sources */,
@@ -1401,10 +1437,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7602439B1B47C5BE00ADD2CC /* ImageSet.swift in Sources */,
 				76D6412F1B42EE8B00D37054 /* PassengerRelationship.swift in Sources */,
 				F50C19BA9E449C250854E0FD /* Passenger.swift in Sources */,
 				76D641441B46263700D37054 /* HasManyRouter.swift in Sources */,
 				7C6CE5B7BF68C555E11EA6AF /* ActiveUrlPath.swift in Sources */,
+				760243901B474F3600ADD2CC /* RelationshipRouter.swift in Sources */,
 				D40B72AEF27F96DBA2EAEC4F /* Albatross.swift in Sources */,
 				C158EED95D1FD7339C1B7B5C /* Api.swift in Sources */,
 				76D641391B43AF9F00D37054 /* Router.swift in Sources */,
@@ -1413,6 +1451,8 @@
 				86660DAE8225C3A2A52D8539 /* AuthorizationService.swift in Sources */,
 				FD7B5FD2882DC699546386C1 /* BasicAuth.swift in Sources */,
 				EC49DA099FA44BB471E32DA5 /* Dictionary.swift in Sources */,
+				7602439D1B47C5C300ADD2CC /* Media.swift in Sources */,
+				760243991B47C5B900ADD2CC /* Image.swift in Sources */,
 				59E803070199EF4A8A552B97 /* Endpoint.swift in Sources */,
 				7680692F1B40C7DC00CD9A69 /* HttpAction.swift in Sources */,
 				9C77B373599B67C6D2457506 /* Environment.swift in Sources */,

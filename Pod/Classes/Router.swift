@@ -11,6 +11,7 @@ import Foundation
 public protocol Router {
     var id: Int { get }
     var parent: Router? { get }
+    func asEndpointPath() -> String
     func getType() -> Passenger.Type
-    func setPathVariables(var path: String) -> String
+    func getOwnershipHierarchy() -> [Router]
 }

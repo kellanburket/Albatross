@@ -56,8 +56,38 @@ public class Route: ActiveUrlPath {
 
     public func applyArguments(router: Router) -> String {
         var str = getFullUrlString()        
-        println("Applying Args")
-        return router.setPathVariables(str)
+        //println("Applying Args")
+        var components: [Router] = router.getOwnershipHierarchy().reverse()
+        
+        var hash = [String: Router]()
+
+        for component in components {
+            hash[component.asEndpointPath().decapitalize] = component
+        }
+        
+        //println("Path: \(str)")
+        if let matches = str.scan("(?<=:)[\\w_\\-\\.\\d]+(?=\\/|$)") {
+            //println("Setting Path Variables \(matches)")
+            for arrMatch in matches {
+                for match in arrMatch {
+                    if let submatch: [String] = match.match("([\\w_\\-\\d]+?)\\.([\\w_\\-\\d]+)") {
+                        var type = submatch[1]
+                        var field = submatch[2]
+                        
+                        if let obj = hash[type] as? Passenger {
+                            //println("\tobj is passenger: \(obj), \(field)")
+                            if let value: AnyObject = obj.getFieldValue(field) {
+                                str = str.gsub(":\(match)", "\(value)")
+                            }
+                        }
+                    } else if let obj = components[0] as? Passenger, value: AnyObject = obj.getFieldValue(match)  {
+                        str = str.gsub(":\(match)", "\(value)")
+                    }
+                }
+            }
+        }
+        
+        return str
     }
     
     override public func getDescription(_ tabs: Int = 0) -> String {

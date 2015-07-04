@@ -16,12 +16,10 @@ class User: Passenger {
     var aboutMe: String?
     var firstName: String?
     
-    lazy var projects: HasManyRelationship<Project> = {
-        return HasManyRelationship<Project>(self)
-    }()
+    var projects = HasManyRelationship<Project>()
     
-    //"large_photo_url": "http://avatars.ravelry.com/kellanbc/286360009/kellan-pic_xlarge.jpg",
-    //"photo_url": "http://avatars.ravelry.com/kellanbc/286360009/kellan-pic_large.jpg",
-    //"small_photo_url": "http://avatars.ravelry.com/kellanbc/286360009/kellan-pic_small.jpg",
-    //"tiny_photo_url": "http://avatars.ravelry.com/kellanbc/286360009/kellan-pic_tiny.jpg",
+    var largePhotoUrl: Image?
+    var photoUrl: Image?
+    var smallPhotoUrl: Image?
+    var tinyPhotoUrl: Image?
 }

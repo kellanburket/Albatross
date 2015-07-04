@@ -62,7 +62,11 @@ public class HttpRequest {
         return handler
     }
     
-    public init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], handler: HttpResponseHandler) {
+    public convenience init(URL: NSURL, method: HttpMethod, handler: HttpResponseHandler = { data, response, url in }) {
+        self.init(URL: URL, method: method, params: [String: AnyObject](), handler: handler)
+    }
+    
+    public init(URL: NSURL, method: HttpMethod, params: [String:AnyObject] = [String: AnyObject](), handler: HttpResponseHandler = { data, response, url in }) {
         self.baseUrl = URL
         self.method = method
         self.parameters = params
@@ -263,28 +267,27 @@ public class HttpRequest {
                 var statusCode = r.statusCode
                 switch statusCode {
                     case 200:
-                        println("Success: 200")
+                        println("\t(200)\tSuccess")
                         handler(data)
                     case 401:
-                        println("(401) Unauthorized")
+                        println("\t(401)\tUnauthorized")
                     case 403:
-                        println("(403) Resource Forbidden")
+                        println("\t(403)\tResource Forbidden")
                         //AlertDialogueController("Resource Forbidden", "You are not permitted to access the selected resource.").present()
                     case 404:
-                        println("(404) Resource Not Found")
+                        println("\t(404)\tResource Not Found")
                         //AlertDialogueController("Resource Not Found", "The selected resource cannot be found.").present()
                     case 408:
-                        println("(408) Network Timeout")
+                        println("\t(408)\tNetwork Timeout")
                         //AlertDialogueController("Network Timeout", "The network timed out while attempting to complete your request.").present()
                     case 415:
-                        println("(415) Unsupported Media Type")
+                        println("\t(415)\tUnsupported Media Type")
                         //AlertDialogueController("Unsupported Media Type", "You are attempting to upload an unsupported media type. The requested action cannot be completed.").present()
                     case 500:
-                        println("(500) Server Error")
+                        println("\t(500)\tServer Error")
                     default:
                         //AlertDialogueController("Something went wrong.", "Please try your request again later.").present()
-                        println("Status: \(statusCode)")
-                        println("Response: \(response)")
+                        println("\t\(statusCode)\t\(response)")
                 }
             } else {
                 println(error)

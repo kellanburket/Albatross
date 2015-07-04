@@ -2,6 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Upload</key>
+	<dict>
+		<key>routes</key>
+		<dict>
+			<key>upload</key>
+			<dict>
+				<key>path</key>
+				<string>image</string>
+				<key>auth</key>
+				<string>OAuth1</string>
+			</dict>
+			<key>status</key>
+			<dict>
+				<key>method</key>
+				<string>GET</string>
+				<key>path</key>
+				<string>image/status</string>
+				<key>auth</key>
+				<string>BasicAuth</string>
+			</dict>
+			<key>request_token</key>
+			<dict>
+				<key>method</key>
+				<string>POST</string>
+				<key>path</key>
+				<string>request_token</string>
+				<key>auth</key>
+				<string>OAuth1</string>
+			</dict>
+		</dict>
+		<key>path</key>
+		<string>upload</string>
+	</dict>
 	<key>ProjectStatus</key>
 	<dict>
 		<key>routes</key>
@@ -74,6 +107,13 @@
 			<dict>
 				<key>routes</key>
 				<dict>
+					<key>destroy</key>
+					<dict>
+						<key>path</key>
+						<string>:id</string>
+						<key>auth</key>
+						<string>OAuth1</string>
+					</dict>
 					<key>save</key>
 					<dict>
 						<key>path</key>

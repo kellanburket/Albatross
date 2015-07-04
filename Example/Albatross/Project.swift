@@ -18,10 +18,9 @@ class Project: Passenger {
     var rating: String?
     var size: String?
 
-    lazy var user: BelongsToRelationship<User> = {
-        return BelongsToRelationship<User>(self)
-    }()
-
+    var user = BelongsToRelationship<User>()
+    var comments = HasManyRelationship<Comment>()
+    
     var progress: Int = 0 {
         didSet {
             if progress > 100 {
@@ -37,7 +36,16 @@ class Project: Passenger {
     var created: NSDate?
     var updated: NSDate?
     var toStart: NSDate?
-
+    
+    func reorderPhotos(sortOrder: ImageSet) {
+        
+    }
+    
+    func createPhoto() {
+        upload {
+            
+        }
+    }
     
     //var yarn: Yarn?
     //var patternSource: PatternSource?

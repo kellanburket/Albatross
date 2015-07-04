@@ -198,7 +198,7 @@ public class OAuth1: AuthorizationService {
         
         var signingKey: String = consumerSecret.percentEncode() + "&"
         
-        let request = HttpRequest(URL: requestTokenUrl, method: HttpMethod.Get) { data in
+        let request = HttpRequest(URL: requestTokenUrl, method: HttpMethod.Get, params: [String: AnyObject]()) { data, response, url in
             
             let query = HttpRequest.parseQuery(data, encoding: self.encoding)
             
@@ -228,7 +228,8 @@ public class OAuth1: AuthorizationService {
         
         var signingKey: String = "\(consumerSecret.percentEncode())&\(requestTokenSecret!.percentEncode())"
         
-        let request = HttpRequest(URL: accessTokenUrl, method: HttpMethod.Get) { data in
+        let request = HttpRequest(URL: accessTokenUrl, method: HttpMethod.Get, params: [String: AnyObject]()) { data, response, url in
+            
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
             var parts = [String:String]()

@@ -2,7 +2,7 @@ import UIKit
 import XCTest
 import Albatross
 
-class Tests: XCTestCase {
+class Tests: XCTestCase, ImageLoadDelegate {
     let userId = 4952800
     
     override func setUp() {
@@ -11,6 +11,14 @@ class Tests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+    }
+    
+    func imageDidLoad(image: Image) {
+        XCTAssert(true, "Image did load, \(image)");
+    }
+
+    func imageDidNotLoad(image: Image) {
+        XCTFail("Image did load, \(image)")
     }
 
     func testFlight() {
@@ -21,6 +29,11 @@ class Tests: XCTestCase {
                 XCTAssert(user.username == "kellanbc", "\(user.username) not true")
                 XCTAssert(user.id == self.userId, "\(user.id)")
 
+                //user.largePhotoUrl?.load(delegate: self)
+                //user.smallPhotoUrl?.load(delegate: self)
+                //user.photoUrl?.load(delegate: self)
+                //user.tinyPhotoUrl?.load(delegate: self)
+                
                 user.projects.list { flight in
                     
                     XCTAssert(flight != nil, "No Members in Flight")
@@ -59,22 +72,23 @@ class Tests: XCTestCase {
                     var params = [
                         "name": "purlie",
                         "progress": 102,
-                        "started": "01/06/1983",
-                        "completed": "06/26/2015",
+                        "started": "1983-01-06",
+                        "completed": "2015-06-26",
                     ]
                     
                     user.projects.create(params) { record in
                         if let project = record {
                             XCTAssert(project.name! == params["name"], "\(project.name!)")
                             XCTAssert(project.progress == 100, "\(project.progress)")
-                            let startDate = project.started!.format("MM/dd/yyyy")
-                            XCTAssert(startDate == params["started"]!, startDate)
-                            let completedDate = project.completed!.format("MM/dd/yyyy")
+                            let startDate = project.started!.format("yyyy-MM-dd")
+                            XCTAssert(startDate == params["started"]!, "\(project.started) -> \(startDate)")
+                            let completedDate = project.completed!.format("yyyy-MM-dd")
                             
-                            XCTAssert(completedDate == params["completed"]!, completedDate)
+                            XCTAssert(completedDate == params["completed"]!, "\(project.completed) -> \(completedDate)")
                             
                             let newProjectName = "new project"
                             project.name = newProjectName
+                            
                             
                             project.save { success in
                                 XCTAssert(success, "Project has not been saved")
@@ -83,12 +97,15 @@ class Tests: XCTestCase {
                                     //println("Project has been saved. \(project.id)")
                                     user.projects.find(project.id) { obj in
                                         //println("Project has been found")
-                                        if let record = obj {
-                                            XCTAssert(record.name! == newProjectName, record.name!)
+                                        if let project = obj {
+                                            XCTAssert(project.name! == newProjectName, project.name!)
                                             
-                                            project.destroy { success in
-                                                XCTAssert(success, "Project was not destroyed")
-                                                q.fulfill()
+                                            project.comments.list { obj in
+                                                
+                                                project.destroy { success in
+                                                    XCTAssert(success, "Project was not destroyed")
+                                                    q.fulfill()
+                                                }
                                             }
                                             
                                         } else {
@@ -97,6 +114,7 @@ class Tests: XCTestCase {
                                         }
                                     }
                                 } else {
+                                    XCTFail("Project.Save Returned Error")
                                     q.fulfill()
                                 }
                             }
