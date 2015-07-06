@@ -14,10 +14,6 @@
 		<dict>
 			<key>signature_method</key>
 			<string>HMAC-SHA1</string>
-			<key>access_token_secret</key>
-			<string></string>
-			<key>access_token</key>
-			<string>OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X</string>
 			<key>consumer_secret</key>
 			<string>ap3PxaF4l20xYOLf5+NcgHy5mTi1/pVWkojgP7jg</string>
 			<key>access_token_url</key>
