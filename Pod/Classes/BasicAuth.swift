@@ -11,17 +11,13 @@ import Foundation
 public class BasicAuth: AuthorizationService {
     
     var personalKey: String = ""
-    var consumerKey: String = ""
 
-    override init(_ args: NSDictionary) {
-        if let pkey = args["personal_key"] as? String {
+    override public init(key: String, params: [String: AnyObject]) {
+        if let pkey = params["personal_key"] as? String {
             self.personalKey = pkey
         }
         
-        if let ckey = args["consumer_key"] as? String {
-            self.consumerKey = ckey
-        }
-        super.init(args)
+        super.init(key: key, params: params)
     }
     
     override public func setHeader(url: NSURL, inout request: NSMutableURLRequest) {

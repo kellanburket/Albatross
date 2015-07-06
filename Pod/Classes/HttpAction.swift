@@ -15,4 +15,5 @@ enum HttpAction: String {
     case Search = "search"
     case Save = "save"
     case Create = "create"
+    case Upload = "upload"
 }

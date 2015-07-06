@@ -1,5 +1,5 @@
 //
-//  HasOneRelationship.swift
+//  HasOne.swift
 //  Pods
 //
 //  Created by Kellan Cummings on 6/30/15.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class HasOneRelationship<T: Passenger>: PassengerRelationship<T>, HasOneRouter {
+public class HasOne<T: Passenger>: Relationship<T>, HasOneRouter {
 
     public var passenger: Passenger? {
         didSet {
             if let p = passenger as? T, method = owner?.asMethodName() {
-                if let relationship = p.belongsToRelationships[method], owner = owner {
+                if let relationship = p.BelongsTos[method], owner = owner {
                     relationship.registerPassenger(owner)
                 } else {
                     fatalError("'Has One' relationship must register passengers with corresponding 'Belongs To' relationship.")
@@ -36,7 +36,7 @@ public class HasOneRelationship<T: Passenger>: PassengerRelationship<T>, HasOneR
         super.init()
     }
     
-    public func create(params: [String: AnyObject], onComplete: Passenger? -> Void) {
+    public func create(params: [String: AnyObject], onComplete: onPassengerRetrieved) {
         T(params).create { record in
             if let passenger = record as? T {
                 self.passenger = passenger
@@ -48,7 +48,7 @@ public class HasOneRelationship<T: Passenger>: PassengerRelationship<T>, HasOneR
         }
     }
     
-    public func find(id: Int, onComplete: Passenger? -> Void) {
+    public func find(id: Int, onComplete: onPassengerRetrieved) {
         passenger = T(["id": id])
 
         Api.shared.find(self) { record in
@@ -62,21 +62,24 @@ public class HasOneRelationship<T: Passenger>: PassengerRelationship<T>, HasOneR
         }
     }
     
-    public func destroy(onComplete: Bool -> Void) {
+    public func destroy(onComplete: AnyObject? -> Void) {
         if let passenger = self.passenger {
-            passenger.destroy { success in
-                if success {
-                    self.passenger = nil
-                }
-                
-                onComplete(success)
-            }
+            passenger.destroy(onComplete)
         }
     }
     
-    public func save(onComplete: Bool -> Void) {
+    public func save(onComplete: AnyObject? -> Void) {
         if let passenger = self.passenger {
             passenger.save(onComplete)
+        }
+    }
+    
+    public func upload(name: String, data: NSData, params: [String: AnyObject], onComplete: AnyObject? -> Void) {
+        if let media = passenger as? Media {
+            media.upload(name, data: data, params: params, onComplete: onComplete)
+        } else {
+            println("Unable to upload.")
+            onComplete(nil)
         }
     }
         

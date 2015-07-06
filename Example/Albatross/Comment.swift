@@ -13,6 +13,6 @@ class Comment: Passenger {
 
     var createdAt: NSDate?
     var commentHtml: String?
-    var higlightedProject = BelongsToRelationship<Project>()
+    var higlightedProject = BelongsTo<Project>()
     
 }

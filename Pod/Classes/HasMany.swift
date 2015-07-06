@@ -1,5 +1,5 @@
 //
-//  HasManyRelationship.swift
+//  HasMany.swift
 //  Pods
 //
 //  Created by Kellan Cummings on 6/30/15.
@@ -8,16 +8,12 @@
 
 import Foundation
 
-public class HasManyRelationship<T: Passenger>: PassengerRelationship<T>, HasManyRouter {
+public class HasMany<T: Passenger>: Relationship<T>, HasManyRouter {
  
     public var passengers = [Int: Passenger]()    
     
     override public init() {
         super.init()
-    }
-
-    override internal func getClassName() -> String {
-        return ("\(T.self)".split(".").last ?? "").pluralize()
     }
     
     public var parent: Router? {
@@ -38,7 +34,7 @@ public class HasManyRelationship<T: Passenger>: PassengerRelationship<T>, HasMan
     }
     
     public func create(params: [String: AnyObject], onComplete: T? -> Void) {
-        Api.shared.create(self, data: params) { record in
+        Api.shared.create(self, params: params) { record in
             if let passenger = record as? T {
                 self.registerPassenger(passenger)
                 onComplete(passenger)
@@ -66,6 +62,13 @@ public class HasManyRelationship<T: Passenger>: PassengerRelationship<T>, HasMan
         }
     }
 
+    public func upload(data: [String: NSData], params: [String: AnyObject], onComplete: AnyObject? -> Void) {
+        //let router = PseudoRouter(type: T.self)
+        Api.shared.upload(self, data: data, params: params) { objs in
+            println("Upload Completed: \(objs)")
+        }
+    }
+
     public func getOwnershipHierarchy() -> [Router] {
         var components: [Router] = [self]
         var router: Router = self
@@ -89,7 +92,7 @@ public class HasManyRelationship<T: Passenger>: PassengerRelationship<T>, HasMan
     public func registerPassenger(passenger: Passenger) {
         if let passenger = passenger as? T, method = owner?.asMethodName() {
  
-            if let relationship = passenger.belongsToRelationships[method], owner = owner {
+            if let relationship = passenger.BelongsTos[method], owner = owner {
                 relationship.registerPassenger(owner)
                 passengers[passenger.id] = passenger
             } else {

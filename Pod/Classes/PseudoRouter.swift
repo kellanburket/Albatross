@@ -21,12 +21,12 @@ class PseudoRouter: NSObject, Router {
         return nil
     }
     
-    func getType() -> Passenger.Type {
-        return type
+    func construct(args: [String: AnyObject], node: String? = nil) -> AnyObject {
+        return type.parse(args, node: node)
     }
 
-    func asEndpointPath() -> String {
-        return getType().className
+    var endpoint: String {
+        return type.className
     }
     
     func getOwnershipHierarchy() -> [Router] {

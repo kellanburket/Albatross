@@ -7,6 +7,12 @@ class Tests: XCTestCase, ImageLoadDelegate {
     
     override func setUp() {
         super.setUp()
+        if let service = Api.shared.getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
+            if service.accessToken == nil || service.accessTokenSecret == nil {
+                service.accessToken = "OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X"
+                service.accessTokenSecret = "D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT"
+            }
+        }
     }
     
     override func tearDown() {
@@ -90,32 +96,51 @@ class Tests: XCTestCase, ImageLoadDelegate {
                             project.name = newProjectName
                             
                             
-                            project.save { success in
-                                XCTAssert(success, "Project has not been saved")
+                            project.save { obj in
+                                
+                                XCTAssert((obj as? Project)?.id ?? 0 == project.id, "Project has not been saved")
 
-                                if success {
-                                    //println("Project has been saved. \(project.id)")
-                                    user.projects.find(project.id) { obj in
-                                        //println("Project has been found")
-                                        if let project = obj {
-                                            XCTAssert(project.name! == newProjectName, project.name!)
+                                //println("Project has been saved. \(project.id)")
+                                user.projects.find(project.id) { obj in
+                                    //println("Project has been found")
+                                    if let project = obj {
+                                        XCTAssert(project.name! == newProjectName, project.name!)
+                                        
+                                        project.comments.list { obj in
+                                            println("Project Comments: \(obj)")
+                                            XCTAssert(true, "")
                                             
-                                            project.comments.list { obj in
-                                                
-                                                project.destroy { success in
-                                                    XCTAssert(success, "Project was not destroyed")
-                                                    q.fulfill()
+                                            if let image = UIImage(named: "test") {
+                                                var data = ["test": image]
+
+                                                project.createPhoto(data) { obj in
+                                                    println("Photo Created: \(obj)")
+                                                    
+                                                    if let json = obj as? Json {
+                                                        
+                                                        XCTAssert(json["status_token"] != nil, "No Status Token Returned")
+                                                        
+                                                        project.destroy { obj in
+                                                            XCTAssert((obj as? Project)?.id ?? 0 == project.id, "Project was not destroyed")
+                                                            q.fulfill()
+                                                        }
+                                                        
+                                                    } else {
+                                                        XCTFail("Image is nil")
+                                                        q.fulfill()
+                                                    }
                                                 }
+                                                
+                                            } else {
+                                                XCTFail("Could not load test image")
+                                                q.fulfill()
                                             }
-                                            
-                                        } else {
-                                            XCTAssert(false, "Unable to Fetch project \(project.id)")
-                                            q.fulfill()
                                         }
+                                        
+                                    } else {
+                                        XCTAssert(false, "Unable to Fetch project \(project.id)")
+                                        q.fulfill()
                                     }
-                                } else {
-                                    XCTFail("Project.Save Returned Error")
-                                    q.fulfill()
                                 }
                             }
                         }
@@ -127,7 +152,7 @@ class Tests: XCTestCase, ImageLoadDelegate {
             }
         }
         
-        waitForExpectationsWithTimeout(5) { error in
+        waitForExpectationsWithTimeout(10) { error in
             XCTAssertNil(error, "Timeout")
         }
     }

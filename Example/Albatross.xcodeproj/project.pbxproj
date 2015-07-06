@@ -17,8 +17,6 @@
 		66686EB934C0C33BCD3FFE2D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A350CF9AFA56AA6984BEDA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7602439F1B47F56D00ADD2CC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602439E1B47F56D00ADD2CC /* Comment.swift */; };
 		760243A01B47F64300ADD2CC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602439E1B47F56D00ADD2CC /* Comment.swift */; };
-		760243A21B4806F500ADD2CC /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243A11B4806F500ADD2CC /* Upload.swift */; };
-		760243A31B4806FE00ADD2CC /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760243A11B4806F500ADD2CC /* Upload.swift */; };
 		761B10EB1B2FFC88005EB620 /* Craft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761B10EA1B2FFC88005EB620 /* Craft.swift */; };
 		7631FD591B32BE99006476DC /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; };
 		7631FD5A1B32BE99006476DC /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -33,6 +31,7 @@
 		76AC9DB11B2896650084749D /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC9DB01B2896650084749D /* Pattern.swift */; };
 		76AC9DB31B2896AB0084749D /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AC9DB21B2896AB0084749D /* endpoints.plist */; };
 		76AC9DB51B2896D80084749D /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AC9DB41B2896D80084749D /* api.plist */; };
+		76BE080D1B48EAD90029C8BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		9416CFC44B1D565617CBBA42 /* Pods_Albatross_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE1447C3128513BE6895D6A3 /* Pods_Albatross_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -78,7 +77,6 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7602439E1B47F56D00ADD2CC /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		760243A11B4806F500ADD2CC /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		761B10EA1B2FFC88005EB620 /* Craft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Craft.swift; sourceTree = "<group>"; };
 		7631FD571B32BE99006476DC /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = ../Frameworks/CommonCrypto.framework; sourceTree = "<group>"; };
 		7631FD581B32BE99006476DC /* Reflektor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reflektor.framework; path = ../Frameworks/Reflektor.framework; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				76A9B6E41B3F268A0008126A /* User.swift */,
 				7602439E1B47F56D00ADD2CC /* Comment.swift */,
 				761B10EA1B2FFC88005EB620 /* Craft.swift */,
-				760243A11B4806F500ADD2CC /* Upload.swift */,
 				76AC9DB41B2896D80084749D /* api.plist */,
 				76AC9DB21B2896AB0084749D /* endpoints.plist */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -319,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76BE080D1B48EAD90029C8BA /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +424,6 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				76A9B6E51B3F268A0008126A /* User.swift in Sources */,
 				7602439F1B47F56D00ADD2CC /* Comment.swift in Sources */,
-				760243A21B4806F500ADD2CC /* Upload.swift in Sources */,
 				761B10EB1B2FFC88005EB620 /* Craft.swift in Sources */,
 				76A9B6DF1B3D9A0F0008126A /* Project.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
@@ -437,7 +434,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				760243A31B4806FE00ADD2CC /* Upload.swift in Sources */,
 				7659FEA81B406D490053E7A9 /* User.swift in Sources */,
 				760243A01B47F64300ADD2CC /* Comment.swift in Sources */,
 				7659FEA61B406D430053E7A9 /* Pattern.swift in Sources */,

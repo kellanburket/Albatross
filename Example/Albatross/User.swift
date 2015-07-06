@@ -16,7 +16,7 @@ class User: Passenger {
     var aboutMe: String?
     var firstName: String?
     
-    var projects = HasManyRelationship<Project>()
+    var projects = HasMany<Project>()
     
     var largePhotoUrl: Image?
     var photoUrl: Image?

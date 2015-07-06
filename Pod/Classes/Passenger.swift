@@ -27,9 +27,8 @@ import Wildcard
 */
 
 public class Passenger: NSObject, Router {
-
     public var id: Int = 0
-
+    
     class var className: String {
         return "\(self.self)".split(".").last ?? ""
     }
@@ -38,15 +37,15 @@ public class Passenger: NSObject, Router {
         return "\(self.dynamicType)".split(".").last?.decapitalize ?? ""
     }
     
-    public lazy var hasManyRelationships: [String: HasManyRouter] = {
+    public lazy var HasManys: [String: HasManyRouter] = {
         return self.getRelationships(HasManyRouter.self)
     }()
 
-    public lazy var hasOneRelationships: [String: HasOneRouter] = {
+    public lazy var HasOnes: [String: HasOneRouter] = {
         return self.getRelationships(HasOneRouter.self)
     }()
     
-    public lazy var belongsToRelationships: [String: BelongsToRouter] = {
+    public lazy var BelongsTos: [String: BelongsToRouter] = {
         return self.getRelationships(BelongsToRouter.self)
     }()
     
@@ -102,11 +101,29 @@ public class Passenger: NSObject, Router {
         }
     }
 
-    final public func save(onComplete: (Bool) -> ()) {
-        Api.shared.save(self, data: serialize(), onComplete: onComplete)
+    final public func save(onComplete: AnyObject? -> Void) {
+        Api.shared.save(self, params: serialize(), onComplete: onComplete)
     }
 
-    final public class func find(id: Int, onComplete: Passenger? -> Void) {
+    final public func create(onComplete: onPassengerRetrieved) {
+        Api.shared.create(self, params: serialize()) { [unowned self] obj in
+            if let passenger = obj as? Passenger {
+                onComplete(passenger)
+            } else {
+                onComplete(nil)
+            }
+        }
+    }
+    
+    final public func destroy(onComplete: AnyObject? -> Void) {
+        Api.shared.destroy(self, onComplete: onComplete)
+    }
+
+    final public func doAction(endpoint: String, params: [String: AnyObject], onComplete: AnyObject? -> Void) {
+        Api.shared.request(self, endpoint: endpoint, params: params, handler: onComplete)
+    }
+
+    final public class func find(id: Int, onComplete: onPassengerRetrieved) {
         Api.shared.find(self(["id": id])) { obj in
             if let record = obj as? Passenger {
                 onComplete(record)
@@ -116,23 +133,15 @@ public class Passenger: NSObject, Router {
         }
     }
 
-    final public func create(onComplete: Passenger? -> Void) {
-        Api.shared.create(self, data: serialize()) { obj in
-            if let record = obj as? Passenger {
-                self.id = record.id
-                onComplete(self)
-            } else {
-                onComplete(nil)
-            }
-        }
+    final public class func create(params: [String: AnyObject], onComplete: onPassengerRetrieved) {
+        self(params).create(onComplete)
     }
-
-    final public func destroy(onComplete: Bool -> Void) {
-        Api.shared.destroy(self, onComplete: onComplete)
-    }
-
     
-    final public class func list(onComplete: [Passenger]? -> Void) {
+    final public class func create(onComplete: onPassengerRetrieved) {
+        self.create([String: AnyObject](), onComplete: onComplete)
+    }
+
+    final public class func list(onComplete: onPassengersRetrieved) {
         Api.shared.list(self.getRouter()) { records in
             if let arr = records as? [Passenger] {
                 onComplete(arr)
@@ -142,44 +151,14 @@ public class Passenger: NSObject, Router {
             }
         }
     }
-
-    final public class func search(params: [String: AnyObject], onComplete: [Passenger]? -> Void) {
+    
+    final public class func search(params: [String: AnyObject], onComplete: onPassengersRetrieved) {
         Api.shared.search(self.getRouter(), params: params) { records in
             if let arr = records as? [Passenger] {
                 onComplete(arr)
             } else {
                 fatalError("\(records)")
                 //onComplete(nil)
-            }
-        }
-    }
-    
-    final public class func upload() {
-        requestUploadToken { (data, response, error) in
-            //println("Request Token Upload")
-            if let json = data.toJSON() {
-                if let token = json["upload_token"] as? String {
-                    //println("Request Token Returned: \(token)")
-                    self.uploadImage(token, filepath: filepath) { (data, response, error) in
-                        if let morejson = data.toJSON() {
-                            if let uploads = morejson["uploads"] as? NSDictionary {
-                                if let file0 = uploads["file0"] as? NSDictionary {
-                                    if let imageId = file0["image_id"] as? Int {
-                                        //println("Image ID Returned: \(imageId)")
-                                        Http.post(
-                                            URL,
-                                            params: ["image_id": imageId],
-                                            delegate: delegate,
-                                            action: action
-                                        )
-                                    }
-                                }
-                            }
-                        } else {
-                            //println("Data is null")
-                        }
-                    }
-                }
             }
         }
     }
@@ -224,7 +203,7 @@ public class Passenger: NSObject, Router {
             }
         } else if let value = data[name] as? String {
             if type is String.Type || type is Optional<String>.Type {
-                //println("Setting (String) \(name) : \(value)")
+                //println("Setting (String) \(name) : \(value). \(self)")
                 self.setValue(value, forKey: name)
             } else if type is Character.Type {
                 self.setValue(value, forKey: name)
@@ -266,19 +245,22 @@ public class Passenger: NSObject, Router {
                     } else if mirror.value is Optional<Passenger>.Type {
                         self.setValue(obj, forKey: name)
                     }
-                } else {
-                    //For Dictionaries
                 }
+            } else if type is NSDictionary.Type || type is [String: AnyObject].Type {
+                self.setValue(values, forKey: name)
             }
         } else if let value = data[name] as? Passenger {
             //println("Setting \(name) : \(value)")
             self.setValue(value, forKey: name)
         } else if let values = data[name] as? [AnyObject] {
             println("Setting (Arr) \(name)")
-            for value in values {
-                println("\t\(value)")
+            self.setValue(values, forKey: name)
+            //for value in values {
+                //if realValue = getMirrorValue(value)
+                
+                //println("\t\(value)")
                 //setMirrorValue(name, mirror: mirror, data: data)
-            }
+            //}
         }
     }
 
@@ -340,31 +322,43 @@ public class Passenger: NSObject, Router {
         return nil
     }
 
-    class func parse(raw: NSDictionary) -> AnyObject {
+    class func parse(raw: NSDictionary, node: String? = nil) -> AnyObject {
         var json = raw.formatKeys()
         for (i, item) in json {
-            if i.capitalizedString == className  {
-                if let dictionary = item as? [String: AnyObject] {
-                    return self.self(dictionary)
-                }
-            } else if i.capitalizedString == className.pluralize() {
-                if let list = item as? [[String: AnyObject]] {
-                    var passengers = [Passenger]()
-                    for dictionary in list {
-                        passengers.append(self.self(dictionary))
+            if let node = node {
+                if i == node {
+                    if let dictionary = item as? [String: AnyObject] {
+                        return self.self(dictionary)
+                    } else if let list = item as? [[String: AnyObject]] {
+                        
                     }
-                    return passengers
+                }
+            } else {
+                if i.capitalizedString == className  {
+                    if let dictionary = item as? [String: AnyObject] {
+                        return self.self(dictionary)
+                    }
+                } else if i.capitalizedString == className.pluralize() {
+                    if let list = item as? [[String: AnyObject]]  {
+                        var passengers = [Passenger]()
+                        for dictionary in list {
+                            passengers.append(self.self(dictionary))
+                        }
+                        return passengers
+                    }
                 }
             }
         }
+        
+        //println("RETURNING \(json)")
     
         return self.self(json)
     }
     
-    public func getType() -> Passenger.Type {
-        return self.dynamicType
+    public func construct(args: [String: AnyObject], node: String? = nil) -> AnyObject {
+        return self.dynamicType.parse(args, node: node)
     }
-    
+
     public func getFieldValue(name: String) -> AnyObject? {
         if let mirror = mirrors[name] {
             return getMirrorValue(mirror)
@@ -373,14 +367,14 @@ public class Passenger: NSObject, Router {
         return nil
     }
     
-    public func asEndpointPath() -> String {
+    public var endpoint: String {
         return self.dynamicType.className
     }
         
     public var parent: Router? {
         
-        for (name, relationship) in belongsToRelationships {
-            println("\(self.dynamicType.className) has relationship to \(name)")
+        for (name, relationship) in BelongsTos {
+            //println("\(self.dynamicType.className) has relationship to \(name)")
             if let passenger = relationship.passenger {
                 return passenger
             }

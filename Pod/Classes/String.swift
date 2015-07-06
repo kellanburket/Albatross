@@ -252,6 +252,10 @@ extension String {
         return NSURL(string: self)
     }
     
+    func encode(encoding: UInt = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> NSData? {
+        return self.dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion)
+    }
+    
     var decapitalize: String {
         var prefix = self[startIndex..<advance(startIndex, 1)].lowercaseString
         var body = self[advance(startIndex, 1)..<endIndex]

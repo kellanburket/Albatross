@@ -12,6 +12,7 @@ public class Route: ActiveUrlPath {
     
     var method: HttpMethod?
     var action: String
+    var node: String?
     var auth: String?
     var contentType: HttpMediaType = HttpMediaType.Json
     var accept: [HttpMediaType] = [HttpMediaType.Json]
@@ -39,11 +40,13 @@ public class Route: ActiveUrlPath {
                     } else {
                         fatalError("Path must be a string.")
                     }
-                case "method": //Overrite Default Method
+                case "method": //Overwite Default Method
                     //println("Overwriting Default Method \(arg)")
                     if let method = HttpMethod(rawValue: arg as! String) {
                         self.method = method
                     }
+                case "node": //Overwrite Default Data Node
+                    self.node = "\(arg)"
                 default:
                     if let arguments = arg as? [String: AnyObject] {
                         endpoints[parameter] = Endpoint(type: parameter, values: arguments, parent: self)
@@ -62,7 +65,7 @@ public class Route: ActiveUrlPath {
         var hash = [String: Router]()
 
         for component in components {
-            hash[component.asEndpointPath().decapitalize] = component
+            hash[component.endpoint.decapitalize] = component
         }
         
         //println("Path: \(str)")

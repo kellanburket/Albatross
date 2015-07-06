@@ -14,6 +14,7 @@ public enum HttpMediaType: String {
     case Csv = "text/csv"
     case Plain = "text/plain"
     case FormEncoded = "application/x-www-form-urlencoded"
+    case MultipartFormData = "multipart/form-data"
     
     var description: String {
         return self.rawValue
@@ -25,7 +26,7 @@ public enum HttpMediaType: String {
             case Html: return "html"
             case Csv: return "csv"
             case Plain: return "txt"
-            case FormEncoded: return nil
+            default: return nil
         }
     }
 }

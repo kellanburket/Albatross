@@ -4,7 +4,9 @@
 <dict>
 	<key>namespace</key>
 	<string>Albatross_Example</string>
-	<key>authentication</key>
+	<key>consumer_key</key>
+	<string>070C505B63E50C3BAD3D</string>
+	<key>authorization</key>
 	<dict>
 		<key>OAuth2</key>
 		<dict/>
@@ -13,11 +15,9 @@
 			<key>signature_method</key>
 			<string>HMAC-SHA1</string>
 			<key>access_token_secret</key>
-			<string>D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT</string>
+			<string></string>
 			<key>access_token</key>
 			<string>OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X</string>
-			<key>consumer_key</key>
-			<string>070C505B63E50C3BAD3D</string>
 			<key>consumer_secret</key>
 			<string>ap3PxaF4l20xYOLf5+NcgHy5mTi1/pVWkojgP7jg</string>
 			<key>access_token_url</key>
@@ -35,8 +35,6 @@
 			<string>_jP_2lOVBjSsYtC36hYacGbpjohCtzr8HSdzJBE2</string>
 			<key>username</key>
 			<string>kellanbc</string>
-			<key>consumer_key</key>
-			<string>070C505B63E50C3BAD3D</string>
 		</dict>
 	</dict>
 	<key>url</key>

@@ -1,5 +1,5 @@
 //
-//  BelongsToRelationship.swift
+//  BelongsTo.swift
 //  Pods
 //
 //  Created by Kellan Cummings on 6/30/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BelongsToRelationship<T: Passenger>: PassengerRelationship<T>, BelongsToRouter {
+public class BelongsTo<T: Passenger>: Relationship<T>, BelongsToRouter {
  
     public var passenger: Passenger?
     
@@ -21,7 +21,6 @@ public class BelongsToRelationship<T: Passenger>: PassengerRelationship<T>, Belo
         var router: Router? = self
         
         while let parent = router?.parent {
-            println("\tparent: \(parent)")
             components.append(parent)
             router = router?.parent
         }

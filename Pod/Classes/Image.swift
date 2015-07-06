@@ -20,25 +20,29 @@ public class Image: Media {
 
     internal var priority: NSOperationQueuePriority = .Normal
     
-    private lazy var request: HttpRequest = {
-        return HttpRequest(URL: self.url, method: HttpMethod.Get, params: [String: AnyObject]()
-            ) { data, response, url in
-                
-            if data != nil {
-                if let image = UIImage(data: data) {
-                    self.loadImage(image)
+    private lazy var request: HttpRequest? = {
+        if let url = self.url {
+            return HttpRequest(URL: url, method: HttpMethod.Get, params: [String: AnyObject]()
+                ) { data, response, url in
+                    
+                if data != nil {
+                    if let image = UIImage(data: data) {
+                        self.loadImage(image)
+                    } else {
+                        if let delegate = self.delegate {
+                            delegate.imageDidNotLoad(self)
+                        }
+                        //self.loadImage(UIImage(named: "missing-photo")!)
+                    }
                 } else {
                     if let delegate = self.delegate {
                         delegate.imageDidNotLoad(self)
                     }
                     //self.loadImage(UIImage(named: "missing-photo")!)
                 }
-            } else {
-                if let delegate = self.delegate {
-                    delegate.imageDidNotLoad(self)
-                }
-                //self.loadImage(UIImage(named: "missing-photo")!)
             }
+        } else {
+            return nil
         }
     }()
     
@@ -51,7 +55,9 @@ public class Image: Media {
 
     public func load(delegate: ImageLoadDelegate? = nil, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
         self.delegate = delegate
-        Http.get(request, queue: queue ?? self.queue, priority: priority)
+        if let request = request {
+            Http.get(request, queue: queue ?? self.queue, priority: priority)
+        }
     }
     
     func loadImage(image: UIImage) {

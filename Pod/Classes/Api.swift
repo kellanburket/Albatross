@@ -20,9 +20,14 @@ public class Api: NSObject {
     private var version: String = ""
     public var namespace: String = ""
     private var flags: UInt64 = 0
+    private var consumerKey: String
     
-    private var authorization = [String: AuthorizationService]()
+    private var authorization = [AuthorizationType: AuthorizationService]()
     public var endpoints = [String: Endpoint]()
+    
+    public var key: String {
+        return consumerKey
+    }
     
     internal override init() {
         //println("Initializing API")
@@ -30,6 +35,12 @@ public class Api: NSObject {
         if let apiPath = NSBundle.mainBundle().pathForResource("api", ofType: "plist") {
             if let data = NSDictionary(contentsOfFile: apiPath) {
                 //println("API Config \(data)")
+                
+                if let consumerKey = data["consumer_key"] as? String {
+                    self.consumerKey = consumerKey
+                } else {
+                    fatalError("Must provide 'consumer_key' field in api.plist.")
+                }
                 
                 if let ns = data["namespace"] as? String {
                     namespace = ns
@@ -39,17 +50,17 @@ public class Api: NSObject {
                     self.url = NSURL(string: urlString)
                 }
 
-                if let auth = data["authentication"] as? [String: AnyObject] {
+                if let auth = data["authorization"] as? [String: AnyObject] {
                     for (key, value) in auth {
-                        if let hash = value as? [String: AnyObject] {
+                        if let hash = value as? [String: AnyObject], key = AuthorizationType(rawValue: key) {
                             //println("\(key) \(value)")
                             switch key {
-                                case "OAuth1":
-                                    authorization[key] = OAuth1(hash)
-                                case "OAuth2":
-                                    authorization[key] = OAuth2(hash)
+                                case .OAuth1:
+                                    authorization[key] = OAuth1(key: self.consumerKey, params: hash)
+                                case .OAuth2:
+                                    authorization[key] = OAuth2(key: self.consumerKey, params: hash)
                                 default:
-                                    authorization[key] = BasicAuth(hash)
+                                    authorization[key] = BasicAuth(key: self.consumerKey, params: hash)
                             }
                         }
                         //if let authService = ClassReflektor.create(key as! String) as? AuthorizationService {   authorization["\(key)"] = authService }
@@ -76,7 +87,11 @@ public class Api: NSObject {
                         }
                     }
                 }
+            } else {
+                fatalError("Could not parse contents of api.plist file. Please check file. It may be corrupt.")
             }
+        } else {
+            fatalError("api.plist file not found in main directory.")
         }
         
         if let endpointsPath = NSBundle.mainBundle().pathForResource("endpoints", ofType: "plist") {
@@ -88,7 +103,11 @@ public class Api: NSObject {
                         self.endpoints[type] = Endpoint(type: type, values: endpoint)
                     }
                 }
+            } else {
+                fatalError("Could not parse contents of endpoints.plist file. Please check file. It may be corrupt.")
             }
+        } else {
+            fatalError("endpoints.plist file not found in main directory.")
         }
     }
     
@@ -100,100 +119,78 @@ public class Api: NSObject {
             return api!
         }
     }
-
+    
     //Get all from collection
-    public func list(router: Router, onComplete: (AnyObject?) -> ()) {
-        if let request = getRequest(router, action: "list", params: [String: AnyObject](), handler: onComplete) {
-            Http.start(request)
-        } else {
-            onComplete(nil)
-        }
+    public func list(router: Router, onComplete: AnyObject? -> Void) -> Api {
+        return request(router, endpoint: "list", params: [String: AnyObject](), handler: onComplete)
     }
 
     //Get all in acollection that meet parameter
-    public func search(router: Router, params: [String: AnyObject], onComplete: (AnyObject?) -> ()) {
-        if let request = getRequest(router, action: "search", params: params, handler: onComplete) {
-            Http.start(request)
-        } else {
-            onComplete(nil)
-        }
+    public func search(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
+        return request(router, endpoint: "search", params: params, handler: onComplete)
     }
 
     //Get One In Collection
-    public func find(router: Router, onComplete: (AnyObject?) -> ()) {
-        if let request = getRequest(router, action: "find", params: [String: AnyObject](), handler: onComplete) {
-            //println("Starting Find Request")
-            Http.start(request)
-        } else {
-            onComplete(nil)
-        }
+    public func find(router: Router, onComplete: (AnyObject?) -> ()) -> Api {
+        return request(router, endpoint: "find", params: [String: AnyObject](), handler: onComplete)
     }
     
     //Create One in Collection
-    public func create(router: Router, data: [String: AnyObject], onComplete: (AnyObject?) -> ()) {
-        if let request = getRequest(router, action: "create", params: data, handler: onComplete) {
+    public func create(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
+        return request(router, endpoint: "create", params: params, handler: onComplete)
+    }
+    
+    //Destroy One Element
+    public func destroy(passenger: Passenger, onComplete:  AnyObject? -> Void) -> Api {
+        return request(passenger, endpoint: "destroy", params: ["id": passenger.id], handler: onComplete)
+    }
+    
+    //Save Element
+    public func save(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
+        return request(router, endpoint: "save", params: params, handler: onComplete)
+    }
+    
+    public func upload(router: Router, data: [String: NSData], params: [String:AnyObject], onComplete: AnyObject? -> Void) -> Api {
+        if let request = getMultipartRequest(router, data: data, params: params, handler: onComplete) {
             Http.start(request)
         } else {
             onComplete(nil)
         }
+        
+        return self
     }
     
-    //Destroy One Element
-    public func destroy(router: Router, onComplete: (Bool) -> ()) {
+    public func request(router: Router, endpoint: String, params: [String: AnyObject], handler: AnyObject? -> Void) -> Api {
         
-        let handler: (AnyObject?) -> () = { obj in
-            if let record = obj as? Passenger {
-                onComplete(true)
-            } else {
-                onComplete(false)
-            }
-        }
-        
-        
-        if let request = getRequest(router, action: "destroy", params: ["id": router.id], handler: handler) {
+        if let request = getRequest(router, action: endpoint, params: params, handler: handler) {
             Http.start(request)
         } else {
-            onComplete(false)
+            handler(nil)
+        }
+        
+        return self
+    }
+    
+    public func getValue<T>(key: String, onComplete: T? -> Void) {
+        var handler: NSData -> Void = { data in
+            if let json = data.parseJson(), value = json[key] as? T {
+                onComplete(value)
+            } else {
+                onComplete(nil)
+            }
         }
     }
 
-    /*
-    //Destroy Collection
-    public func destroy(type: Passenger.Type, onComplete: (Bool) -> ()) {
-        println("Destroying \(type)")
-    }
-    */
-    
-    //Save Element
-    public func save(router: Router, data: [String: AnyObject], onComplete: (Bool) -> ()) {
-
-        var handler: (AnyObject?) -> () = { raw in
-            //println("Handling Save Request \(raw)")
-            if let record = raw as? Passenger {
-                onComplete(true)
-            } else {
-                onComplete(false)
-            }
-        }
-        
-        if let request = getRequest(router, action: "save", params: data, handler: handler) {
-            Http.start(request)
-        } else {
-            onComplete(false)
-        }
-    }
     
     public var basepath: String? {
         return url?.absoluteString
     }
     
-    internal func getAuthorizationService(method: String) -> AuthorizationService? {
+    public func getAuthorizationService(method: AuthorizationType) -> AuthorizationService? {
         return authorization[method]
     }
 
     private func getRequest(router: Router, action: String, var params: [String: AnyObject], handler: (AnyObject?) -> ()) -> HttpRequest? {
-
-        let type = router.getType()
 
         if let route = getRoute(router, action: action), let url = getUrl(router, route: route, params: &params) {
             
@@ -203,29 +200,51 @@ public class Api: NSObject {
                 request = HttpRequest(
                     URL: url,
                     method: route.method ?? HttpMethod.Get,
-                    handler: prepareHttpRequestHandler(type, onComplete: handler)
+                    handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
                 )
             } else {
                 request = HttpRequest(
                     URL: url,
                     method: route.method ?? HttpMethod.Get,
                     params: params,
-                    handler: prepareHttpRequestHandler(type, onComplete: handler)
+                    handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
                 )
             }
             
-            if let auth = route.auth, service = Api.shared.getAuthorizationService(auth) {
+            if let rawauth = route.auth, auth = AuthorizationType(rawValue: rawauth), service = Api.shared.getAuthorizationService(auth) {
                 request.authorize(service)
             }
             
             return request
         } else {
-            fatalError("No Endpoint for \(type.className).\(action)")
+            fatalError("No Endpoint for \(router).\(action)")
         }
         
         return nil
     }
-    
+
+    private func getMultipartRequest(router: Router, var data: [String: NSData], var params: [String: AnyObject], handler: (AnyObject?) -> ()) -> HttpMultipartRequest? {
+        
+        if let route = getRoute(router, action: "upload"), let url = getUrl(router, route: route, params: &params) {
+            var request = HttpMultipartRequest(
+                URL: url,
+                data: data,
+                params: params,
+                handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
+            )
+            
+            if let rawauth = route.auth, auth = AuthorizationType(rawValue: rawauth), service = Api.shared.getAuthorizationService(auth) {
+                request.authorize(service)
+            }
+            
+            return request
+        } else {
+            fatalError("No Endpoint for \(router).upload")
+        }
+        
+        return nil
+    }
+
     private func getRoute(router: Router, action: String) -> Route? {
         if let endpoint = getEndpoint(router), let route = endpoint.getRoute(action) {
             return route
@@ -253,15 +272,20 @@ public class Api: NSObject {
         return NSURL(string: "\(urlpath)\(versionpath)\(routepath)\(extensionpath)")
     }
     
-    private func prepareHttpRequestHandler(type: Passenger.Type, onComplete: (AnyObject?) -> ()) -> (NSData!) -> () {
-        return { data in
-            if let json = data.parseJson() {
-                //println("JSON Parsed")
-                onComplete(type.parse(json))
-            } else {
-                println("Unable to Parse JSON")
-                onComplete(nil)
-            }
+    private func prepareHttpRequestHandler(router: Router, route: Route, onComplete: AnyObject? -> Void) -> NSData! -> Void {
+        switch route.action {
+            case "create", "list", "search", "find", "save", "destroy":
+                return { data in
+                    if let json = data.parseJson() {
+                        onComplete(router.construct(json, node: route.node))
+                    } else {
+                        onComplete(nil)
+                    }
+                }
+            default: // includes save, upload, and destroy
+                return { data in
+                    onComplete(data.parseJson())
+                }
         }
     }
     
@@ -271,15 +295,12 @@ public class Api: NSObject {
 
         var components: [Router] = router?.getOwnershipHierarchy() ?? [Router]()
         
-        println(components)
-        
         for component in components {
-            let clz = component.asEndpointPath()
-            if let endpoint = endpoints[clz] {
+            if let endpoint = endpoints[component.endpoint] {
                 lastEndpoint = endpoint
                 endpoints = lastEndpoint!.endpoints
                 //println("Next Endpoints \(endpoints)")
-            } else if let endpoint = endpoints[clz.pluralize()] {
+            } else if let endpoint = endpoints[component.endpoint.pluralize()] {
                 lastEndpoint = endpoint
                 endpoints = lastEndpoint!.endpoints
             }

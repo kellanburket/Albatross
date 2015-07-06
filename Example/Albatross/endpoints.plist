@@ -4,32 +4,39 @@
 <dict>
 	<key>Upload</key>
 	<dict>
-		<key>routes</key>
+		<key>endpoints</key>
 		<dict>
-			<key>upload</key>
+			<key>Image</key>
 			<dict>
 				<key>path</key>
 				<string>image</string>
-				<key>auth</key>
-				<string>OAuth1</string>
+				<key>routes</key>
+				<dict>
+					<key>status</key>
+					<dict>
+						<key>method</key>
+						<string>GET</string>
+						<key>path</key>
+						<string>status</string>
+						<key>auth</key>
+						<string>BasicAuth</string>
+					</dict>
+					<key>upload</key>
+					<dict>
+						<key>node</key>
+						<string>uploads</string>
+					</dict>
+				</dict>
 			</dict>
-			<key>status</key>
+		</dict>
+		<key>routes</key>
+		<dict>
+			<key>create</key>
 			<dict>
-				<key>method</key>
-				<string>GET</string>
-				<key>path</key>
-				<string>image/status</string>
-				<key>auth</key>
-				<string>BasicAuth</string>
-			</dict>
-			<key>request_token</key>
-			<dict>
-				<key>method</key>
-				<string>POST</string>
 				<key>path</key>
 				<string>request_token</string>
 				<key>auth</key>
-				<string>OAuth1</string>
+				<string>BasicAuth</string>
 			</dict>
 		</dict>
 		<key>path</key>
@@ -151,22 +158,18 @@
 						<key>auth</key>
 						<string>OAuth1</string>
 					</dict>
+					<key>create_photo</key>
+					<dict>
+						<key>auth</key>
+						<string>OAuth1</string>
+						<key>path</key>
+						<string>:id/create_photo</string>
+						<key>method</key>
+						<string>POST</string>
+					</dict>
 				</dict>
 				<key>endpoints</key>
 				<dict>
-					<key>PhotoSet</key>
-					<dict>
-						<key>routes</key>
-						<dict>
-							<key>create</key>
-							<dict>
-								<key>auth</key>
-								<string>OAuth1</string>
-							</dict>
-						</dict>
-						<key>path</key>
-						<string>:project.id/create_photo</string>
-					</dict>
 					<key>Comment</key>
 					<dict>
 						<key>path</key>

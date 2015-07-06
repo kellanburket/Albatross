@@ -25,14 +25,10 @@ public class HttpRequest {
     private var authorizationService: AuthorizationService?
     private var handler: HttpResponseHandler
     
-    private var headers: [String:String] = [
-        "Content-Type": HttpMediaType.FormEncoded.description,
-        "Accept": HttpMediaType.Json.description
-    ]
-    
-    private var parameters = [String:AnyObject]()
+    internal var headers = [String:String]()
+    internal var parameters = [String:AnyObject]()
 
-    private var baseUrl: NSURL
+    internal var baseUrl: NSURL
     
     public var url: String {
         return baseUrl.absoluteString!
@@ -61,19 +57,24 @@ public class HttpRequest {
     public var onComplete: HttpResponseHandler {
         return handler
     }
-    
-    public convenience init(URL: NSURL, method: HttpMethod, handler: HttpResponseHandler = { data, response, url in }) {
-        self.init(URL: URL, method: method, params: [String: AnyObject](), handler: handler)
-    }
-    
-    public init(URL: NSURL, method: HttpMethod, params: [String:AnyObject] = [String: AnyObject](), handler: HttpResponseHandler = { data, response, url in }) {
+  
+    public init(URL: NSURL, method: HttpMethod, params: [String: AnyObject] = [String: AnyObject](), handler: HttpResponseHandler = { data, response, error in }) {
         self.baseUrl = URL
         self.method = method
         self.parameters = params
         self.handler = handler
+        
+        self.headers = [
+            "Content-Type": HttpMediaType.FormEncoded.description,
+            "Accept": HttpMediaType.Json.description
+        ]
     }
 
-    public convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], handler: (NSData!) -> ()) {
+    public convenience init(URL: NSURL, method: HttpMethod, handler: HttpResponseHandler = { data, response, url in }) {
+        self.init(URL: URL, method: method, params: [String: AnyObject](), handler: handler)
+    }
+    
+    public convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], handler: NSData! -> Void) {
         self.init(URL: URL, method: method, params: params, handler: HttpRequest.getDefaultCompletionHandler(handler))
     }
     
@@ -93,7 +94,7 @@ public class HttpRequest {
         self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
 
-    public convenience init(URL: NSURL, method: HttpMethod, handler: (NSData!) -> ()) {
+    public convenience init(URL: NSURL, method: HttpMethod, handler: NSData! -> Void) {
         self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(handler))
     }
 
@@ -154,11 +155,7 @@ public class HttpRequest {
             request.setValue(value, forHTTPHeaderField: header)
         }
     }
-    
-    private func generateBoundaryString() -> String {
-        return String(format:"---------------------------%@", generateNonce(digits: 12))
-    }
-        
+            
     private func generateRequestObject() -> NSMutableURLRequest {
 
         if method == HttpMethod.Get {
@@ -201,7 +198,7 @@ public class HttpRequest {
         return "\(urlString)\(paramString)"
     }
     
-    private func prepareBody(inout request: NSMutableURLRequest) {
+    internal func prepareBody(inout request: NSMutableURLRequest) {
         
         var bodyString = ""
         
@@ -260,7 +257,7 @@ public class HttpRequest {
         }
     }
     
-    private class func getDefaultCompletionHandler(handler: (NSData!) -> ()) -> HttpResponseHandler {
+    internal class func getDefaultCompletionHandler(handler: (NSData!) -> ()) -> HttpResponseHandler {
         return { data, response, error in
             
             if let r = response as? NSHTTPURLResponse  {

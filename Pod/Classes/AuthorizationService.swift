@@ -10,10 +10,12 @@ import Foundation
 
 public class AuthorizationService: NSObject {
  
-    var headers = [String:String]()
+    internal var consumerKey: String
+    var headers = [String: String]()
     let encoding: NSStringEncoding = NSUTF8StringEncoding
     
-    init(_ args: NSDictionary) {
+    public init(key: String, params: [String: AnyObject]) {
+        self.consumerKey = key
         super.init()
     }
     
