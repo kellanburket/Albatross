@@ -35,4 +35,8 @@ public class BelongsTo<T: Passenger>: Relationship<T>, BelongsToRouter {
     public var parent: Router? {
         return passenger
     }
+    
+    public func serialize() -> AnyObject? {
+        return passenger?.serialize()
+    }
 }

@@ -19,7 +19,7 @@
 			<key>access_token_url</key>
 			<string>https://www.ravelry.com/oauth/access_token</string>
 			<key>request_token_callback</key>
-			<string>com.fkcomp.albatross</string>
+			<string>albatross://com.fkcomp.albatross</string>
 			<key>authorize_url</key>
 			<string>https://www.ravelry.com/oauth/authorize</string>
 			<key>request_token_url</key>

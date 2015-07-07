@@ -41,6 +41,10 @@ public class Resource: NSObject, Router {
         return components.reverse()
     }
     
+    public func serialize() -> AnyObject? {
+        return nil
+    }
+    
     public func resource(endpoint: String) -> Resource {
         var resource = Resource(endpoint, parent: self)
         registerResource(resource)

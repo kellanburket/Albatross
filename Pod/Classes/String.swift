@@ -8,6 +8,7 @@
 
 import Foundation
 import Wildcard
+import CommonCrypto
 
 public let MIMEBase64Encoding: [Character] = [
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -73,7 +74,7 @@ private let irregularPlurals: [String:String] = [
 
 extension String {
 
-    subscript(index: Int) -> String? {
+    internal subscript(index: Int) -> String? {
         for (i, char) in enumerate(self) {
             if i == index {
                 return String(char)
@@ -83,16 +84,24 @@ extension String {
         return nil
     }
     
-    func toCamelcase() -> String {
+    public func toCamelcase() -> String {
         return self.gsub("_\\w") { match in
             return match[1]?.uppercaseString ?? match
         }
     }
     
-    func toSnakecase() -> String {
+    public func toSnakecase() -> String {
         return self.gsub("(\\p{L})") { match in
             return "_\(match.lowercaseString)"
         }
+    }
+
+    internal func sign(algorithm: HMACAlgorithm, key: String) -> String? {
+        if let data = self.dataUsingEncoding(NSUTF8StringEncoding) {
+            return data.sign(algorithm, key: key)
+        }
+        
+        return nil
     }
 
     public var base64Encoded: String {
@@ -163,7 +172,7 @@ extension String {
         return output
     }
     
-    func repeat(times: Int) -> String {
+    public func repeat(times: Int) -> String {
         
         var rstring = ""
         if times > 0 {
@@ -174,7 +183,7 @@ extension String {
         return rstring
     }
     
-    func pluralize(language: String = "en/us") -> String {
+    public func pluralize(language: String = "en/us") -> String {
         if let plural = find(identicalPlurals, self) {
             return self
         }
@@ -205,7 +214,7 @@ extension String {
     :returns: a date
     */
     public func toDate() -> NSDate? {
-        
+        //println("to Date: \(self)")
         var patterns = [
             "(\\d{4})[-\\/](\\d{1,2})[-\\/](\\d{1,2})": ["year", "month", "day"],
             "(\\d{1,2})[-\\/](\\d{1,2})[-\\/](\\d{4})": ["month", "day", "year"]
@@ -248,15 +257,15 @@ extension String {
     
     :return: if the string passed in
     */
-    func toUrl() -> NSURL? {
+    public func toUrl() -> NSURL? {
         return NSURL(string: self)
     }
     
-    func encode(encoding: UInt = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> NSData? {
+    public func encode(encoding: UInt = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> NSData? {
         return self.dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion)
     }
     
-    var decapitalize: String {
+    public var decapitalize: String {
         var prefix = self[startIndex..<advance(startIndex, 1)].lowercaseString
         var body = self[advance(startIndex, 1)..<endIndex]
         return "\(prefix)\(body)"

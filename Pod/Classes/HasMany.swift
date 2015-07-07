@@ -103,6 +103,18 @@ public class HasMany<T: Passenger>: Relationship<T>, HasManyRouter {
         }
     }
 
+    public func serialize() -> AnyObject? {
+        var serial = [Json]()
+        for (id, passenger) in passengers {
+            if let serialized = passenger.serialize() as? Json {
+                serial.append(serialized)
+            }
+        }
+    
+        return serial
+    }
+
+
     public subscript(id: Int) -> Passenger? {
         get {
             return passengers[id]

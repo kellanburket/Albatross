@@ -19,7 +19,6 @@
 		19AB11E631A9D1CF1DA3DC61 /* Hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD35845FF23CC8E85478B79 /* Hmac.swift */; };
 		1C0E2202FEAADACA7E23D1F3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E4CAFED597FA166E92CB5 /* String.swift */; };
 		1F21696A3D997E85B52A96D9 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E4664A81B7E73CD37A481 /* Route.swift */; };
-		20BEB2CDADB605446C9024EC /* Albatross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0327EDAF55C6BB828C8FB3E9 /* Albatross.swift */; };
 		25BFFF6AF889B744B7811E6A /* Wildcard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 832828CCC8ED81253FB28254 /* Wildcard.bundle */; };
 		297F4BEB721A1602EF696E53 /* Pods-Albatross_Example-Wildcard-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C162A5CCCB8260A75968A8 /* Pods-Albatross_Example-Wildcard-dummy.m */; };
 		29A42189C98DF331FD848335 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D439EA97380F095CC34AB5DF /* NSObject.swift */; };
@@ -78,16 +77,20 @@
 		761EC4221B49B07900B89DBB /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4211B49B07900B89DBB /* Resource.swift */; };
 		761EC4231B49B07F00B89DBB /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4211B49B07900B89DBB /* Resource.swift */; };
 		761EC4241B49B08100B89DBB /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4211B49B07900B89DBB /* Resource.swift */; };
+		761EC42A1B4AD57200B89DBB /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4291B4AD57200B89DBB /* Serializable.swift */; };
+		761EC42B1B4AD5D400B89DBB /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4291B4AD57200B89DBB /* Serializable.swift */; };
+		761EC42C1B4AD5D500B89DBB /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4291B4AD57200B89DBB /* Serializable.swift */; };
+		761EC42E1B4B581800B89DBB /* OAuth1Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC42D1B4B581800B89DBB /* OAuth1Delegate.swift */; };
+		761EC42F1B4B581800B89DBB /* OAuth1Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC42D1B4B581800B89DBB /* OAuth1Delegate.swift */; };
+		761EC4301B4B581800B89DBB /* OAuth1Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC42D1B4B581800B89DBB /* OAuth1Delegate.swift */; };
 		7631FD2A1B32A9C5006476DC /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126B9639FA1A38F52CEFE67 /* Passenger.swift */; };
 		7631FD2B1B32A9C9006476DC /* ActiveUrlPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC28C4937F05323FB564BBA3 /* ActiveUrlPath.swift */; };
-		7631FD2C1B32A9CD006476DC /* Albatross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0327EDAF55C6BB828C8FB3E9 /* Albatross.swift */; };
 		7631FD2D1B32A9D1006476DC /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11FC074A42FAC1BD90381 /* Api.swift */; };
 		7631FD2E1B32A9D4006476DC /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7E7F642ACDED6EF64F5FF1 /* Array.swift */; };
 		7631FD2F1B32A9D8006476DC /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C659056616C9E934DD20 /* AuthorizationService.swift */; };
 		7631FD301B32A9DC006476DC /* BasicAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525C180629DCE80A437F91F /* BasicAuth.swift */; };
 		7631FD311B32A9DF006476DC /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EFDAF801AF0F7F929BC95A /* Dictionary.swift */; };
 		7631FD321B32A9E3006476DC /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75B122F92C9D5CC0EA14F1 /* Endpoint.swift */; };
-		7631FD331B32A9E6006476DC /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08098B412EBF8E1F707000AF /* Environment.swift */; };
 		7631FD341B32A9E9006476DC /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9382C188816682E1DE7640F /* Functions.swift */; };
 		7631FD351B32A9ED006476DC /* Hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD35845FF23CC8E85478B79 /* Hmac.swift */; };
 		7631FD361B32A9F3006476DC /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85103C4DFFAC8C20BDCA8505 /* Http.swift */; };
@@ -149,7 +152,6 @@
 		86660DAE8225C3A2A52D8539 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C659056616C9E934DD20 /* AuthorizationService.swift */; };
 		8817D3982E13DA4100E829FD /* NSDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2E77069F60415FD3CB28 /* NSDictionary.swift */; };
 		8D73B2659A4A8A0CCD880368 /* Pods-Albatross_Example-Albatross-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DC211308F62DDFB5D1F0D9B6 /* Pods-Albatross_Example-Albatross-dummy.m */; };
-		9C77B373599B67C6D2457506 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08098B412EBF8E1F707000AF /* Environment.swift */; };
 		9F3B60FA579C70E3663E1509 /* Wildcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F3E7841AF933EA71AB03D /* Wildcard.swift */; };
 		A2FF74E1412254CCEF146A6F /* ActiveUrlPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC28C4937F05323FB564BBA3 /* ActiveUrlPath.swift */; };
 		A45A62DF4CD9F57C8930BB84 /* TextAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF81842E064EFB78EF48D38 /* TextAttribute.swift */; };
@@ -165,10 +167,8 @@
 		C87D71232367CFB17DB2C44E /* TextAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF81842E064EFB78EF48D38 /* TextAttribute.swift */; };
 		CDA60DF1CDBCA9E7D3E1474C /* Pods-Albatross_Tests-Albatross-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DA5687910B1DD46488C8BA /* Pods-Albatross_Tests-Albatross-dummy.m */; };
 		CDF1227B8DB46E83D8ED5C41 /* Albatross.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 76450ADFB7273E514A84182E /* Albatross.bundle */; };
-		CEF625ED18713E2E9B8324E2 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08098B412EBF8E1F707000AF /* Environment.swift */; };
 		D21BED77797A61984C7319AF /* Wildcard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8F8B1D5B68A324D985234CC /* Wildcard.bundle */; };
 		D3A10BE7C6C5E3A3B68EE214 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D439EA97380F095CC34AB5DF /* NSObject.swift */; };
-		D40B72AEF27F96DBA2EAEC4F /* Albatross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0327EDAF55C6BB828C8FB3E9 /* Albatross.swift */; };
 		D9BA6A1F13D2EC9EBC5F15B5 /* OAuth1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870AE73C62B1D51F7EB3536B /* OAuth1.swift */; };
 		DD879D1DBC40C8F5F233C627 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF41CC5AE075045EAC33BBFE /* UIKit.framework */; };
 		DE49C8C4EFC9A8F597AFC316 /* TextAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF81842E064EFB78EF48D38 /* TextAttribute.swift */; };
@@ -282,11 +282,9 @@
 /* Begin PBXFileReference section */
 		027CD1D18F10B1769495DA21 /* Pods-Albatross_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Albatross_Tests-resources.sh"; sourceTree = "<group>"; };
 		03032FD27D82C26B075A1CA7 /* RegExpMatch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RegExpMatch.swift; path = Pod/Classes/RegExpMatch.swift; sourceTree = "<group>"; };
-		0327EDAF55C6BB828C8FB3E9 /* Albatross.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Albatross.swift; sourceTree = "<group>"; };
 		06661538AD481BC7A034DD82 /* Pods-Albatross_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Albatross_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		0670708C173FB9D99ABDF88F /* Pods-Wildcard-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-Wildcard-dummy.m"; path = "../Pods-Wildcard/Pods-Wildcard-dummy.m"; sourceTree = "<group>"; };
 		06CBF3C5D04F3345C9B11B2C /* RegExp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RegExp.swift; path = Pod/Classes/RegExp.swift; sourceTree = "<group>"; };
-		08098B412EBF8E1F707000AF /* Environment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		0DCE2E77069F60415FD3CB28 /* NSDictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NSDictionary.swift; sourceTree = "<group>"; };
 		14FDCBB9B0930CFE4C1CBC75 /* Pods-Wildcard.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildcard.xcconfig"; path = "../Pods-Wildcard/Pods-Wildcard.xcconfig"; sourceTree = "<group>"; };
 		16C7BD9C653C024D3E2E3F23 /* Pods_Albatross_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Albatross_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -347,6 +345,8 @@
 		760243B61B4897FE00ADD2CC /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		760243BA1B48BF4A00ADD2CC /* HttpMultipartRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMultipartRequest.swift; sourceTree = "<group>"; };
 		761EC4211B49B07900B89DBB /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		761EC4291B4AD57200B89DBB /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		761EC42D1B4B581800B89DBB /* OAuth1Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth1Delegate.swift; sourceTree = "<group>"; };
 		7631FD4A1B32BE4B006476DC /* Reflektor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reflektor.framework; path = ../../Frameworks/Reflektor.framework; sourceTree = "<group>"; };
 		7631FD4B1B32BE4B006476DC /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = ../../Frameworks/CommonCrypto.framework; sourceTree = "<group>"; };
 		7632337608EAC27F7019D84A /* Pods-Albatross_Tests-Wildcard-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Albatross_Tests-Wildcard-Private.xcconfig"; path = "../Pods-Albatross_Tests-Wildcard/Pods-Albatross_Tests-Wildcard-Private.xcconfig"; sourceTree = "<group>"; };
@@ -538,10 +538,9 @@
 				76D6413E1B44395400D37054 /* Routing */,
 				76A9B6EB1B3F7D250008126A /* Extensions */,
 				76A9B6E61B3F63080008126A /* Auth */,
-				0327EDAF55C6BB828C8FB3E9 /* Albatross.swift */,
 				760243A41B484DD200ADD2CC /* Aliases.swift */,
+				761EC4291B4AD57200B89DBB /* Serializable.swift */,
 				760243B61B4897FE00ADD2CC /* MediaType.swift */,
-				08098B412EBF8E1F707000AF /* Environment.swift */,
 				B9382C188816682E1DE7640F /* Functions.swift */,
 				8BD35845FF23CC8E85478B79 /* Hmac.swift */,
 			);
@@ -672,6 +671,7 @@
 				FC48C659056616C9E934DD20 /* AuthorizationService.swift */,
 				760243AE1B485C2C00ADD2CC /* AuthorizationType.swift */,
 				8525C180629DCE80A437F91F /* BasicAuth.swift */,
+				761EC42D1B4B581800B89DBB /* OAuth1Delegate.swift */,
 				76A9B6E71B3F63250008126A /* OAuth2.swift */,
 				870AE73C62B1D51F7EB3536B /* OAuth1.swift */,
 			);
@@ -1328,7 +1328,6 @@
 				A2FF74E1412254CCEF146A6F /* ActiveUrlPath.swift in Sources */,
 				7602438F1B474F3500ADD2CC /* RelationshipRouter.swift in Sources */,
 				760243B81B4897FE00ADD2CC /* MediaType.swift in Sources */,
-				20BEB2CDADB605446C9024EC /* Albatross.swift in Sources */,
 				4645213E05CF6311F0F1C0D1 /* Api.swift in Sources */,
 				76D641381B43AF9F00D37054 /* Router.swift in Sources */,
 				FD809876EC3C7DDB337859B7 /* Array.swift in Sources */,
@@ -1342,7 +1341,7 @@
 				760243981B47C5B800ADD2CC /* Image.swift in Sources */,
 				E829A332C10B9C1290EF0D7F /* Endpoint.swift in Sources */,
 				7680692E1B40C7DC00CD9A69 /* HttpAction.swift in Sources */,
-				CEF625ED18713E2E9B8324E2 /* Environment.swift in Sources */,
+				761EC42B1B4AD5D400B89DBB /* Serializable.swift in Sources */,
 				76D6413C1B442EC700D37054 /* PseudoRouter.swift in Sources */,
 				A4CA1D01809DCE26FD532998 /* Functions.swift in Sources */,
 				76D641471B46264100D37054 /* BelongsToRouter.swift in Sources */,
@@ -1359,6 +1358,7 @@
 				76D641301B42EE8E00D37054 /* HasMany.swift in Sources */,
 				760243B01B485C2C00ADD2CC /* AuthorizationType.swift in Sources */,
 				E2A67D2CF2AF7871402D1DC0 /* NSData.swift in Sources */,
+				761EC42F1B4B581800B89DBB /* OAuth1Delegate.swift in Sources */,
 				E261C110AF1489622E6497FA /* NSDictionary.swift in Sources */,
 				76A9B6E91B3F63250008126A /* OAuth2.swift in Sources */,
 				D3A10BE7C6C5E3A3B68EE214 /* NSObject.swift in Sources */,
@@ -1440,7 +1440,6 @@
 				7631FD371B32A9F6006476DC /* HttpMediaType.swift in Sources */,
 				76D641371B43AF9F00D37054 /* Router.swift in Sources */,
 				7631FD3A1B32AA00006476DC /* NSData.swift in Sources */,
-				7631FD2C1B32A9CD006476DC /* Albatross.swift in Sources */,
 				7631FD2B1B32A9C9006476DC /* ActiveUrlPath.swift in Sources */,
 				760243BB1B48BF4A00ADD2CC /* HttpMultipartRequest.swift in Sources */,
 				76D641271B42EDE100D37054 /* HasMany.swift in Sources */,
@@ -1451,13 +1450,13 @@
 				7680692D1B40C7DC00CD9A69 /* HttpAction.swift in Sources */,
 				76D6413B1B442EC700D37054 /* PseudoRouter.swift in Sources */,
 				7631FD3F1B32AA13006476DC /* Route.swift in Sources */,
+				761EC42A1B4AD57200B89DBB /* Serializable.swift in Sources */,
 				76D641461B46264100D37054 /* BelongsToRouter.swift in Sources */,
 				760243941B47B08200ADD2CC /* Image.swift in Sources */,
 				760243921B47962400ADD2CC /* Media.swift in Sources */,
 				7631FD3D1B32AA0B006476DC /* OAuth1.swift in Sources */,
 				7631FD311B32A9DF006476DC /* Dictionary.swift in Sources */,
 				76D6414A1B46264A00D37054 /* HasOneRouter.swift in Sources */,
-				7631FD331B32A9E6006476DC /* Environment.swift in Sources */,
 				760243B31B48909300ADD2CC /* UIImage.swift in Sources */,
 				7631FD3E1B32AA0F006476DC /* String.swift in Sources */,
 				761EC4221B49B07900B89DBB /* Resource.swift in Sources */,
@@ -1467,6 +1466,7 @@
 				7659FEA31B404EE80053E7A9 /* NSDate.swift in Sources */,
 				760243AF1B485C2C00ADD2CC /* AuthorizationType.swift in Sources */,
 				7631FD381B32A9F9006476DC /* HttpMethod.swift in Sources */,
+				761EC42E1B4B581800B89DBB /* OAuth1Delegate.swift in Sources */,
 				5704997868ECE09CBD8F3F19 /* Pods-dummy.m in Sources */,
 				76A9B6E81B3F63250008126A /* OAuth2.swift in Sources */,
 				7631FD341B32A9E9006476DC /* Functions.swift in Sources */,
@@ -1487,7 +1487,6 @@
 				7C6CE5B7BF68C555E11EA6AF /* ActiveUrlPath.swift in Sources */,
 				760243901B474F3600ADD2CC /* RelationshipRouter.swift in Sources */,
 				760243B91B4897FE00ADD2CC /* MediaType.swift in Sources */,
-				D40B72AEF27F96DBA2EAEC4F /* Albatross.swift in Sources */,
 				C158EED95D1FD7339C1B7B5C /* Api.swift in Sources */,
 				76D641391B43AF9F00D37054 /* Router.swift in Sources */,
 				161A1431DF8B22411704D581 /* Array.swift in Sources */,
@@ -1501,7 +1500,7 @@
 				760243991B47C5B900ADD2CC /* Image.swift in Sources */,
 				59E803070199EF4A8A552B97 /* Endpoint.swift in Sources */,
 				7680692F1B40C7DC00CD9A69 /* HttpAction.swift in Sources */,
-				9C77B373599B67C6D2457506 /* Environment.swift in Sources */,
+				761EC42C1B4AD5D500B89DBB /* Serializable.swift in Sources */,
 				76D6413D1B442EC700D37054 /* PseudoRouter.swift in Sources */,
 				306439B696B39F62FE7BA087 /* Functions.swift in Sources */,
 				76D641481B46264100D37054 /* BelongsToRouter.swift in Sources */,
@@ -1518,6 +1517,7 @@
 				76D641311B42EE9000D37054 /* HasMany.swift in Sources */,
 				760243B11B485C2C00ADD2CC /* AuthorizationType.swift in Sources */,
 				3FB85F512B72C31404B7B4BB /* NSData.swift in Sources */,
+				761EC4301B4B581800B89DBB /* OAuth1Delegate.swift in Sources */,
 				8817D3982E13DA4100E829FD /* NSDictionary.swift in Sources */,
 				76A9B6EA1B3F63250008126A /* OAuth2.swift in Sources */,
 				29A42189C98DF331FD848335 /* NSObject.swift in Sources */,

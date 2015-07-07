@@ -83,13 +83,8 @@ public class HasOne<T: Passenger>: Relationship<T>, HasOneRouter {
         }
     }
         
-    override public func serialize() -> [String: AnyObject] {
-        
-        if let passenger = self.passenger {
-            return passenger.serialize()
-        }
-        
-        return [String: AnyObject]()
+    public func serialize() -> AnyObject? {
+        return passenger?.serialize()
     }
 
     public func getOwnershipHierarchy() -> [Router] {

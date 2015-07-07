@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum MediaType: UInt8 {
+internal enum MediaType: UInt8 {
     case JPG = 0xFF
     case GIF = 0x47
     case PNG = 0x89

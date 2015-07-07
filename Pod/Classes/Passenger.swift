@@ -102,11 +102,11 @@ public class Passenger: NSObject, Router {
     }
 
     final public func save(onComplete: AnyObject? -> Void) {
-        Api.shared.save(self, params: serialize(), onComplete: onComplete)
+        Api.shared.save(self, params: serialize() as? Json ?? Json(), onComplete: onComplete)
     }
 
     final public func create(onComplete: onPassengerRetrieved) {
-        Api.shared.create(self, params: serialize()) { [unowned self] obj in
+        Api.shared.create(self, params: serialize() as? Json ?? Json()) { [unowned self] obj in
             if let passenger = obj as? Passenger {
                 onComplete(passenger)
             } else {
@@ -173,11 +173,12 @@ public class Passenger: NSObject, Router {
         }
     }
     
-    public func serialize() -> [String: AnyObject] {
+    public func serialize() -> AnyObject? {
         var serial = [String: AnyObject]()
         
         for (fieldName, fieldMirror) in mirrors {
             if let value: AnyObject = getMirrorValue(fieldMirror) {
+                //println("Serializing \(fieldName), \(value)")
                 serial[fieldName] = value
             }
         }
@@ -286,9 +287,9 @@ public class Passenger: NSObject, Router {
     }
     
     private func getMirrorValue(fieldMirror: MirrorType) -> AnyObject? {
-        if let value = fieldMirror.value as? Passenger {
+        if let value = fieldMirror.value as? Router {
             //println("setting AnyObject \(fieldName): \(value)")
-            return value.serialize()
+            return nil //value.serialize()
         } else if fieldMirror.disposition == .Optional && fieldMirror.count > 0 {
             switch fieldMirror.count {
             case 1:
@@ -297,8 +298,7 @@ public class Passenger: NSObject, Router {
                     if let value = fieldMirror[0].1.value as? Passenger {
                         return value.serialize()
                     } else if let value = fieldMirror[0].1.value as? NSDate {
-                        return "\(value)".gsub("(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}).*", "$1")
-                        // println("Setting Value: \(fieldName) \(serial[fieldName]!)")
+                        return value.format("yyyy-MM-dd hh:mm:ss")
                     } else if let value: AnyObject = fieldMirror[0].1.value as? AnyObject {
                         return value
                     }

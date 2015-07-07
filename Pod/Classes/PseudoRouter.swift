@@ -20,7 +20,11 @@ class PseudoRouter: NSObject, Router {
     internal var parent: Router? {
         return nil
     }
-    
+
+    func serialize() -> AnyObject? {
+        return nil
+    }
+
     func construct(args: [String: AnyObject], node: String? = nil) -> AnyObject {
         return type.parse(args, node: node)
     }

@@ -11,7 +11,7 @@ import Foundation
 public protocol Router {
     var parent: Router? { get }
     var endpoint: String { get }
-    
+    func serialize() -> AnyObject?
     func construct(args: [String: AnyObject], node: String?) -> AnyObject
     func getOwnershipHierarchy() -> [Router]
 }

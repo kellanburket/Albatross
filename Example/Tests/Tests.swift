@@ -8,9 +8,9 @@ class Tests: XCTestCase, ImageLoadDelegate {
     override func setUp() {
         super.setUp()
         if let service = Api.shared.getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
-            if service.accessToken == nil || service.accessTokenSecret == nil {
-                service.accessToken = "OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X"
-                service.accessTokenSecret = "D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT"
+            if service.token == nil || service.secret == nil {
+                service.token = "OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X"
+                service.secret = "D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT"
             }
         }
     }
@@ -87,10 +87,10 @@ class Tests: XCTestCase, ImageLoadDelegate {
                             XCTAssert(project.name! == params["name"], "\(project.name!)")
                             XCTAssert(project.progress == 100, "\(project.progress)")
                             let startDate = project.started!.format("yyyy-MM-dd")
-                            XCTAssert(startDate == params["started"]!, "\(project.started) -> \(startDate)")
+                            XCTAssert(startDate == params["started"]!, "Start dates don't match")
                             let completedDate = project.completed!.format("yyyy-MM-dd")
-                            
-                            XCTAssert(completedDate == params["completed"]!, "\(project.completed) -> \(completedDate)")
+
+                            XCTAssert(completedDate == params["completed"]!, "End dates don't match")
                             
                             let newProjectName = "new project"
                             project.name = newProjectName

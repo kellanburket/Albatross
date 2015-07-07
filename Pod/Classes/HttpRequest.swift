@@ -123,17 +123,40 @@ public class HttpRequest {
         }
     }
     
-    public class func parseQuery(data: NSData, encoding: UInt) -> [String:String] {
-        var arr = [String:String]()
+    public class func parseQueryString(data: NSData, encoding: UInt = NSUTF8StringEncoding) -> Json {
+        var arr = Json()
         
-        if let params = NSString(data: data, encoding: encoding) as? String {
-            let parseParams = params.split("&")
-            
-            for param in parseParams {
-                let values = param.split("=")
-                if values.count > 1 {
-                    arr[values[0]] = values[1]
-                }
+        if let urlString = data.toString(encoding: encoding) {
+            //println("URL STRING: \(urlString)")
+            return self.parseQueryString(urlString)
+        }
+        
+        return arr
+    }
+    
+    public class func parseQueryString(url: NSURL) -> [String: AnyObject] {
+        var arr = Json()
+        
+        if let urlString = url.absoluteString {
+            var urlParts = urlString.split("?")
+            if urlParts.count > 1 {
+                return self.parseQueryString(urlParts[1])
+            }
+        }
+        
+        return arr
+    }
+    
+    public class func parseQueryString(query: String) -> [String: AnyObject] {
+        var arr = Json()
+
+        var keyValuePairs = query.split("&")
+        //println("keyValuePairs: \(keyValuePairs)")
+        
+        for keyValuePair in keyValuePairs {
+            var keyValuePairArr = keyValuePair.split("=")
+            if keyValuePairArr.count == 2 {
+                arr[keyValuePairArr[0]] = keyValuePairArr[1]
             }
         }
         
