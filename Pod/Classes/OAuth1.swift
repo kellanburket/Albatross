@@ -147,7 +147,7 @@ public class OAuth1: AuthorizationService {
     }
     
     override public func setHeader(url: NSURL, inout request: NSMutableURLRequest) {
-        var header: String = "OAuth realm=\"\(url.absoluteString!)\", "
+        var header: String = "OAuth "//realm=\"\(url.absoluteString!)\", "
         
         var keys = [String](headers.keys)
         keys.sort { return $0 < $1 }

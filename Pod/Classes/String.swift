@@ -30,8 +30,8 @@ private let vowel = "[aeiou]"
 let plurals: [(String, String)] = [
     ("(?<=f)oo(?=t)$|(?<=t)oo(?=th)$", "ee"),
     ("(?<=i)fe$|(?<=[eao]l)f$|(?<=(l|sh)ea)f$", "ves"),
-    ("\\w{2,}[ie]x", "ices"),
-    ("[ml]ouse$", "ice"),
+    ("(\\w{2,})[ie]x", "$1ices"),
+    ("(?<=[ml])ouse$", "ice"),
     ("man$", "men"),
     ("child$", "children"),
     ("person$", "people"),
@@ -46,6 +46,23 @@ let plurals: [(String, String)] = [
     //"us$": "i"
     //"us$": "ora",
     //"us$": "era",
+]
+
+let singulars: [(String, String)] = [
+    ("(?<=f)ee(?=t)$|(?<=t)ee(?=th)$", "oo"),
+    ("(?<=i)ves$", "fe"),
+    ("(?<=[eao]l)ves$|(?<=(l|sh)ea)ves$", "f"),
+    ("(?<=[ml])ice$", "ouse"),
+    ("men$", "man"),
+    ("children$", "child"),
+    ("people$", "person"),
+    ("eaux$", "eau"),
+    ("(?<=-by)s$", ""),
+    ("(?<=[^q]\(vowel)y)s$", ""),
+    ("ies$", "y"),
+    ("(?<=s|sh|tch)es$", ""),
+    ("(?<=\(vowel)\(consonant)i)a", "um"),
+    ("(?<=\\w)s$", "")
 ]
 
 private let identicalPlurals: [String] = [
@@ -69,7 +86,13 @@ private let identicalPlurals: [String] = [
 
 private let irregularPlurals: [String:String] = [
     "potato": "potatoes",
-    "die": "dice"
+    "die": "dice",
+    "appendix": "appendices",
+    "index": "indices",
+    "matrix": "matrices",
+    "radix": "radices",
+    "vertex": "vertices",
+    "radius": "radii"
 ]
 
 extension String {
@@ -201,6 +224,25 @@ extension String {
         
         return self
     }
+    
+    public func singularize(language: String = "en/us") -> String {
+        if let singular = find(identicalPlurals, self) {
+            return self
+        }
+
+        if let plurals = irregularPlurals.flip(), plural = plurals[self] {
+            return plural
+        }
+
+        for (regex, mod) in singulars {
+            var replacement = self.gsubi(regex, mod)
+            if replacement != self {
+                return replacement
+            }
+        }
+        
+        return self
+    }
 
     
     /**
@@ -215,59 +257,128 @@ extension String {
     */
     public func toDate() -> NSDate? {
         //println("to Date: \(self)")
+        
         var patterns = [
-            "(\\d{4})[-\\/](\\d{1,2})[-\\/](\\d{1,2})": ["year", "month", "day"],
-            "(\\d{1,2})[-\\/](\\d{1,2})[-\\/](\\d{4})": ["month", "day", "year"]
+            "\\w+ (\\w+) (\\d+) (\\d{1,2}):(\\d{1,2}):(\\d{1,2}) \\+\\d{4} (\\d{4})": ["month", "day", "hour", "minute", "second", "year"],
+            "(\\d{4})[-\\/](\\d{1,2})[-\\/](\\d{1,2})(?: (\\d{1,2}):(\\d{1,2}):(\\d{1,2}))?": ["year", "month", "day", "hour", "minute", "second"],
+            "(\\d{1,2})[-\\/](\\d{1,2})[-\\/](\\d{4})(?: (\\d{1,2}):(\\d{1,2}):(\\d{1,2}))?": ["month", "day", "year", "hour", "minute", "second"]
         ]
         
         for (pattern, map) in patterns {
             if let matches = self.match(pattern) {
                 //println("Matches \(matches)")
-                if(matches.count == 4) {
+                if(matches.count >= 4) {
                     var dictionary = [String:String]()
-                    
+
                     for (i, item) in enumerate(map) {
-                        dictionary[item] = matches[i + 1]
+                        if i + 1 < matches.count {
+                            dictionary[item] = matches[i + 1]
+                        } else {
+                            break
+                        }
                     }
                     
                     let calendar = NSCalendar.currentCalendar()
                     let comp = NSDateComponents()
-                    
+
+                    comp.year = 0
                     if let year = dictionary["year"]?.toInt() {
                         comp.year = year
-                        if let month = dictionary["month"]?.toInt() {
+                    }
+                    
+                    comp.month = 0
+                    if let month = dictionary["month"] {
+                        if let month = month.toInt() {
                             comp.month = month
-                            if let day = dictionary["day"]?.toInt() {
-                                comp.day = day
-                                comp.hour = 0
-                                comp.minute = 0
-                                comp.second = 0
-                                return calendar.dateFromComponents(comp)
+                        } else {
+                            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+                            for (i, m) in enumerate(months) {
+                                if month =~ m {
+                                    comp.month = i
+                                    break
+                                }
                             }
                         }
                     }
+                    
+                    comp.day = 0
+                    if let day = dictionary["day"]?.toInt() {
+                        comp.day = day
+                    }
+                    
+                    comp.hour = 0
+                    if let hour = dictionary["hour"]?.toInt() {
+                        comp.hour = hour
+                    }
+                    
+                    comp.minute = 0
+                    if let minute = dictionary["minute"]?.toInt() {
+                        comp.minute = minute
+                    }
+                    
+                    comp.second = 0
+                    if let second = dictionary["second"]?.toInt() {
+                        comp.second = second
+                    }
+
+                    return calendar.dateFromComponents(comp)
                 }
             }
         }
         return nil
     }
 
-    /**
-    Convert a string into an NSURL object.
-    
-    :return: if the string passed in
-    */
-    public func toUrl() -> NSURL? {
-        return NSURL(string: self)
+    /*
+    public var hex: UInt64? {
+        if self =~ "^[0-9a-fA-F]+$" {
+            var total = 0
+            let length = count(self)
+            for (i, char) in enumerate(self.unicodeScalars) {
+                var temp = 0
+        
+                switch String(char).uppercaseString {
+                    case "1": temp = 1
+                    case "2": temp = 2
+                    case "3": temp = 3
+                    case "4": temp = 4
+                    case "5": temp = 5
+                    case "6": temp = 6
+                    case "7": temp = 7
+                    case "8": temp = 8
+                    case "9": temp = 9
+                    case "A": temp = 10
+                    case "B": temp = 11
+                    case "C": temp = 12
+                    case "D": temp = 13
+                    case "E": temp = 14
+                    case "F": temp = 15
+                    default: temp = 0
+                }
+            
+                total += temp * (2 << (length - 1))
+            }
+            
+            return total
+        }
+        
+        return nil
     }
+    */
     
     public func encode(encoding: UInt = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> NSData? {
         return self.dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion)
     }
     
-    public var decapitalize: String {
+    public func decapitalize() -> String {
         var prefix = self[startIndex..<advance(startIndex, 1)].lowercaseString
         var body = self[advance(startIndex, 1)..<endIndex]
         return "\(prefix)\(body)"
     }
+
+    public func capitalize() -> String {
+        var prefix = self[startIndex..<advance(startIndex, 1)].uppercaseString
+        var body = self[advance(startIndex, 1)..<endIndex]
+        return "\(prefix)\(body)"
+    }
+
 }

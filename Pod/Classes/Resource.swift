@@ -8,41 +8,39 @@
 
 import Foundation
 
-public class Resource: NSObject, Router {
+public class Resource: Passenger {
 
-    public var id: Int = 0
-    public var endpoint: String
-    public var parent: Router?
+    private var _endpoint: String = ""
+    private var _parent: Passenger?
+    
+    override public var endpoint: String {
+        return _endpoint
+    }
+
+    override public var parent: Passenger? {
+        return _parent
+    }
+
     private var resources = [String: Router]()
     
-    required public init(_ endpoint: String, parent: Router? = nil) {
-        self.endpoint = endpoint
-        self.parent = parent
-        super.init()
+    public init(_ endpoint: String, parent: Passenger? = nil) {
+        self._endpoint = endpoint
+        self._parent = parent
+        super.init(Json())
+    }
+
+    required public init(_ properties: Json) {
+        println("Resource should not be instantiated.")
+        super.init(Json())
     }
     
-    public func construct(args: Json, node: String? = nil) -> AnyObject {
-        if let node = node, json: AnyObject = args[node]  {
+    override public func construct(args: AnyObject, node: String? = nil) -> AnyObject {
+
+        if let node = node, json: AnyObject = args[node] {
             return json
         }
         
         return args
-    }
-    
-    public func getOwnershipHierarchy() -> [Router] {
-        var components: [Router] = [self]
-        var router: Router = self
-        
-        while let parent = router.parent {
-            components.append(parent)
-            router = parent
-        }
-        
-        return components.reverse()
-    }
-    
-    public func serialize() -> AnyObject? {
-        return nil
     }
     
     public func resource(endpoint: String) -> Resource {
@@ -51,37 +49,27 @@ public class Resource: NSObject, Router {
         return resource
     }
     
-    public func doAction(endpoint: String, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Resource {
+    override public func doAction(endpoint: String, params: [String: AnyObject], onComplete: AnyObject? -> Void) {
         Api.shared.request(self, endpoint: endpoint, params: params, handler: onComplete)
-        return self
     }
     
-    public func upload(data: [String: NSData], params: Json, onComplete: AnyObject? -> Void) -> Resource {
+    public func upload(data: [String: NSData], params: Json, onComplete: AnyObject? -> Void) {
         Api.shared.upload(self, data: data, params: params, onComplete: onComplete)
-        return self
     }
     
-    public func create(onComplete: AnyObject? -> Void) -> Resource {
-        return self.create(Json(), onComplete: onComplete)
-    }
-
-    public func create(params: Json, onComplete: AnyObject? -> Void) -> Resource {
+    public func create(params: Json, onComplete: AnyObject? -> Void) {
        Api.shared.create(self, params: params, onComplete: onComplete)
-        return self
     }
     
-    public func list(onComplete: AnyObject? -> Void) -> Resource {
+    public func list(onComplete: AnyObject? -> Void) {
         Api.shared.list(self, onComplete: onComplete)
-        return self
     }
     
-    public func search(params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Resource {
+    public func search(params: [String: AnyObject], onComplete: AnyObject? -> Void) {
         Api.shared.search(self, params: params, onComplete: onComplete)
-        return self
     }
     
-    private func registerResource(resource: Resource) -> Resource {
+    private func registerResource(resource: Resource) {
         resources[resource.endpoint] = resource
-        return self
     }
 }

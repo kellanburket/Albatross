@@ -1,0 +1,205 @@
+{
+  "created_at": "Mon Apr 13 22:07:44 +0000 2015",
+  "id": 587738967279325184,
+  "id_str": "587738967279325184",
+  "text": "#UNELECTABLE !! #DEADWRONG !! #MarcoRubio #TeamRubio #Rubio2016 http://t.co/5dONoyRGnk",
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "truncated": false,
+  "in_reply_to_status_id": null,
+  "in_reply_to_status_id_str": null,
+  "in_reply_to_user_id": null,
+  "in_reply_to_user_id_str": null,
+  "in_reply_to_screen_name": null,
+  "user": {
+    "id": 16298441,
+    "id_str": "16298441",
+    "name": "wint",
+    "screen_name": "dril",
+    "location": "nj",
+    "description": "pregnant Hog measurer",
+    "url": "http://t.co/8V6Wi4tMN3",
+    "entities": {
+      "url": {
+        "urls": [
+          {
+            "url": "http://t.co/8V6Wi4tMN3",
+            "expanded_url": "http://www.wint.co",
+            "display_url": "wint.co",
+            "indices": [
+              0,
+              22
+            ]
+          }
+        ]
+      },
+      "description": {
+        "urls": []
+      }
+    },
+    "protected": false,
+    "followers_count": 219851,
+    "friends_count": 170,
+    "listed_count": 2239,
+    "created_at": "Mon Sep 15 17:21:54 +0000 2008",
+    "favourites_count": 15,
+    "utc_offset": -14400,
+    "time_zone": "Eastern Time (US & Canada)",
+    "geo_enabled": false,
+    "verified": false,
+    "statuses_count": 5701,
+    "lang": "en",
+    "contributors_enabled": false,
+    "is_translator": false,
+    "is_translation_enabled": false,
+    "profile_background_color": "BADFCD",
+    "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/426222433/oscars1.jpg",
+    "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/426222433/oscars1.jpg",
+    "profile_background_tile": true,
+    "profile_image_url": "http://pbs.twimg.com/profile_images/473173117263564800/no2X3257_normal.jpeg",
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/473173117263564800/no2X3257_normal.jpeg",
+    "profile_banner_url": "https://pbs.twimg.com/profile_banners/16298441/1394248006",
+    "profile_link_color": "2E82DB",
+    "profile_sidebar_border_color": "000000",
+    "profile_sidebar_fill_color": "000000",
+    "profile_text_color": "5B5BA8",
+    "profile_use_background_image": true,
+    "has_extended_profile": false,
+    "default_profile": false,
+    "default_profile_image": false,
+    "following": true,
+    "follow_request_sent": false,
+    "notifications": false
+  },
+  "geo": null,
+  "coordinates": null,
+  "place": null,
+  "contributors": null,
+  "is_quote_status": false,
+  "retweet_count": 375,
+  "favorite_count": 1075,
+  "entities": {
+    "hashtags": [
+      {
+        "text": "UNELECTABLE",
+        "indices": [
+          0,
+          12
+        ]
+      },
+      {
+        "text": "DEADWRONG",
+        "indices": [
+          16,
+          26
+        ]
+      },
+      {
+        "text": "MarcoRubio",
+        "indices": [
+          30,
+          41
+        ]
+      },
+      {
+        "text": "TeamRubio",
+        "indices": [
+          42,
+          52
+        ]
+      },
+      {
+        "text": "Rubio2016",
+        "indices": [
+          53,
+          63
+        ]
+      }
+    ],
+    "symbols": [],
+    "user_mentions": [],
+    "urls": [],
+    "media": [
+      {
+        "id": 587738966691975168,
+        "id_str": "587738966691975168",
+        "indices": [
+          64,
+          86
+        ],
+        "media_url": "http://pbs.twimg.com/media/CCgReepUkAAo4Fz.jpg",
+        "media_url_https": "https://pbs.twimg.com/media/CCgReepUkAAo4Fz.jpg",
+        "url": "http://t.co/5dONoyRGnk",
+        "display_url": "pic.twitter.com/5dONoyRGnk",
+        "expanded_url": "http://twitter.com/dril/status/587738967279325184/photo/1",
+        "type": "photo",
+        "sizes": {
+          "large": {
+            "w": 800,
+            "h": 600,
+            "resize": "fit"
+          },
+          "small": {
+            "w": 340,
+            "h": 255,
+            "resize": "fit"
+          },
+          "medium": {
+            "w": 600,
+            "h": 450,
+            "resize": "fit"
+          },
+          "thumb": {
+            "w": 150,
+            "h": 150,
+            "resize": "crop"
+          }
+        }
+      }
+    ]
+  },
+  "extended_entities": {
+    "media": [
+      {
+        "id": 587738966691975168,
+        "id_str": "587738966691975168",
+        "indices": [
+          64,
+          86
+        ],
+        "media_url": "http://pbs.twimg.com/media/CCgReepUkAAo4Fz.jpg",
+        "media_url_https": "https://pbs.twimg.com/media/CCgReepUkAAo4Fz.jpg",
+        "url": "http://t.co/5dONoyRGnk",
+        "display_url": "pic.twitter.com/5dONoyRGnk",
+        "expanded_url": "http://twitter.com/dril/status/587738967279325184/photo/1",
+        "type": "photo",
+        "sizes": {
+          "large": {
+            "w": 800,
+            "h": 600,
+            "resize": "fit"
+          },
+          "small": {
+            "w": 340,
+            "h": 255,
+            "resize": "fit"
+          },
+          "medium": {
+            "w": 600,
+            "h": 450,
+            "resize": "fit"
+          },
+          "thumb": {
+            "w": 150,
+            "h": 150,
+            "resize": "crop"
+          }
+        }
+      }
+    ]
+  },
+  "favorited": false,
+  "retweeted": false,
+  "possibly_sensitive": false,
+  "possibly_sensitive_appealable": false,
+  "lang": "und"
+}

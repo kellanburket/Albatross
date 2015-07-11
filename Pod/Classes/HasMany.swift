@@ -8,16 +8,24 @@
 
 import Foundation
 
-public class HasMany<T: Passenger>: Relationship<T>, HasManyRouter {
+public class HasMany<T: Passenger>: BaseRelationship<T>, HasManyRouter, SequenceType {
  
-    public var passengers = [Int: Passenger]()    
+    private var passengers = [Int: T]()
     
     override public init() {
         super.init()
     }
-    
-    public var parent: Router? {
+
+    override public var kind: String {
+        return "hasMany"
+    }
+
+    public var parent: Passenger? {
         return owner
+    }
+
+    public func get() -> [Int : Passenger] {
+        return passengers
     }
 
     public func list(onComplete: [T]? -> ()) {
@@ -69,55 +77,53 @@ public class HasMany<T: Passenger>: Relationship<T>, HasManyRouter {
         }
     }
 
-    public func getOwnershipHierarchy() -> [Router] {
-        var components: [Router] = [self]
+    internal func getOwnershipHierarchy() -> [Router] {
+        var components = [Router]()
         var router: Router = self
         
-        while let parent = router.parent {
+        while let parent = router.parent as? Router {
             components.append(parent)
             router = parent
         }
         
         return components.reverse()
     }
-
-    public override func serialize() -> [String: AnyObject] {
-        var serial = [String: AnyObject]()
-        for (id, passenger) in passengers {
-            serial["\(id)"] = passenger.serialize()
-        }
-        return serial
-    }
-        
-    public func registerPassenger(passenger: Passenger) {
+    
+    internal func registerPassenger(passenger: Passenger) {
         if let passenger = passenger as? T, method = owner?.asMethodName() {
- 
-            if let relationship = passenger.BelongsTos[method], owner = owner {
+            
+            if let relationship = passenger.belongsTos[method], owner = owner {
                 relationship.registerPassenger(owner)
                 passengers[passenger.id] = passenger
             } else {
-                fatalError("'Has Many' relationship ('\(owner?.dynamicType.className)' has many '\(passenger.asMethodName().pluralize())') must register '\(passenger.dynamicType.className)' with corresponding 'Belongs To' ('\(passenger.dynamicType.className)' belongs to '\(method)') relationship.")
+                println("'Has Many' relationship ('\(owner?.dynamicType.className)' has many '\(passenger.asMethodName().pluralize())') must register '\(passenger.dynamicType.className)' with corresponding 'Belongs To' ('\(passenger.dynamicType.className)' belongs to '\(method)') relationship.")
             }
         } else {
-            fatalError("Cannot register passenger of type '\(passenger.self)'.")
+            println("Could not register passenger of type '\(passenger.self)' : \(T.className) owned by \(owner?.asMethodName()).")
         }
     }
 
-    public func serialize() -> AnyObject? {
-        var serial = [Json]()
-        for (id, passenger) in passengers {
-            if let serialized = passenger.serialize() as? Json {
-                serial.append(serialized)
-            }
-        }
-    
-        return serial
-    }
-
-
-    public subscript(id: Int) -> Passenger? {
+    public subscript(id: Int) -> T? {
         get {
             return passengers[id]
         }
     }
+    
+    public func generate() -> DictionaryGenerator<Int, T> {
+        return passengers.generate()
+    }
+    
+    override internal func describeSelf(_ tabs: Int = 0) -> String {
+        var output = ""
+        
+        for passenger in passengers {
+            if let passenger = passenger as? Router {
+                output += passenger.describeSelf(tabs)
+            }
+        }
+        
+        return output
+    }
+
+
 }

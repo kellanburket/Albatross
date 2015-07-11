@@ -126,7 +126,7 @@ public class HttpRequest {
     public class func parseQueryString(data: NSData, encoding: UInt = NSUTF8StringEncoding) -> Json {
         var arr = Json()
         
-        if let urlString = data.toString(encoding: encoding) {
+        if let urlString = data.stringify(encoding: encoding) {
             //println("URL STRING: \(urlString)")
             return self.parseQueryString(urlString)
         }
@@ -288,7 +288,13 @@ public class HttpRequest {
                 switch statusCode {
                     case 200:
                         println("\t(200)\tSuccess")
+
+                        if let data = data.stringify() {
+                            Log.d(data)
+                        }
+
                         handler(data)
+
                     case 401:
                         println("\t(401)\tUnauthorized")
                     case 403:

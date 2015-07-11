@@ -8,24 +8,21 @@
 
 import Foundation
 
-class PseudoRouter: NSObject, Router {
+internal class PseudoRouter: NSObject, Router {
     
-    var id: Int = 0
+    var id = Int()
+
     private var type: Passenger.Type
     
     init(type: Passenger.Type) {
         self.type = type
     }
 
-    internal var parent: Router? {
+    internal var parent: Passenger? {
         return nil
     }
 
-    func serialize() -> AnyObject? {
-        return nil
-    }
-
-    func construct(args: [String: AnyObject], node: String? = nil) -> AnyObject {
+    func construct(args: AnyObject, node: String? = nil) -> AnyObject {
         return type.parse(args, node: node)
     }
 
@@ -35,5 +32,9 @@ class PseudoRouter: NSObject, Router {
     
     func getOwnershipHierarchy() -> [Router] {
         return [self]
+    }
+
+    internal func describeSelf(_ tabs: Int = 0) -> String {
+        return ""
     }
 }

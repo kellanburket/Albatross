@@ -8,7 +8,7 @@
 
 import Foundation
 import Albatross
-
+/*
 class User: Passenger {
     var location: String?
     var username: String?
@@ -23,3 +23,4 @@ class User: Passenger {
     var smallPhotoUrl: Image?
     var tinyPhotoUrl: Image?
 }
+*/

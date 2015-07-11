@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         /*
         Pattern.find(1234) { record in
             if let pattern = record as? Pattern {

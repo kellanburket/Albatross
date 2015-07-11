@@ -13,24 +13,50 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		607FACEC1AFB9204008FA782 /* RavleryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* RavleryTests.swift */; };
 		66686EB934C0C33BCD3FFE2D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A350CF9AFA56AA6984BEDA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7602439F1B47F56D00ADD2CC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602439E1B47F56D00ADD2CC /* Comment.swift */; };
 		760243A01B47F64300ADD2CC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7602439E1B47F56D00ADD2CC /* Comment.swift */; };
 		761B10EB1B2FFC88005EB620 /* Craft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761B10EA1B2FFC88005EB620 /* Craft.swift */; };
+		761EC4371B4CE09A00B89DBB /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761EC4351B4CE09A00B89DBB /* api.plist */; };
+		761EC4381B4CE09A00B89DBB /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761EC4361B4CE09A00B89DBB /* endpoints.plist */; };
+		761EC43E1B4CFD0400B89DBB /* UserMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC43D1B4CFD0400B89DBB /* UserMention.swift */; };
+		761EC4401B4CFD2700B89DBB /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC43F1B4CFD2700B89DBB /* Status.swift */; };
+		761EC4411B4CFEE300B89DBB /* UserMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC43D1B4CFD0400B89DBB /* UserMention.swift */; };
+		761EC4421B4CFEE500B89DBB /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC43F1B4CFD2700B89DBB /* Status.swift */; };
 		7631FD591B32BE99006476DC /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; };
 		7631FD5A1B32BE99006476DC /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7631FD5B1B32BE99006476DC /* Reflektor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD581B32BE99006476DC /* Reflektor.framework */; };
 		7631FD5C1B32BE99006476DC /* Reflektor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD581B32BE99006476DC /* Reflektor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		763B033C1B4D676C0095A56B /* RavelryOAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B033B1B4D676C0095A56B /* RavelryOAuth1Helper.swift */; };
+		763B033E1B4D67980095A56B /* OAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B033D1B4D67980095A56B /* OAuth1Helper.swift */; };
+		763B03401B4D69A40095A56B /* TwitterOAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B033F1B4D69A40095A56B /* TwitterOAuth1Helper.swift */; };
+		763B03551B4F36670095A56B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03541B4F36670095A56B /* User.swift */; };
+		763B03571B4F37840095A56B /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03561B4F37840095A56B /* Url.swift */; };
+		763B03581B4F38510095A56B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03541B4F36670095A56B /* User.swift */; };
+		763B03591B4F38530095A56B /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03561B4F37840095A56B /* Url.swift */; };
+		763B03661B51B1560095A56B /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03651B51B1560095A56B /* Entity.swift */; };
+		763B03671B51B1560095A56B /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03651B51B1560095A56B /* Entity.swift */; };
+		763B03691B51B2F70095A56B /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03681B51B2F70095A56B /* Hashtag.swift */; };
+		763B036A1B51B2F70095A56B /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03681B51B2F70095A56B /* Hashtag.swift */; };
+		763B036C1B51B3670095A56B /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B036B1B51B3670095A56B /* Media.swift */; };
+		763B036D1B51B3670095A56B /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B036B1B51B3670095A56B /* Media.swift */; };
+		763B036F1B51BADE0095A56B /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B036E1B51BADE0095A56B /* Symbol.swift */; };
+		763B03701B51BADE0095A56B /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B036E1B51BADE0095A56B /* Symbol.swift */; };
+		763B03721B51BE4A0095A56B /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03711B51BE4A0095A56B /* UserEntity.swift */; };
+		763B03731B51BE4A0095A56B /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03711B51BE4A0095A56B /* UserEntity.swift */; };
+		763B03751B51BE530095A56B /* StatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03741B51BE530095A56B /* StatusEntity.swift */; };
+		763B03761B51BE530095A56B /* StatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03741B51BE530095A56B /* StatusEntity.swift */; };
+		763B03771B51CF5C0095A56B /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4391B4CE37600B89DBB /* Tests.swift */; };
 		7659FEA61B406D430053E7A9 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC9DB01B2896650084749D /* Pattern.swift */; };
 		7659FEA71B406D460053E7A9 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6DE1B3D9A0F0008126A /* Project.swift */; };
-		7659FEA81B406D490053E7A9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6E41B3F268A0008126A /* User.swift */; };
+		7659FEA81B406D490053E7A9 /* RavelryUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6E41B3F268A0008126A /* RavelryUser.swift */; };
 		7659FEA91B406D4B0053E7A9 /* Craft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761B10EA1B2FFC88005EB620 /* Craft.swift */; };
 		76A9B6DF1B3D9A0F0008126A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6DE1B3D9A0F0008126A /* Project.swift */; };
-		76A9B6E51B3F268A0008126A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6E41B3F268A0008126A /* User.swift */; };
+		76A9B6E51B3F268A0008126A /* RavelryUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9B6E41B3F268A0008126A /* RavelryUser.swift */; };
 		76AC9DB11B2896650084749D /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AC9DB01B2896650084749D /* Pattern.swift */; };
-		76AC9DB31B2896AB0084749D /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AC9DB21B2896AB0084749D /* endpoints.plist */; };
-		76AC9DB51B2896D80084749D /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AC9DB41B2896D80084749D /* api.plist */; };
+		76AC9DB31B2896AB0084749D /* endpoints-ravelry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AC9DB21B2896AB0084749D /* endpoints-ravelry.plist */; };
+		76AC9DB51B2896D80084749D /* api-ravelry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AC9DB41B2896D80084749D /* api-ravelry.plist */; };
 		76BE080D1B48EAD90029C8BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		9416CFC44B1D565617CBBA42 /* Pods_Albatross_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE1447C3128513BE6895D6A3 /* Pods_Albatross_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -75,17 +101,33 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* Albatross_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Albatross_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		607FACEB1AFB9204008FA782 /* RavleryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavleryTests.swift; sourceTree = "<group>"; };
 		7602439E1B47F56D00ADD2CC /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		761B10EA1B2FFC88005EB620 /* Craft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Craft.swift; sourceTree = "<group>"; };
+		761EC4351B4CE09A00B89DBB /* api.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = api.plist; sourceTree = SOURCE_ROOT; };
+		761EC4361B4CE09A00B89DBB /* endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = endpoints.plist; sourceTree = SOURCE_ROOT; };
+		761EC4391B4CE37600B89DBB /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		761EC43D1B4CFD0400B89DBB /* UserMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMention.swift; sourceTree = "<group>"; };
+		761EC43F1B4CFD2700B89DBB /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		7631FD571B32BE99006476DC /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = ../Frameworks/CommonCrypto.framework; sourceTree = "<group>"; };
 		7631FD581B32BE99006476DC /* Reflektor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reflektor.framework; path = ../Frameworks/Reflektor.framework; sourceTree = "<group>"; };
+		763B033B1B4D676C0095A56B /* RavelryOAuth1Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RavelryOAuth1Helper.swift; sourceTree = "<group>"; };
+		763B033D1B4D67980095A56B /* OAuth1Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth1Helper.swift; sourceTree = "<group>"; };
+		763B033F1B4D69A40095A56B /* TwitterOAuth1Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterOAuth1Helper.swift; sourceTree = "<group>"; };
+		763B03541B4F36670095A56B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Twitter/User.swift; sourceTree = "<group>"; };
+		763B03561B4F37840095A56B /* Url.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Url.swift; path = Twitter/Url.swift; sourceTree = "<group>"; };
+		763B03651B51B1560095A56B /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		763B03681B51B2F70095A56B /* Hashtag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashtag.swift; sourceTree = "<group>"; };
+		763B036B1B51B3670095A56B /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		763B036E1B51BADE0095A56B /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
+		763B03711B51BE4A0095A56B /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		763B03741B51BE530095A56B /* StatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusEntity.swift; sourceTree = "<group>"; };
 		7668E8041B2DF14100C4ACD7 /* Tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tester.playground; sourceTree = "<group>"; };
 		76A9B6DE1B3D9A0F0008126A /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		76A9B6E41B3F268A0008126A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		76A9B6E41B3F268A0008126A /* RavelryUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RavelryUser.swift; sourceTree = "<group>"; };
 		76AC9DB01B2896650084749D /* Pattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
-		76AC9DB21B2896AB0084749D /* endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = endpoints.plist; sourceTree = "<group>"; };
-		76AC9DB41B2896D80084749D /* api.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = api.plist; sourceTree = "<group>"; };
+		76AC9DB21B2896AB0084749D /* endpoints-ravelry.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "endpoints-ravelry.plist"; sourceTree = "<group>"; };
+		76AC9DB41B2896D80084749D /* api-ravelry.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "api-ravelry.plist"; sourceTree = "<group>"; };
 		7A976B735422E1C6686B4CEB /* Pods_Albatross_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Albatross_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F64F0AF8730DFBD2A069064 /* Pods-Albatross_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Albatross_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Albatross_Example/Pods-Albatross_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		95BC4E282AC5C2B9CF4B8EC6 /* Albatross.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Albatross.podspec; path = ../Albatross.podspec; sourceTree = "<group>"; };
@@ -153,16 +195,12 @@
 		607FACD21AFB9204008FA782 /* Example for Albatross */ = {
 			isa = PBXGroup;
 			children = (
+				761EC43C1B4CFCE700B89DBB /* Twitter */,
+				761EC43B1B4CFCD300B89DBB /* Ravelry */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				763B033D1B4D67980095A56B /* OAuth1Helper.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				7668E8041B2DF14100C4ACD7 /* Tester.playground */,
-				76AC9DB01B2896650084749D /* Pattern.swift */,
-				76A9B6DE1B3D9A0F0008126A /* Project.swift */,
-				76A9B6E41B3F268A0008126A /* User.swift */,
-				7602439E1B47F56D00ADD2CC /* Comment.swift */,
-				761B10EA1B2FFC88005EB620 /* Craft.swift */,
-				76AC9DB41B2896D80084749D /* api.plist */,
-				76AC9DB21B2896AB0084749D /* endpoints.plist */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -183,7 +221,8 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				607FACEB1AFB9204008FA782 /* RavleryTests.swift */,
+				761EC4391B4CE37600B89DBB /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -205,6 +244,41 @@
 				36DAC0EBB277E6B4417A2D9A /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		761EC43B1B4CFCD300B89DBB /* Ravelry */ = {
+			isa = PBXGroup;
+			children = (
+				7602439E1B47F56D00ADD2CC /* Comment.swift */,
+				761B10EA1B2FFC88005EB620 /* Craft.swift */,
+				763B033B1B4D676C0095A56B /* RavelryOAuth1Helper.swift */,
+				76AC9DB41B2896D80084749D /* api-ravelry.plist */,
+				76AC9DB21B2896AB0084749D /* endpoints-ravelry.plist */,
+				76AC9DB01B2896650084749D /* Pattern.swift */,
+				76A9B6DE1B3D9A0F0008126A /* Project.swift */,
+				76A9B6E41B3F268A0008126A /* RavelryUser.swift */,
+			);
+			name = Ravelry;
+			sourceTree = "<group>";
+		};
+		761EC43C1B4CFCE700B89DBB /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				761EC4351B4CE09A00B89DBB /* api.plist */,
+				761EC4361B4CE09A00B89DBB /* endpoints.plist */,
+				763B033F1B4D69A40095A56B /* TwitterOAuth1Helper.swift */,
+				761EC43D1B4CFD0400B89DBB /* UserMention.swift */,
+				763B03541B4F36670095A56B /* User.swift */,
+				763B03651B51B1560095A56B /* Entity.swift */,
+				763B03711B51BE4A0095A56B /* UserEntity.swift */,
+				763B03741B51BE530095A56B /* StatusEntity.swift */,
+				763B036E1B51BADE0095A56B /* Symbol.swift */,
+				763B03681B51B2F70095A56B /* Hashtag.swift */,
+				763B03561B4F37840095A56B /* Url.swift */,
+				761EC43F1B4CFD2700B89DBB /* Status.swift */,
+				763B036B1B51B3670095A56B /* Media.swift */,
+			);
+			name = Twitter;
 			sourceTree = "<group>";
 		};
 		AB024B775D98632BE727A6E1 /* Frameworks */ = {
@@ -304,11 +378,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76AC9DB51B2896D80084749D /* api.plist in Resources */,
+				76AC9DB51B2896D80084749D /* api-ravelry.plist in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				76AC9DB31B2896AB0084749D /* endpoints.plist in Resources */,
+				76AC9DB31B2896AB0084749D /* endpoints-ravelry.plist in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				761EC4381B4CE09A00B89DBB /* endpoints.plist in Resources */,
+				761EC4371B4CE09A00B89DBB /* api.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,9 +496,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				763B036C1B51B3670095A56B /* Media.swift in Sources */,
+				763B036F1B51BADE0095A56B /* Symbol.swift in Sources */,
 				76AC9DB11B2896650084749D /* Pattern.swift in Sources */,
+				763B03721B51BE4A0095A56B /* UserEntity.swift in Sources */,
+				761EC4401B4CFD2700B89DBB /* Status.swift in Sources */,
+				761EC43E1B4CFD0400B89DBB /* UserMention.swift in Sources */,
+				763B03751B51BE530095A56B /* StatusEntity.swift in Sources */,
+				763B03691B51B2F70095A56B /* Hashtag.swift in Sources */,
+				763B03571B4F37840095A56B /* Url.swift in Sources */,
+				763B03401B4D69A40095A56B /* TwitterOAuth1Helper.swift in Sources */,
+				763B03661B51B1560095A56B /* Entity.swift in Sources */,
+				763B033C1B4D676C0095A56B /* RavelryOAuth1Helper.swift in Sources */,
+				763B03551B4F36670095A56B /* User.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
-				76A9B6E51B3F268A0008126A /* User.swift in Sources */,
+				76A9B6E51B3F268A0008126A /* RavelryUser.swift in Sources */,
+				763B033E1B4D67980095A56B /* OAuth1Helper.swift in Sources */,
 				7602439F1B47F56D00ADD2CC /* Comment.swift in Sources */,
 				761B10EB1B2FFC88005EB620 /* Craft.swift in Sources */,
 				76A9B6DF1B3D9A0F0008126A /* Project.swift in Sources */,
@@ -434,12 +523,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7659FEA81B406D490053E7A9 /* User.swift in Sources */,
+				7659FEA81B406D490053E7A9 /* RavelryUser.swift in Sources */,
+				761EC4411B4CFEE300B89DBB /* UserMention.swift in Sources */,
+				763B036D1B51B3670095A56B /* Media.swift in Sources */,
+				763B036A1B51B2F70095A56B /* Hashtag.swift in Sources */,
 				760243A01B47F64300ADD2CC /* Comment.swift in Sources */,
+				761EC4421B4CFEE500B89DBB /* Status.swift in Sources */,
 				7659FEA61B406D430053E7A9 /* Pattern.swift in Sources */,
+				763B03581B4F38510095A56B /* User.swift in Sources */,
 				7659FEA91B406D4B0053E7A9 /* Craft.swift in Sources */,
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				763B03671B51B1560095A56B /* Entity.swift in Sources */,
+				763B03701B51BADE0095A56B /* Symbol.swift in Sources */,
+				607FACEC1AFB9204008FA782 /* RavleryTests.swift in Sources */,
 				7659FEA71B406D460053E7A9 /* Project.swift in Sources */,
+				763B03731B51BE4A0095A56B /* UserEntity.swift in Sources */,
+				763B03761B51BE530095A56B /* StatusEntity.swift in Sources */,
+				763B03591B4F38530095A56B /* Url.swift in Sources */,
+				763B03771B51CF5C0095A56B /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

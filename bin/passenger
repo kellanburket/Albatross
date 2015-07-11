@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+require_relative './source/p_list'
+require_relative './source/dir'
+
+if dir = Dir.scan(Dir.pwd, "xcworkspace", {ignore: ["xcodeproj"]})
+	apiPath = "#{dir}/api-twitter.plist"
+	endpointsPath = "#{dir}/endpoints-twitter.plist"
+
+	if File.exists? apiPath 
+		puts "api.plist file already added to directory. Aborting."
+	elsif File.exists? endpointsPath
+		puts "endpoints.plist file already added to directory. Aborting."
+	else
+		File.open(apiPath, "w") do |f|
+			f.write PList::Doc.new({
+				namespace: nil,
+				consumer_key: nil,
+				authorization: {
+					OAuth1: {
+						signature_method: "HMAC-SHA1",
+						consumer_secret: nil,
+						access_token_url: nil,
+						request_token_callback: nil,
+						authorize_url: nil,
+						request_token_url: nil
+					},
+					OAuth2: {},
+					BasicAuth: {
+						personal_key: nil,
+						username: nil
+					}
+				},
+				url: nil,
+				version: nil,
+				options: {
+					use_file_extensions: true,
+					use_accept_headers: false,
+					show_version_in_path: false
+				}
+			}).build
+		end
+
+		File.open(endpointsPath, "w") do |f|
+			f.write PList::Doc.new.build
+		end 
+	end
+else
+	puts "Unable to locate xcodeproj in directory '#{Dir.pwd}'. Aborting."
+end
+
+
+#puts plist.build

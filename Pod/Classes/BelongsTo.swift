@@ -8,35 +8,57 @@
 
 import Foundation
 
-public class BelongsTo<T: Passenger>: Relationship<T>, BelongsToRouter {
+public class BelongsTo<T: Passenger>: BaseRelationship<T>, BelongsToRouter {
  
-    public var passenger: Passenger?
+    private var passenger: T?
+
+    public var model: T? {
+        return passenger
+    }
+
+    override public var kind: String {
+        return "belongsTo"
+    }
+    
+    public var parent: Passenger? {
+        return passenger
+    }
     
     override public init() {
         super.init()
     }
+    
+    public func get() -> Passenger? {
+        return passenger
+    }
 
-    public func getOwnershipHierarchy() -> [Router] {
-        var components: [Router] = [self]
+    internal func getOwnershipHierarchy() -> [Router] {
+        var components = [Router]()
         var router: Router? = self
-        
-        while let parent = router?.parent {
-            components.append(parent)
+
+        if let passenger = passenger as? Router {
+            components << passenger
+        }
+
+        while let parent = router?.parent as? Router {
+            components << parent
             router = router?.parent
         }
         
         return components.reverse()
     }
 
-    public func registerPassenger(passenger: Passenger) {
-        self.passenger = passenger
-    }
-
-    public var parent: Router? {
-        return passenger
+    internal func registerPassenger(passenger: Passenger) {
+        if let passenger = passenger as? T{
+            self.passenger = passenger
+        }
     }
     
-    public func serialize() -> AnyObject? {
-        return passenger?.serialize()
+    override internal func describeSelf(_ tabs: Int = 0) -> String {
+        if let passenger = passenger {
+            return passenger.describeSelf(tabs)
+        }
+        
+        return ""
     }
 }

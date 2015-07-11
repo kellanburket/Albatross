@@ -57,7 +57,7 @@ public class Route: ActiveUrlPath {
         }
     }
 
-    public func applyArguments(router: Router) -> String {
+    internal func applyArguments(router: Router) -> String {
         var str = getFullUrlString()        
         //println("Applying Args")
         var components: [Router] = router.getOwnershipHierarchy().reverse()
@@ -65,7 +65,7 @@ public class Route: ActiveUrlPath {
         var hash = [String: Router]()
 
         for component in components {
-            hash[component.endpoint.decapitalize] = component
+            hash[component.endpoint.decapitalize()] = component
         }
         
         //println("Path: \(str)")

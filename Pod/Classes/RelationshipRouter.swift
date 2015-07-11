@@ -8,7 +8,9 @@
 
 import Foundation
 
-public protocol RelationshipRouter: Router {
+internal protocol RelationshipRouter: Router {
     var owner: Passenger? { get set }
+    var kind: String { get }
     func registerPassenger(passenger: Passenger)
+    func setOwner(passenger: Passenger)
 }

@@ -13,6 +13,10 @@ func +=<T>(left: [T], right: [T]) -> [T] {
     return left + right
 }
 
+func <<<T>(inout left: [T], right: T) {
+    left.append(right)
+}
+
 extension Array {
     mutating func shift() -> T? {
         return self.count > 0 ? self.removeAtIndex(0) : nil

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>namespace</key>
+	<string>Albatross_Example</string>
+	<key>version</key>
+	<string>1.1</string>
+	<key>consumer_key</key>
+	<string>QJvtp1ayB6FnDqmObf2Yhi983</string>
+	<key>authorization</key>
+	<dict>
+		<key>OAuth1</key>
+		<dict>
+			<key>consumer_secret</key>
+			<string>6KKzY3AG7zaT3jbrw4YUMJIunCp482LYAuwxvGhSxDh3eJwqxM</string>
+			<key>signature_method</key>
+			<string>HMAC-SHA1</string>
+			<key>request_token_url</key>
+			<string>https://api.twitter.com/oauth/request_token</string>
+			<key>access_token_url</key>
+			<string>https://api.twitter.com/oauth/access_token</string>
+			<key>request_token_callback</key>
+			<string>albatross://com.fkcomp.albatross</string>
+			<key>authorize_url</key>
+			<string>https://api.twitter.com/oauth/authorize</string>
+		</dict>
+		<key>OAuth2</key>
+		<dict/>
+		<key>BasicAuth</key>
+		<dict>
+			<key>personal_key</key>
+			<string></string>
+			<key>username</key>
+			<string></string>
+		</dict>
+	</dict>
+	<key>options</key>
+	<dict>
+		<key>use_file_extensions</key>
+		<true/>
+		<key>use_accept_headers</key>
+		<false/>
+		<key>show_version_in_path</key>
+		<true/>
+	</dict>
+	<key>url</key>
+	<string>https://api.twitter.com</string>
+</dict>
+</plist>

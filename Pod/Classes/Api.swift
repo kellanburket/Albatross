@@ -121,36 +121,36 @@ public class Api: NSObject {
     }
     
     //Get all from collection
-    public func list(router: Router, onComplete: AnyObject? -> Void) -> Api {
+    internal func list(router: Router, onComplete: AnyObject? -> Void) -> Api {
         return request(router, endpoint: "list", params: [String: AnyObject](), handler: onComplete)
     }
 
     //Get all in acollection that meet parameter
-    public func search(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
+    internal func search(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
         return request(router, endpoint: "search", params: params, handler: onComplete)
     }
 
     //Get One In Collection
-    public func find(router: Router, onComplete: (AnyObject?) -> ()) -> Api {
+    internal func find(router: Router, onComplete: (AnyObject?) -> ()) -> Api {
         return request(router, endpoint: "find", params: [String: AnyObject](), handler: onComplete)
     }
     
     //Create One in Collection
-    public func create(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
+    internal func create(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
         return request(router, endpoint: "create", params: params, handler: onComplete)
     }
     
     //Destroy One Element
-    public func destroy(passenger: Passenger, onComplete:  AnyObject? -> Void) -> Api {
+    internal func destroy(passenger: Passenger, onComplete:  AnyObject? -> Void) -> Api {
         return request(passenger, endpoint: "destroy", params: ["id": passenger.id], handler: onComplete)
     }
     
     //Save Element
-    public func save(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
+    internal func save(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
         return request(router, endpoint: "save", params: params, handler: onComplete)
     }
     
-    public func upload(router: Router, data: [String: NSData], params: [String:AnyObject], onComplete: AnyObject? -> Void) -> Api {
+    internal func upload(router: Router, data: [String: NSData], params: [String:AnyObject], onComplete: AnyObject? -> Void) -> Api {
         if let request = getMultipartRequest(router, data: data, params: params, handler: onComplete) {
             Http.start(request)
         } else {
@@ -160,7 +160,7 @@ public class Api: NSObject {
         return self
     }
     
-    public func request(router: Router, endpoint: String, params: [String: AnyObject], handler: AnyObject? -> Void) -> Api {
+    internal func request(router: Router, endpoint: String, params: [String: AnyObject], handler: AnyObject? -> Void) -> Api {
         
         if let request = getRequest(router, action: endpoint, params: params, handler: handler) {
             Http.start(request)
@@ -170,17 +170,6 @@ public class Api: NSObject {
         
         return self
     }
-    
-    public func getValue<T>(key: String, onComplete: T? -> Void) {
-        var handler: NSData -> Void = { data in
-            if let json = data.parseJson(), value = json[key] as? T {
-                onComplete(value)
-            } else {
-                onComplete(nil)
-            }
-        }
-    }
-
     
     public var basepath: String? {
         return url?.absoluteString
@@ -254,7 +243,7 @@ public class Api: NSObject {
     }
     
     private func getUrl(router: Router, route: Route, inout params: [String:AnyObject]) -> NSURL? {
-        let versionpath: String = (self.flags & SHOW_VERSION_IN_PATH > 0) ? "/\(version)/" : ""
+        let versionpath: String = (self.flags & SHOW_VERSION_IN_PATH > 0) ? "/\(version)" : ""
  
         let routepath = route.applyArguments(router)
         
@@ -276,7 +265,7 @@ public class Api: NSObject {
         switch route.action {
             case "create", "list", "search", "find", "save", "destroy":
                 return { data in
-                    if let json = data.parseJson() {
+                    if let json: AnyObject = data.parseJson() {
                         onComplete(router.construct(json, node: route.node))
                     } else {
                         onComplete(nil)

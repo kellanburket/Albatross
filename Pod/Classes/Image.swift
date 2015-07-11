@@ -16,6 +16,30 @@ public protocol ImageLoadDelegate {
 public class Image: Media {
 
     public var image: UIImage?
+
+    public var height = Double()
+    public var width = Double()
+    
+    public var h: Double {
+        get {
+            return height
+        }
+        
+        set(newHeight) {
+            height = newHeight
+        }
+    }
+
+    public var w: Double {
+        get {
+            return width
+        }
+        
+        set(newWidth) {
+            width = newWidth
+        }
+    }
+
     public var delegate: ImageLoadDelegate?
 
     internal var priority: NSOperationQueuePriority = .Normal

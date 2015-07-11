@@ -98,7 +98,6 @@
 		7631FD381B32A9F9006476DC /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9FA4CCB415A15A049C9904 /* HttpMethod.swift */; };
 		7631FD391B32A9FD006476DC /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27388269B5B5B07FCAC35B3 /* HttpRequest.swift */; };
 		7631FD3A1B32AA00006476DC /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DB6E5488D9D8C4A73EAC7 /* NSData.swift */; };
-		7631FD3B1B32AA03006476DC /* NSDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2E77069F60415FD3CB28 /* NSDictionary.swift */; };
 		7631FD3C1B32AA07006476DC /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D439EA97380F095CC34AB5DF /* NSObject.swift */; };
 		7631FD3D1B32AA0B006476DC /* OAuth1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870AE73C62B1D51F7EB3536B /* OAuth1.swift */; };
 		7631FD3E1B32AA0F006476DC /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E4CAFED597FA166E92CB5 /* String.swift */; };
@@ -109,6 +108,18 @@
 		7631FD4F1B32BE4B006476DC /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD4B1B32BE4B006476DC /* CommonCrypto.framework */; };
 		7631FD501B32BE4B006476DC /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD4B1B32BE4B006476DC /* CommonCrypto.framework */; };
 		7631FD511B32BE4B006476DC /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD4B1B32BE4B006476DC /* CommonCrypto.framework */; };
+		763B034D1B4F2FDF0095A56B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B034C1B4F2FDF0095A56B /* Log.swift */; };
+		763B034E1B4F30EA0095A56B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B034C1B4F2FDF0095A56B /* Log.swift */; };
+		763B034F1B4F30EB0095A56B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B034C1B4F2FDF0095A56B /* Log.swift */; };
+		763B03511B4F33660095A56B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03501B4F33660095A56B /* File.swift */; };
+		763B03521B4F33C60095A56B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03501B4F33660095A56B /* File.swift */; };
+		763B03531B4F33C90095A56B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B03501B4F33660095A56B /* File.swift */; };
+		763B035B1B4F51390095A56B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B035A1B4F51390095A56B /* UIColor.swift */; };
+		763B035C1B4F513D0095A56B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B035A1B4F51390095A56B /* UIColor.swift */; };
+		763B035D1B4F513F0095A56B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B035A1B4F51390095A56B /* UIColor.swift */; };
+		763B035F1B500B660095A56B /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B035E1B500B660095A56B /* BaseObject.swift */; };
+		763B03601B500BB60095A56B /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B035E1B500B660095A56B /* BaseObject.swift */; };
+		763B03611B500BB70095A56B /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B035E1B500B660095A56B /* BaseObject.swift */; };
 		7659FEA31B404EE80053E7A9 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7659FEA21B404EE80053E7A9 /* NSDate.swift */; };
 		7659FEA41B404EED0053E7A9 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7659FEA21B404EE80053E7A9 /* NSDate.swift */; };
 		7659FEA51B404EEE0053E7A9 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7659FEA21B404EE80053E7A9 /* NSDate.swift */; };
@@ -121,9 +132,9 @@
 		76D641271B42EDE100D37054 /* HasMany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D641261B42EDE100D37054 /* HasMany.swift */; };
 		76D641291B42EDEA00D37054 /* HasOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D641281B42EDEA00D37054 /* HasOne.swift */; };
 		76D6412B1B42EDF100D37054 /* BelongsTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6412A1B42EDF100D37054 /* BelongsTo.swift */; };
-		76D6412D1B42EE0000D37054 /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6412C1B42EE0000D37054 /* Relationship.swift */; };
-		76D6412E1B42EE8A00D37054 /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6412C1B42EE0000D37054 /* Relationship.swift */; };
-		76D6412F1B42EE8B00D37054 /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6412C1B42EE0000D37054 /* Relationship.swift */; };
+		76D6412D1B42EE0000D37054 /* BaseRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6412C1B42EE0000D37054 /* BaseRelationship.swift */; };
+		76D6412E1B42EE8A00D37054 /* BaseRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6412C1B42EE0000D37054 /* BaseRelationship.swift */; };
+		76D6412F1B42EE8B00D37054 /* BaseRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6412C1B42EE0000D37054 /* BaseRelationship.swift */; };
 		76D641301B42EE8E00D37054 /* HasMany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D641261B42EDE100D37054 /* HasMany.swift */; };
 		76D641311B42EE9000D37054 /* HasMany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D641261B42EDE100D37054 /* HasMany.swift */; };
 		76D641321B42EE9700D37054 /* HasOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D641281B42EDEA00D37054 /* HasOne.swift */; };
@@ -150,7 +161,6 @@
 		7C6CE5B7BF68C555E11EA6AF /* ActiveUrlPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC28C4937F05323FB564BBA3 /* ActiveUrlPath.swift */; };
 		7D2FE4E51965C4C43E0C2CE6 /* Hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD35845FF23CC8E85478B79 /* Hmac.swift */; };
 		86660DAE8225C3A2A52D8539 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C659056616C9E934DD20 /* AuthorizationService.swift */; };
-		8817D3982E13DA4100E829FD /* NSDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2E77069F60415FD3CB28 /* NSDictionary.swift */; };
 		8D73B2659A4A8A0CCD880368 /* Pods-Albatross_Example-Albatross-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DC211308F62DDFB5D1F0D9B6 /* Pods-Albatross_Example-Albatross-dummy.m */; };
 		9F3B60FA579C70E3663E1509 /* Wildcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F3E7841AF933EA71AB03D /* Wildcard.swift */; };
 		A2FF74E1412254CCEF146A6F /* ActiveUrlPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC28C4937F05323FB564BBA3 /* ActiveUrlPath.swift */; };
@@ -172,7 +182,6 @@
 		D9BA6A1F13D2EC9EBC5F15B5 /* OAuth1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870AE73C62B1D51F7EB3536B /* OAuth1.swift */; };
 		DD879D1DBC40C8F5F233C627 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF41CC5AE075045EAC33BBFE /* UIKit.framework */; };
 		DE49C8C4EFC9A8F597AFC316 /* TextAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF81842E064EFB78EF48D38 /* TextAttribute.swift */; };
-		E261C110AF1489622E6497FA /* NSDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2E77069F60415FD3CB28 /* NSDictionary.swift */; };
 		E2A67D2CF2AF7871402D1DC0 /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DB6E5488D9D8C4A73EAC7 /* NSData.swift */; };
 		E7211471561EFC0B0CF5CD13 /* Pods-Albatross_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FA1781CEC12E3B0F72C26C /* Pods-Albatross_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E829A332C10B9C1290EF0D7F /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75B122F92C9D5CC0EA14F1 /* Endpoint.swift */; };
@@ -285,7 +294,6 @@
 		06661538AD481BC7A034DD82 /* Pods-Albatross_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Albatross_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		0670708C173FB9D99ABDF88F /* Pods-Wildcard-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-Wildcard-dummy.m"; path = "../Pods-Wildcard/Pods-Wildcard-dummy.m"; sourceTree = "<group>"; };
 		06CBF3C5D04F3345C9B11B2C /* RegExp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RegExp.swift; path = Pod/Classes/RegExp.swift; sourceTree = "<group>"; };
-		0DCE2E77069F60415FD3CB28 /* NSDictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NSDictionary.swift; sourceTree = "<group>"; };
 		14FDCBB9B0930CFE4C1CBC75 /* Pods-Wildcard.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildcard.xcconfig"; path = "../Pods-Wildcard/Pods-Wildcard.xcconfig"; sourceTree = "<group>"; };
 		16C7BD9C653C024D3E2E3F23 /* Pods_Albatross_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Albatross_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		170101FD3149AAA55D033674 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -350,6 +358,10 @@
 		7631FD4A1B32BE4B006476DC /* Reflektor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reflektor.framework; path = ../../Frameworks/Reflektor.framework; sourceTree = "<group>"; };
 		7631FD4B1B32BE4B006476DC /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = ../../Frameworks/CommonCrypto.framework; sourceTree = "<group>"; };
 		7632337608EAC27F7019D84A /* Pods-Albatross_Tests-Wildcard-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Albatross_Tests-Wildcard-Private.xcconfig"; path = "../Pods-Albatross_Tests-Wildcard/Pods-Albatross_Tests-Wildcard-Private.xcconfig"; sourceTree = "<group>"; };
+		763B034C1B4F2FDF0095A56B /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		763B03501B4F33660095A56B /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		763B035A1B4F51390095A56B /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		763B035E1B500B660095A56B /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		76450ADFB7273E514A84182E /* Albatross.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Albatross.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		7659FEA21B404EE80053E7A9 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
 		7680692C1B40C7DC00CD9A69 /* HttpAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpAction.swift; sourceTree = "<group>"; };
@@ -357,7 +369,7 @@
 		76D641261B42EDE100D37054 /* HasMany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasMany.swift; sourceTree = "<group>"; };
 		76D641281B42EDEA00D37054 /* HasOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasOne.swift; sourceTree = "<group>"; };
 		76D6412A1B42EDF100D37054 /* BelongsTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BelongsTo.swift; sourceTree = "<group>"; };
-		76D6412C1B42EE0000D37054 /* Relationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
+		76D6412C1B42EE0000D37054 /* BaseRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRelationship.swift; sourceTree = "<group>"; };
 		76D641361B43AF9F00D37054 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		76D6413A1B442EC700D37054 /* PseudoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PseudoRouter.swift; sourceTree = "<group>"; };
 		76D641411B46263700D37054 /* HasManyRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasManyRouter.swift; sourceTree = "<group>"; };
@@ -539,6 +551,9 @@
 				76A9B6EB1B3F7D250008126A /* Extensions */,
 				76A9B6E61B3F63080008126A /* Auth */,
 				760243A41B484DD200ADD2CC /* Aliases.swift */,
+				763B035E1B500B660095A56B /* BaseObject.swift */,
+				763B034C1B4F2FDF0095A56B /* Log.swift */,
+				763B03501B4F33660095A56B /* File.swift */,
 				761EC4291B4AD57200B89DBB /* Serializable.swift */,
 				760243B61B4897FE00ADD2CC /* MediaType.swift */,
 				B9382C188816682E1DE7640F /* Functions.swift */,
@@ -645,7 +660,7 @@
 		760243AC1B48590B00ADD2CC /* relationships */ = {
 			isa = PBXGroup;
 			children = (
-				76D6412C1B42EE0000D37054 /* Relationship.swift */,
+				76D6412C1B42EE0000D37054 /* BaseRelationship.swift */,
 				76D6412A1B42EDF100D37054 /* BelongsTo.swift */,
 				76D641281B42EDEA00D37054 /* HasOne.swift */,
 				76D641261B42EDE100D37054 /* HasMany.swift */,
@@ -685,8 +700,8 @@
 				56EFDAF801AF0F7F929BC95A /* Dictionary.swift */,
 				736DB6E5488D9D8C4A73EAC7 /* NSData.swift */,
 				760243B21B48909300ADD2CC /* UIImage.swift */,
+				763B035A1B4F51390095A56B /* UIColor.swift */,
 				7659FEA21B404EE80053E7A9 /* NSDate.swift */,
-				0DCE2E77069F60415FD3CB28 /* NSDictionary.swift */,
 				D439EA97380F095CC34AB5DF /* NSObject.swift */,
 				788E4CAFED597FA166E92CB5 /* String.swift */,
 			);
@@ -1322,8 +1337,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76D6412E1B42EE8A00D37054 /* Relationship.swift in Sources */,
+				76D6412E1B42EE8A00D37054 /* BaseRelationship.swift in Sources */,
 				BBBCDD9402D86B3D95E5D7D0 /* Passenger.swift in Sources */,
+				763B034E1B4F30EA0095A56B /* Log.swift in Sources */,
 				76D641431B46263700D37054 /* HasManyRouter.swift in Sources */,
 				A2FF74E1412254CCEF146A6F /* ActiveUrlPath.swift in Sources */,
 				7602438F1B474F3500ADD2CC /* RelationshipRouter.swift in Sources */,
@@ -1333,6 +1349,7 @@
 				FD809876EC3C7DDB337859B7 /* Array.swift in Sources */,
 				76D641341B42EE9D00D37054 /* BelongsTo.swift in Sources */,
 				760243BC1B48BF4A00ADD2CC /* HttpMultipartRequest.swift in Sources */,
+				763B03601B500BB60095A56B /* BaseObject.swift in Sources */,
 				46312091A2FFB853FDBD07AD /* AuthorizationService.swift in Sources */,
 				4080A60AFC921D17F7621E67 /* BasicAuth.swift in Sources */,
 				760243A61B484DE500ADD2CC /* Aliases.swift in Sources */,
@@ -1350,16 +1367,17 @@
 				76D6414B1B46264A00D37054 /* HasOneRouter.swift in Sources */,
 				76E8E8688CA2E65DA320DED9 /* Http.swift in Sources */,
 				760243B41B48909300ADD2CC /* UIImage.swift in Sources */,
+				763B03521B4F33C60095A56B /* File.swift in Sources */,
 				6780B303C2507438621D1313 /* HttpMediaType.swift in Sources */,
 				761EC4231B49B07F00B89DBB /* Resource.swift in Sources */,
 				661FB94229A4664C987C0DDA /* HttpMethod.swift in Sources */,
+				763B035C1B4F513D0095A56B /* UIColor.swift in Sources */,
 				FF6084354E3771995BF33EB0 /* HttpRequest.swift in Sources */,
 				7659FEA41B404EED0053E7A9 /* NSDate.swift in Sources */,
 				76D641301B42EE8E00D37054 /* HasMany.swift in Sources */,
 				760243B01B485C2C00ADD2CC /* AuthorizationType.swift in Sources */,
 				E2A67D2CF2AF7871402D1DC0 /* NSData.swift in Sources */,
 				761EC42F1B4B581800B89DBB /* OAuth1Delegate.swift in Sources */,
-				E261C110AF1489622E6497FA /* NSDictionary.swift in Sources */,
 				76A9B6E91B3F63250008126A /* OAuth2.swift in Sources */,
 				D3A10BE7C6C5E3A3B68EE214 /* NSObject.swift in Sources */,
 				F959F01E3528AB0B0384E0AA /* OAuth1.swift in Sources */,
@@ -1432,6 +1450,7 @@
 			files = (
 				7631FD351B32A9ED006476DC /* Hmac.swift in Sources */,
 				7631FD2A1B32A9C5006476DC /* Passenger.swift in Sources */,
+				763B034D1B4F2FDF0095A56B /* Log.swift in Sources */,
 				76D641421B46263700D37054 /* HasManyRouter.swift in Sources */,
 				7631FD2F1B32A9D8006476DC /* AuthorizationService.swift in Sources */,
 				7602438E1B474EFE00ADD2CC /* RelationshipRouter.swift in Sources */,
@@ -1441,11 +1460,12 @@
 				76D641371B43AF9F00D37054 /* Router.swift in Sources */,
 				7631FD3A1B32AA00006476DC /* NSData.swift in Sources */,
 				7631FD2B1B32A9C9006476DC /* ActiveUrlPath.swift in Sources */,
+				763B035F1B500B660095A56B /* BaseObject.swift in Sources */,
 				760243BB1B48BF4A00ADD2CC /* HttpMultipartRequest.swift in Sources */,
 				76D641271B42EDE100D37054 /* HasMany.swift in Sources */,
 				7631FD321B32A9E3006476DC /* Endpoint.swift in Sources */,
 				760243A51B484DD200ADD2CC /* Aliases.swift in Sources */,
-				76D6412D1B42EE0000D37054 /* Relationship.swift in Sources */,
+				76D6412D1B42EE0000D37054 /* BaseRelationship.swift in Sources */,
 				7631FD2E1B32A9D4006476DC /* Array.swift in Sources */,
 				7680692D1B40C7DC00CD9A69 /* HttpAction.swift in Sources */,
 				76D6413B1B442EC700D37054 /* PseudoRouter.swift in Sources */,
@@ -1458,9 +1478,11 @@
 				7631FD311B32A9DF006476DC /* Dictionary.swift in Sources */,
 				76D6414A1B46264A00D37054 /* HasOneRouter.swift in Sources */,
 				760243B31B48909300ADD2CC /* UIImage.swift in Sources */,
+				763B03511B4F33660095A56B /* File.swift in Sources */,
 				7631FD3E1B32AA0F006476DC /* String.swift in Sources */,
 				761EC4221B49B07900B89DBB /* Resource.swift in Sources */,
 				7631FD2D1B32A9D1006476DC /* Api.swift in Sources */,
+				763B035B1B4F51390095A56B /* UIColor.swift in Sources */,
 				7631FD301B32A9DC006476DC /* BasicAuth.swift in Sources */,
 				76D641291B42EDEA00D37054 /* HasOne.swift in Sources */,
 				7659FEA31B404EE80053E7A9 /* NSDate.swift in Sources */,
@@ -1470,7 +1492,6 @@
 				5704997868ECE09CBD8F3F19 /* Pods-dummy.m in Sources */,
 				76A9B6E81B3F63250008126A /* OAuth2.swift in Sources */,
 				7631FD341B32A9E9006476DC /* Functions.swift in Sources */,
-				7631FD3B1B32AA03006476DC /* NSDictionary.swift in Sources */,
 				7631FD3C1B32AA07006476DC /* NSObject.swift in Sources */,
 				7631FD391B32A9FD006476DC /* HttpRequest.swift in Sources */,
 				7631FD361B32A9F3006476DC /* Http.swift in Sources */,
@@ -1481,8 +1502,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76D6412F1B42EE8B00D37054 /* Relationship.swift in Sources */,
+				76D6412F1B42EE8B00D37054 /* BaseRelationship.swift in Sources */,
 				F50C19BA9E449C250854E0FD /* Passenger.swift in Sources */,
+				763B034F1B4F30EB0095A56B /* Log.swift in Sources */,
 				76D641441B46263700D37054 /* HasManyRouter.swift in Sources */,
 				7C6CE5B7BF68C555E11EA6AF /* ActiveUrlPath.swift in Sources */,
 				760243901B474F3600ADD2CC /* RelationshipRouter.swift in Sources */,
@@ -1492,6 +1514,7 @@
 				161A1431DF8B22411704D581 /* Array.swift in Sources */,
 				76D641351B42EE9E00D37054 /* BelongsTo.swift in Sources */,
 				760243BD1B48BF4A00ADD2CC /* HttpMultipartRequest.swift in Sources */,
+				763B03611B500BB70095A56B /* BaseObject.swift in Sources */,
 				86660DAE8225C3A2A52D8539 /* AuthorizationService.swift in Sources */,
 				FD7B5FD2882DC699546386C1 /* BasicAuth.swift in Sources */,
 				760243A71B484DE600ADD2CC /* Aliases.swift in Sources */,
@@ -1509,16 +1532,17 @@
 				76D6414C1B46264A00D37054 /* HasOneRouter.swift in Sources */,
 				55D7AFEE0BF140746D01873D /* Http.swift in Sources */,
 				760243B51B48909300ADD2CC /* UIImage.swift in Sources */,
+				763B03531B4F33C90095A56B /* File.swift in Sources */,
 				7A5D474DC95050EB67EEE4C9 /* HttpMediaType.swift in Sources */,
 				761EC4241B49B08100B89DBB /* Resource.swift in Sources */,
 				62FBFDFE6EA7FC5EAF0F2601 /* HttpMethod.swift in Sources */,
+				763B035D1B4F513F0095A56B /* UIColor.swift in Sources */,
 				1071E442744903C8264C2E76 /* HttpRequest.swift in Sources */,
 				7659FEA51B404EEE0053E7A9 /* NSDate.swift in Sources */,
 				76D641311B42EE9000D37054 /* HasMany.swift in Sources */,
 				760243B11B485C2C00ADD2CC /* AuthorizationType.swift in Sources */,
 				3FB85F512B72C31404B7B4BB /* NSData.swift in Sources */,
 				761EC4301B4B581800B89DBB /* OAuth1Delegate.swift in Sources */,
-				8817D3982E13DA4100E829FD /* NSDictionary.swift in Sources */,
 				76A9B6EA1B3F63250008126A /* OAuth2.swift in Sources */,
 				29A42189C98DF331FD848335 /* NSObject.swift in Sources */,
 				D9BA6A1F13D2EC9EBC5F15B5 /* OAuth1.swift in Sources */,

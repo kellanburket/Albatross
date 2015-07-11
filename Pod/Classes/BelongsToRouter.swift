@@ -8,6 +8,6 @@
 
 import Foundation
 
-public protocol BelongsToRouter: RelationshipRouter {
-    var passenger: Passenger? { get set }
+internal protocol BelongsToRouter: RelationshipRouter {
+    func get() -> Passenger?
 }

@@ -8,34 +8,44 @@
 
 import Foundation
 
-public class HasOne<T: Passenger>: Relationship<T>, HasOneRouter {
+public class HasOne<T: Passenger>: BaseRelationship<T>, HasOneRouter {
 
-    public var passenger: Passenger? {
+    override public var kind: String {
+        return "hasOne"
+    }
+
+    public var model: T? {
+        return passenger
+    }
+
+    private var passenger: T? {
         didSet {
-            if let p = passenger as? T, method = owner?.asMethodName() {
-                if let relationship = p.BelongsTos[method], owner = owner {
+            if let owner = owner, passenger = passenger {
+                var method = owner.asMethodName()
+
+                if let relationship = passenger.belongsTos[method] {
                     relationship.registerPassenger(owner)
                 } else {
-                    fatalError("'Has One' relationship must register passengers with corresponding 'Belongs To' relationship.")
+                    println("'Has One' relationship must register passengers with corresponding 'Belongs To' relationship.")
                 }
             } else {
-                fatalError("Something went wrong and passenger was not set for 'Has One' relationship.")
+                println("Something went wrong and passenger was not set for 'Has One' relationship.")
             }
         }
     }
     
-    public var parent: Router? {
+    public var parent: Passenger? {
         return owner
-    }
-
-    override public var id: Int {
-        return passenger?.id ?? 0
     }
     
     override public init() {
         super.init()
     }
-    
+
+    public func get() -> Passenger? {
+        return passenger
+    }
+
     public func create(params: [String: AnyObject], onComplete: onPassengerRetrieved) {
         T(params).create { record in
             if let passenger = record as? T {
@@ -82,16 +92,16 @@ public class HasOne<T: Passenger>: Relationship<T>, HasOneRouter {
             onComplete(nil)
         }
     }
-        
-    public func serialize() -> AnyObject? {
-        return passenger?.serialize()
-    }
 
-    public func getOwnershipHierarchy() -> [Router] {
-        var components: [Router] = [self]
-        var router: Router = self
+    internal func getOwnershipHierarchy() -> [Router] {
+        var components = [Router]()
         
-        while let parent = router.parent {
+        if let passenger = passenger as? Router {
+            components << passenger
+        }
+        
+        var router: Router = self
+        while let parent = router.parent as? Router {
             components.append(parent)
             router = parent
         }
@@ -100,7 +110,17 @@ public class HasOne<T: Passenger>: Relationship<T>, HasOneRouter {
     }
 
     public func registerPassenger(passenger: Passenger) {
-        self.passenger = passenger
+        if let passenger = passenger as? T{
+            self.passenger = passenger
+        }
+    }
+    
+    override internal func describeSelf(_ tabs: Int = 0) -> String {
+        if let passenger = passenger {
+            return passenger.describeSelf(tabs)
+        }
+        
+        return ""
     }
 
 }

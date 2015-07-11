@@ -43,7 +43,7 @@ class Project: Passenger {
     
     func createPhoto(images: [String: UIImage], onComplete: AnyObject? -> Void) {
         let upload = Resource("Upload")
-        
+        /*
         upload.create { data in
             if let json = data as? Json, token = json["upload_token"] as? String {
                 
@@ -74,6 +74,7 @@ class Project: Passenger {
                 onComplete(nil)
             }
         }
+        */
     }
     
     //var yarn: Yarn?

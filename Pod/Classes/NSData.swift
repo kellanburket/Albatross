@@ -10,9 +10,11 @@ import Foundation
 import CommonCrypto
 
 extension NSData {
-    public func parseJson() -> [String: AnyObject]? {
+    public func parseJson() -> AnyObject? {
         var error: NSError?
-        if let json = NSJSONSerialization.JSONObjectWithData(self, options: nil, error: &error) as? [String: AnyObject] {
+        if let json = NSJSONSerialization.JSONObjectWithData(self, options: nil, error: &error) as? Json {
+            return json
+        } else if let json = NSJSONSerialization.JSONObjectWithData(self, options: nil, error: &error) as? [AnyObject] {
             return json
         } else {
             println("Could not properly parse JSON data: \(error)")
@@ -20,7 +22,7 @@ extension NSData {
         }
     }
 
-    public func toString(encoding: UInt = NSUTF8StringEncoding) -> String? {
+    public func stringify(encoding: UInt = NSUTF8StringEncoding) -> String? {
         return NSString(data: self, encoding: encoding) as? String
     }
 

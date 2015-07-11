@@ -8,10 +8,10 @@
 
 import Foundation
 
-public protocol Router {
-    var parent: Router? { get }
+internal protocol Router {
+    var parent: Passenger? { get }
     var endpoint: String { get }
-    func serialize() -> AnyObject?
-    func construct(args: [String: AnyObject], node: String?) -> AnyObject
+    func construct(args: AnyObject, node: String?) -> AnyObject
     func getOwnershipHierarchy() -> [Router]
+    func describeSelf(tabs: Int) -> String
 }

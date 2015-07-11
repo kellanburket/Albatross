@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Statuses</key>
+	<dict>
+		<key>endpoints</key>
+		<dict/>
+		<key>path</key>
+		<string>statuses</string>
+		<key>routes</key>
+		<dict>
+			<key>mentions</key>
+			<dict>
+				<key>path</key>
+				<string>mentions_timeline</string>
+				<key>method</key>
+				<string>GET</string>
+				<key>auth</key>
+				<string>OAuth1</string>
+			</dict>
+			<key>find</key>
+			<dict>
+				<key>path</key>
+				<string>show/:id</string>
+				<key>auth</key>
+				<string>OAuth1</string>
+			</dict>
+			<key>search</key>
+			<dict>
+				<key>path</key>
+				<string>user_timeline</string>
+				<key>auth</key>
+				<string>OAuth1</string>
+			</dict>
+			<key>home</key>
+			<dict>
+				<key>path</key>
+				<string>home_timeline</string>
+				<key>method</key>
+				<string>GET</string>
+				<key>auth</key>
+				<string>BasicAuth</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>Media</key>
+	<dict>
+		<key>endpoints</key>
+		<dict/>
+		<key>path</key>
+		<string>media</string>
+	</dict>
+</dict>
+</plist>
