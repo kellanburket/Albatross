@@ -1,7 +1,7 @@
 /*
 import UIKit
 import XCTest
-import Albatross
+import Passenger
 
 class Tests: XCTestCase, ImageLoadDelegate {
     let userId = 4952800

@@ -1,0 +1,6 @@
+framework module Passenger {
+  umbrella header "Pods-Passenger_Example-Passenger-umbrella.h"
+
+  export *
+  module * { export * }
+}

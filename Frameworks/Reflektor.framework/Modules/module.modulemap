@@ -1,6 +1,0 @@
-framework module Reflektor {
-  umbrella header "Reflektor.h"
-
-  export *
-  module * { export * }
-}

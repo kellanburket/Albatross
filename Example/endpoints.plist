@@ -2,6 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>User</key>
+	<dict>
+		<key>path</key>
+		<string>users</string>
+		<key>routes</key>
+		<dict>
+			<key>search</key>
+			<dict>
+				<key>path</key>
+				<string>show</string>
+				<key>auth</key>
+				<string>OAuth1</string>
+			</dict>
+			<key>lookup</key>
+			<dict>
+				<key>path</key>
+				<string>lookup</string>
+				<key>auth</key>
+				<string>OAuth1</string>
+				<key>method</key>
+				<string>GET</string>
+			</dict>
+		</dict>
+	</dict>
 	<key>Statuses</key>
 	<dict>
 		<key>endpoints</key>
@@ -10,6 +34,22 @@
 		<string>statuses</string>
 		<key>routes</key>
 		<dict>
+			<key>create</key>
+			<dict>
+				<key>path</key>
+				<string>update</string>
+				<key>auth</key>
+				<string>OAuth1</string>
+			</dict>
+			<key>destroy</key>
+			<dict>
+				<key>auth</key>
+				<string>OAuth1</string>
+				<key>path</key>
+				<string>destroy</string>
+				<key>method</key>
+				<string>POST</string>
+			</dict>
 			<key>mentions</key>
 			<dict>
 				<key>path</key>

@@ -50,15 +50,29 @@ public class BaseObject: NSObject {
         if mirror.count >= 1 && mirror.disposition == .Optional {
             return parseOptionalMirror(mirror)
         } else if mirror.count >= 1 && mirror.disposition == .Class {
+            //println("\tCount: \(mirror.count)")
+            //println("\tDisposition: \(self.dynamicType.getDisposition(mirror.disposition))")
+            //println("\tValue: \(mirror.value)")
+            //println("\tValue Type: \(mirror.valueType)\n")
+            
+            return mirror.value //parseObjectMirror(mirror)
+        } else if mirror.count >= 1 && mirror.disposition == .Struct {
+            println("\tCount: \(mirror.count)")
+            println("\tDisposition: \(self.dynamicType.getDisposition(mirror.disposition))")
+            println("\tValue: \(mirror.value)")
+            println("\tValue Type: \(mirror.valueType)\n")
+            
             return mirror.value //parseObjectMirror(mirror)
         } else if mirror.count >= 1 && mirror.disposition == .KeyContainer {
             return parseDictionaryMirror(mirror)
+        } else if mirror.count >= 1 && mirror.disposition == .IndexContainer {
+            return parseArrayMirror(mirror)
         } else if let value: AnyObject = mirror.value as? AnyObject {
             //println("Primitive Mirror")
             //println("\tCount: \(mirror.count)")
+            //println("\tDisposition: \(self.dynamicType.getDisposition(mirror.disposition))")
             //println("\tValue: \(mirror.value)")
-            //println("\tValue Type: \(mirror.valueType)")
-            //println("\tSummary: \(mirror.summary)")
+            //println("\tValue Type: \(mirror.valueType)\n")
             return mirror.value
         }
         
@@ -71,9 +85,36 @@ public class BaseObject: NSObject {
         return nil
         
     }
+
+    internal func parseStructMirror(mirror: MirrorType) -> Any? {
+
+        for i in 0..<mirror.count {
+            let (name, structMirror) = mirror[i]
+            if let item = parseMirror(structMirror) {
+                
+            }
+            
+        }
+        
+        return nil
+    }
+    
+    internal func parseArrayMirror(mirror: MirrorType) -> Any? {
+        var array = [Any]()
+        
+        for i in 0..<mirror.count {
+            let (mirrorIndex, arrayMirror) = mirror[i]
+            if let item = parseMirror(arrayMirror) {
+                array << item
+            } else {
+                println("Coult not parse \(arrayMirror.valueType)")
+            }
+        }
+        
+        return array.count > 0 ? array : nil
+    }
     
     internal func parseDictionaryMirror(mirror: MirrorType) -> Any? {
-        //println("\tDictionary Mirror")
         var hash = [String: Any]()
         
         for i in 0..<mirror.count {
@@ -84,6 +125,13 @@ public class BaseObject: NSObject {
                 var valueMirror = tupleMirror[1].1
                 
                 if let key = keyMirror.value as? String {
+                    //println("\t\tAdding Dictionary Key '\(key)'")
+                    //println("\t\t\tCount: \(valueMirror.count)")
+                    //println("\t\t\tDisposition: \(self.dynamicType.getDisposition(keyMirror.disposition))")
+                    //println("\t\t\tValue: \(valueMirror.value)")
+                    //println("\t\t\tValue Type: \(valueMirror.valueType)")
+                    //println("\t\t\tSummary: \(valueMirror.summary)")
+
                     hash[key] = parseMirror(valueMirror)
                 } else {
                     println("\t\tKey Mirror not a String")
@@ -158,43 +206,43 @@ public class BaseObject: NSObject {
 
     internal func getSubtype(type: Any.Type) -> Any.Type? {
         if type is Array<Int>.Type {
-            return Array<Int>.self
+            return Int.self
         } else if type is Array<UInt>.Type {
-            return Array<UInt>.self
+            return UInt.self
         } else if type is Array<Int8>.Type {
-            return Array<Int8>.self
+            return Int8.self
         } else if type is Array<UInt8>.Type {
-            return Array<UInt8>.self
+            return UInt8.self
         } else if type is Array<Int16>.Type {
-            return Array<Int16>.self
+            return Int16.self
         } else if type is Array<UInt16>.Type {
-            return Array<UInt16>.self
+            return UInt16.self
         } else if type is Array<Int32>.Type {
-            return Array<Int32>.self
+            return Int32.self
         } else if type is Array<UInt32>.Type {
-            return Array<UInt32>.self
+            return UInt32.self
         } else if type is Array<Int64>.Type {
-            return Array<Int64>.self
+            return Int64.self
         } else if type is Array<UInt64>.Type {
-            return Array<UInt64>.self
+            return UInt64.self
         } else if type is Array<String>.Type {
-            return Array<String>.self
+            return String.self
         } else if type is Array<Character>.Type {
-            return Array<Character>.self
+            return Character.self
         } else if type is Array<Bool>.Type {
-            return Array<Bool>.self
+            return Bool.self
         } else if type is Array<Float>.Type {
-            return Array<Float>.self
+            return Float.self
         } else if type is Array<Double>.Type {
-            return Array<Double>.self
+            return Double.self
         } else if type is Array<NSURL>.Type {
-            return Array<NSURL>.self
+            return NSURL.self
         } else if type is Array<UIColor>.Type {
-            return Array<UIColor>.self
+            return UIColor.self
         } else if type is Array<NSAttributedString>.Type {
-            return Array<NSAttributedString>.self
+            return NSAttributedString.self
         } else if type is Array<NSDate>.Type {
-            return Array<NSDate>.self
+            return NSDate.self
         }
         
         return nil
@@ -207,8 +255,8 @@ public class BaseObject: NSObject {
             output += describePropertyArray(arr, tabs + 1)
         } else if let hash = value as? [String: AnyObject] {
             output += describePropertyDictionary(hash, tabs + 1)
-        } else {
-            output += describePropertyPrimitive(value)
+        } else if let value = value as? Serializable {
+            output += describePropertySerializable(value)
         }
         
         return output
@@ -230,6 +278,7 @@ public class BaseObject: NSObject {
         var output = ""
         
         for (key, value) in hash {
+            //println("\tDescribing \(key)")
             output += "\n" + "\t".repeat(tabs) + "\(key): "
             output += describeProperty(value, tabs + 1)
         }
@@ -239,5 +288,9 @@ public class BaseObject: NSObject {
     
     internal func describePropertyPrimitive(value: AnyObject) -> String {
         return "\(value)"
+    }
+    
+    internal func describePropertySerializable(value: Serializable) -> String {
+        return value.__prepare()
     }
 }

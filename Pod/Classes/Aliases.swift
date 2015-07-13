@@ -13,6 +13,6 @@ public typealias onJsonRetrieved = Json? -> Void
 
 public typealias onMediaRetrieved = Media? -> Void
 public typealias onMediasRetrieved = [Media]? -> Void
-public typealias onPassengerRetrieved = Passenger? -> Void
-public typealias onPassengersRetrieved = [Passenger]? -> Void
+public typealias onPassengerRetrieved = Model? -> Void
+public typealias onPassengersRetrieved = [Model]? -> Void
 public typealias onPassengerOperationSuccess = Bool -> Void

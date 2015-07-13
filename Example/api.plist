@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>namespace</key>
-	<string>Albatross_Example</string>
+	<string>Passenger_Example</string>
 	<key>version</key>
 	<string>1.1</string>
 	<key>consumer_key</key>
@@ -21,7 +21,7 @@
 			<key>access_token_url</key>
 			<string>https://api.twitter.com/oauth/access_token</string>
 			<key>request_token_callback</key>
-			<string>albatross://com.fkcomp.albatross</string>
+			<string>Passenger://com.fkcomp.Passenger</string>
 			<key>authorize_url</key>
 			<string>https://api.twitter.com/oauth/authorize</string>
 		</dict>

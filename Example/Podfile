@@ -1,12 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'Albatross_Example', :exclusive => true do
-    pod "Albatross", :path => "../"
+target 'Passenger_Example', :exclusive => true do
+    pod "Passenger", :path => "../"
 end
 
-target 'Albatross_Tests', :exclusive => true do
-    pod "Albatross", :path => "../"
+target 'Passenger_Tests', :exclusive => true do
+    pod "Passenger", :path => "../"
 
     #pod 'FBSnapshotTestCase'
 end

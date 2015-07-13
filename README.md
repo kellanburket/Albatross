@@ -1,9 +1,9 @@
-# Albatross
+# Passenger
 
-[![CI Status](http://img.shields.io/travis/Kellan Cummings/Albatross.svg?style=flat)](https://travis-ci.org/Kellan Cummings/Albatross)
-[![Version](https://img.shields.io/cocoapods/v/Albatross.svg?style=flat)](http://cocoapods.org/pods/Albatross)
-[![License](https://img.shields.io/cocoapods/l/Albatross.svg?style=flat)](http://cocoapods.org/pods/Albatross)
-[![Platform](https://img.shields.io/cocoapods/p/Albatross.svg?style=flat)](http://cocoapods.org/pods/Albatross)
+[![CI Status](http://img.shields.io/travis/Kellan Cummings/Passenger.svg?style=flat)](https://travis-ci.org/Kellan Cummings/Passenger)
+[![Version](https://img.shields.io/cocoapods/v/Passenger.svg?style=flat)](http://cocoapods.org/pods/Passenger)
+[![License](https://img.shields.io/cocoapods/l/Passenger.svg?style=flat)](http://cocoapods.org/pods/Passenger)
+[![Platform](https://img.shields.io/cocoapods/p/Passenger.svg?style=flat)](http://cocoapods.org/pods/Passenger)
 
 ## Usage
 
@@ -13,11 +13,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-Albatross is available through [CocoaPods](http://cocoapods.org). To install
+Passenger is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "Albatross"
+pod "Passenger"
 ```
 
 ## Author
@@ -26,4 +26,4 @@ Kellan Cummings, kellan.cummings@gmail.com
 
 ## License
 
-Albatross is available under the MIT license. See the LICENSE file for more info.
+Passenger is available under the MIT license. See the LICENSE file for more info.
