@@ -96,7 +96,7 @@
 		<key>path</key>
 		<string>needles/types</string>
 	</dict>
-	<key>User</key>
+	<key>RavelryUser</key>
 	<dict>
 		<key>routes</key>
 		<dict>
@@ -106,6 +106,8 @@
 				<string>OAuth1</string>
 				<key>path</key>
 				<string>people/:id</string>
+				<key>node</key>
+				<string>user</string>
 			</dict>
 		</dict>
 		<key>endpoints</key>
@@ -185,7 +187,7 @@
 					</dict>
 				</dict>
 				<key>path</key>
-				<string>projects/:user.username</string>
+				<string>projects/:ravelry_user.username</string>
 			</dict>
 			<key>StashItems</key>
 			<dict>
@@ -200,7 +202,7 @@
 					</dict>
 				</dict>
 				<key>path</key>
-				<string>people/:user.username/stash</string>
+				<string>people/:ravelry_user.username/stash</string>
 			</dict>
 			<key>Needles</key>
 			<dict>
@@ -215,7 +217,7 @@
 					</dict>
 				</dict>
 				<key>path</key>
-				<string>people/:user.username/needles</string>
+				<string>people/:ravelry_user.username/needles</string>
 			</dict>
 		</dict>
 	</dict>

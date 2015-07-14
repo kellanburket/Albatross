@@ -1,0 +1,6 @@
+framework module Wildcard {
+  umbrella header "Pods-Ravelry_Tests-Wildcard-umbrella.h"
+
+  export *
+  module * { export * }
+}

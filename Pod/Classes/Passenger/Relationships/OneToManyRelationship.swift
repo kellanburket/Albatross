@@ -33,11 +33,11 @@ class OneToManyRelationship<T: Passenger>: BaseRelationship<T>, HasManyRouter {
     }
     
     func getOwnershipHierarchy() -> [Router] {
-        var components = [Router]()
+        var components: [Router] = [self]
         var router: Router = self
         
         while let parent = router.parent as? Router {
-            components.append(parent)
+            components << parent
             router = parent
         }
         
@@ -65,7 +65,20 @@ class OneToManyRelationship<T: Passenger>: BaseRelationship<T>, HasManyRouter {
             return passengers[id]
         }
     }
+    
+    func construct(args: AnyObject, node: String? = nil) -> AnyObject {
+        var obj: AnyObject = T.parse(args, node: node)
+        if let passenger = obj as? Passenger {
+            registerPassenger(passenger)
+        } else if let passengers = obj as? [Passenger] {
+            for passenger in passengers {
+                registerPassenger(passenger)
+            }
+        }
         
+        return obj
+    }
+    
     override func describeSelf(_ tabs: Int = 0) -> String {
         var output = ""
         

@@ -224,32 +224,35 @@ public class Api: NSObject {
     
     private func getRequest(router: Router, action: String, var params: [String: AnyObject], handler: (AnyObject?) -> ()) -> HttpRequest? {
 
-        if let route = getRoute(router, action: action), let url = getUrl(router, route: route, params: &params) {
-            
-            var request: HttpRequest
-            
-            if route.method == .Delete || route.action == "list" {
-                request = HttpRequest(
-                    URL: url,
-                    method: route.method ?? HttpMethod.Get,
-                    handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
-                )
+        if let route = getRoute(router, action: action) {
+            if let url = getUrl(router, route: route, params: &params) {
+                var request: HttpRequest
+                
+                if route.method == .Delete || route.action == "list" {
+                    request = HttpRequest(
+                        URL: url,
+                        method: route.method ?? HttpMethod.Get,
+                        handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
+                    )
+                } else {
+                    request = HttpRequest(
+                        URL: url,
+                        method: route.method ?? HttpMethod.Get,
+                        params: params,
+                        handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
+                    )
+                }
+                
+                if let rawauth = route.auth, auth = AuthenticationType(rawValue: rawauth), service = getAuthenticationService(auth) {
+                    request.authenticate(service)
+                }
+                
+                return request
             } else {
-                request = HttpRequest(
-                    URL: url,
-                    method: route.method ?? HttpMethod.Get,
-                    params: params,
-                    handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
-                )
+                fatalError("No Url for \(router).\(action)")
             }
-            
-            if let rawauth = route.auth, auth = AuthenticationType(rawValue: rawauth), service = getAuthenticationService(auth) {
-                request.authenticate(service)
-            }
-            
-            return request
         } else {
-            fatalError("No Endpoint for \(router).\(action)")
+            fatalError("No Route for \(router.endpoint).\(action)")
         }
         
         return nil
@@ -278,10 +281,16 @@ public class Api: NSObject {
     }
 
     private func getRoute(router: Router, action: String) -> Route? {
-        if let endpoint = getEndpoint(router), let route = endpoint.getRoute(action) {
-            return route
+        if let endpoint = getEndpoint(router) {
+            if let route = endpoint.getRoute(action) {
+                return route
+            } else {
+                println("No Route.")
+            }
+        } else {
+            println("No Endpoint.")
         }
-        
+    
         return nil
     }
     
@@ -337,7 +346,9 @@ public class Api: NSObject {
         
         var components: [Router] = router?.getOwnershipHierarchy() ?? [Router]()
         
+        println("Endpoints:")
         for component in components {
+            println("\t\(component.dynamicType) : \(component.endpoint)")
             if let endpoint = endpoints[component.endpoint] {
                 lastEndpoint = endpoint
                 endpoints = lastEndpoint!.endpoints
@@ -345,6 +356,8 @@ public class Api: NSObject {
             } else if let endpoint = endpoints[component.endpoint.pluralize()] {
                 lastEndpoint = endpoint
                 endpoints = lastEndpoint!.endpoints
+            } else {
+                println("No Endpoint for \(component.endpoint) : \(endpoints)")
             }
         }
         

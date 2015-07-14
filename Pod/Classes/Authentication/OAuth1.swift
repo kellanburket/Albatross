@@ -159,7 +159,7 @@ public class OAuth1: AuthenticationService {
         }
         
         header = header.rtrim(", ")
-        println("Header: \(header)")
+        //println("Header: \(header)")
         
         request.setValue(header, forHTTPHeaderField: "Authorization")
     }

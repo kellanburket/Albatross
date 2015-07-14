@@ -48,6 +48,20 @@
                ReferencedContainer = "container:Passenger.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "76DDAD5C1B548F4A00995049"
+               BuildableName = "Ravelry_Tests.xctest"
+               BlueprintName = "Ravelry_Tests"
+               ReferencedContainer = "container:Passenger.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -73,6 +87,16 @@
                BlueprintIdentifier = "76655DD51B2CACFF00634B14"
                BuildableName = "CommonCryptoTests.xctest"
                BlueprintName = "CommonCryptoTests"
+               ReferencedContainer = "container:Passenger.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "76DDAD5C1B548F4A00995049"
+               BuildableName = "Ravelry_Tests.xctest"
+               BlueprintName = "Ravelry_Tests"
                ReferencedContainer = "container:Passenger.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -15,7 +15,7 @@ public class HasMany<T: Model>: OneToManyRelationship<T>, SequenceType {
     }
     
     public func list(onComplete: [T]? -> ()) {
-         T.list { records in
+         T.list(self) { records in
             if let passengers = records as? [T] {
                 for passenger in passengers {
                     self.registerPassenger(passenger)
@@ -28,7 +28,8 @@ public class HasMany<T: Model>: OneToManyRelationship<T>, SequenceType {
     }
     
     public func create(params: [String: AnyObject], onComplete: T? -> Void) {
-        T.create(params) { record in
+        
+        T.create(self, params: params) { record in
             if let passenger = record as? T {
                 self.registerPassenger(passenger)
                 onComplete(passenger)
@@ -41,19 +42,20 @@ public class HasMany<T: Model>: OneToManyRelationship<T>, SequenceType {
     public func find(id: Int, onComplete: T? -> Void) {
         let passenger = T(["id": id])
         registerPassenger(passenger)
-        
-        T.find(passenger.id) { record in
-            if let passenger = record as? T {
-                self.registerPassenger(passenger)
-                onComplete(passenger)
-            } else {
-                onComplete(nil)
+        if let router = passenger as? Router {
+            T.find(router, id: passenger.id) { record in
+                if let passenger = record as? T {
+                    self.registerPassenger(passenger)
+                    onComplete(passenger)
+                } else {
+                    onComplete(nil)
+                }
             }
         }
     }
 
     public func upload(data: [String: NSData], params: [String: AnyObject], onComplete: AnyObject? -> Void) {
-        T.upload(data, params: params, onComplete: onComplete)
+        T.upload(self, data: data, params: params, onComplete: onComplete)
     }
 
     public func generate() -> GeneratorOf<T> {

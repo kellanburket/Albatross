@@ -28,15 +28,13 @@ public class Resource: Passenger {
 
     private var resources = [String: Router]()
     
-    public init(_ endpoint: String, parent: Passenger? = nil) {
+    required public init(_ endpoint: String, parent: Passenger? = nil) {
         self._endpoint = endpoint
         self._parent = parent
-        super.init(Json())
     }
 
     required public init(_ properties: Json) {
-        println("Resource should not be instantiated.")
-        super.init(Json())
+        fatalError("Resource should not be instantiated.")
     }
     
     override public func construct(args: AnyObject, node: String? = nil) -> AnyObject {
@@ -48,8 +46,8 @@ public class Resource: Passenger {
         return args
     }
     
-    public func resource(endpoint: String) -> Resource {
-        var resource = Resource(endpoint, parent: self)
+    public func resource(endpoint: String) -> Self {
+        var resource = self.dynamicType(endpoint, parent: self)
         registerResource(resource)
         return resource
     }

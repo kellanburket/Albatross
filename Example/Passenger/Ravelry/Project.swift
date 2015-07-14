@@ -42,7 +42,7 @@ class Project: BaseRavelryModel {
     }
     
     func createPhoto(images: [String: UIImage], onComplete: AnyObject? -> Void) {
-        let upload = Resource("Upload")
+        let upload = BaseRavelryResource("Upload")
 
         upload.create { data in
             if let json = data as? Json, token = json["upload_token"] as? String {
@@ -56,7 +56,7 @@ class Project: BaseRavelryModel {
                 
                 var params: [String: AnyObject] = [
                     "upload_token": token,
-                    "access_key": Api.shared("twitter").key
+                    "access_key": Api.shared("ravelry").key
                 ]
                 
                 upload.resource("Image").upload(data, params: params, onComplete: { raw in
@@ -64,10 +64,13 @@ class Project: BaseRavelryModel {
                         for (name, file) in medias {
                             if let media = file as? Json {
                                 self.doAction("create_photo", params: media, onJsonRetrieved: onComplete)
+                            } else {
+                                onComplete(nil)
                             }
                         }
+                    } else {
+                        onComplete(nil)
                     }
-                    //onComplete(medias)
                 })
             } else {
                 println("Upload Token does not exist. \(data)")

@@ -7,14 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		607FACEC1AFB9204008FA782 /* RavleryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* RavleryTests.swift */; };
 		7631FD591B32BE99006476DC /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; };
 		7631FD5A1B32BE99006476DC /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		763B03771B51CF5C0095A56B /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4391B4CE37600B89DBB /* Tests.swift */; };
-		763C38241B5472B000F4A124 /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38221B5472B000F4A124 /* api.plist */; };
-		763C38251B5472B000F4A124 /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38231B5472B000F4A124 /* endpoints.plist */; };
-		763C38281B5472E600F4A124 /* ravelry.api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38261B5472E600F4A124 /* ravelry.api.plist */; };
-		763C38291B5472E600F4A124 /* ravelry.endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38271B5472E600F4A124 /* ravelry.endpoints.plist */; };
 		763C382B1B54743C00F4A124 /* BaseRavelryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C382A1B54743C00F4A124 /* BaseRavelryModel.swift */; };
 		763C38351B54826300F4A124 /* BaseRavelryResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C38341B54826300F4A124 /* BaseRavelryResource.swift */; };
 		766AF55C1B5441A500CF2529 /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609041B5409B60004B684 /* Hashtag.swift */; };
@@ -54,8 +49,27 @@
 		76C6092A1B540A150004B684 /* OAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609251B540A150004B684 /* OAuth1Helper.swift */; };
 		76C6092F1B540ABE0004B684 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C6092B1B540ABE0004B684 /* LaunchScreen.xib */; };
 		76C609301B540ABE0004B684 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76C6092D1B540ABE0004B684 /* Main.storyboard */; };
+		76DDAD621B548F4A00995049 /* Ravelry_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DDAD611B548F4A00995049 /* Ravelry_Tests.swift */; };
+		76DDAD681B548FC100995049 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608F61B5409740004B684 /* Comment.swift */; };
+		76DDAD691B548FC700995049 /* BaseRavelryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C382A1B54743C00F4A124 /* BaseRavelryModel.swift */; };
+		76DDAD6A1B548FC900995049 /* BaseRavelryResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C38341B54826300F4A124 /* BaseRavelryResource.swift */; };
+		76DDAD6B1B548FCC00995049 /* Craft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608F71B5409740004B684 /* Craft.swift */; };
+		76DDAD6C1B548FD000995049 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608F81B5409740004B684 /* Pattern.swift */; };
+		76DDAD6D1B548FD200995049 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608F91B5409740004B684 /* Project.swift */; };
+		76DDAD6E1B548FD500995049 /* RavelryOAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608FA1B5409740004B684 /* RavelryOAuth1Helper.swift */; };
+		76DDAD6F1B548FD800995049 /* RavelryUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608FB1B5409740004B684 /* RavelryUser.swift */; };
+		76DDAD701B54905500995049 /* OAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609251B540A150004B684 /* OAuth1Helper.swift */; };
+		76DDAD711B54933800995049 /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38221B5472B000F4A124 /* api.plist */; };
+		76DDAD721B54933B00995049 /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38231B5472B000F4A124 /* endpoints.plist */; };
+		76DDAD731B54934400995049 /* ravelry.api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38261B5472E600F4A124 /* ravelry.api.plist */; };
+		76DDAD741B54934700995049 /* ravelry.endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38271B5472E600F4A124 /* ravelry.endpoints.plist */; };
+		76DDAD751B54943B00995049 /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38221B5472B000F4A124 /* api.plist */; };
+		76DDAD761B54943F00995049 /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38231B5472B000F4A124 /* endpoints.plist */; };
+		76DDAD781B54944400995049 /* ravelry.api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38261B5472E600F4A124 /* ravelry.api.plist */; };
+		76DDAD791B54944700995049 /* ravelry.endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38271B5472E600F4A124 /* ravelry.endpoints.plist */; };
 		953180E911FD0B30D9EC86F5 /* Pods_Passenger_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F12F276ADB9DB6E47ED13DB1 /* Pods_Passenger_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D605A63336FCC352DB0AE0C0 /* Pods_Passenger_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2922571166838D80E17F358E /* Pods_Passenger_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D9AAF9B35ADBA93F522E48F0 /* Pods_Ravelry_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EACD6D3D45DB6D7708A6FB5 /* Pods_Ravelry_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E2C1F27E04DF0F146F0562F5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9867F67A10121F115FFE0024 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -66,6 +80,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
 			remoteInfo = Albatross;
+		};
+		76DDAD631B548F4A00995049 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
+			remoteInfo = Passenger_Example;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -86,13 +107,14 @@
 /* Begin PBXFileReference section */
 		07562246D1C56807C75094B8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		09384601B1C0968C38D858BD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		1EACD6D3D45DB6D7708A6FB5 /* Pods_Ravelry_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ravelry_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2179310FD9FF9253FF9BEAC8 /* Pods-Ravelry_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ravelry_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ravelry_Tests/Pods-Ravelry_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2922571166838D80E17F358E /* Pods_Passenger_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passenger_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36DAC0EBB277E6B4417A2D9A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3D3253241466E56B38FCAB0C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Passenger_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passenger_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACE51AFB9204008FA782 /* Passenger_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* RavleryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavleryTests.swift; sourceTree = "<group>"; };
 		71E369C6F90810F77C6EED65 /* Pods-Passenger_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passenger_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Passenger_Tests/Pods-Passenger_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		761EC4391B4CE37600B89DBB /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7631FD571B32BE99006476DC /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = ../Frameworks/CommonCrypto.framework; sourceTree = "<group>"; };
@@ -128,6 +150,10 @@
 		76C609251B540A150004B684 /* OAuth1Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OAuth1Helper.swift; path = Passenger/OAuth1Helper.swift; sourceTree = SOURCE_ROOT; };
 		76C6092C1B540ABE0004B684 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Passenger/Base.lproj/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		76C6092E1B540ABE0004B684 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Passenger/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		76DDAD5D1B548F4A00995049 /* Ravelry_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ravelry_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76DDAD601B548F4A00995049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76DDAD611B548F4A00995049 /* Ravelry_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ravelry_Tests.swift; sourceTree = "<group>"; };
+		7C94238C1D3D97DC8AC3873D /* Pods-Ravelry_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ravelry_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ravelry_Tests/Pods-Ravelry_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		95BC4E282AC5C2B9CF4B8EC6 /* Passenger.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Passenger.podspec; path = ../Passenger.podspec; sourceTree = "<group>"; };
 		9867F67A10121F115FFE0024 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12F276ADB9DB6E47ED13DB1 /* Pods_Passenger_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passenger_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +179,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		76DDAD5A1B548F4A00995049 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9AAF9B35ADBA93F522E48F0 /* Pods_Ravelry_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -163,6 +197,8 @@
 				09384601B1C0968C38D858BD /* Pods.release.xcconfig */,
 				71E369C6F90810F77C6EED65 /* Pods-Passenger_Tests.debug.xcconfig */,
 				F1C27BC7C8F6C656A159FFB0 /* Pods-Passenger_Tests.release.xcconfig */,
+				2179310FD9FF9253FF9BEAC8 /* Pods-Ravelry_Tests.debug.xcconfig */,
+				7C94238C1D3D97DC8AC3873D /* Pods-Ravelry_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -174,6 +210,7 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for Albatross */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				76DDAD5E1B548F4A00995049 /* Ravelry_Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				106744BB00003D9139B2C3B9 /* Pods */,
 				AB024B775D98632BE727A6E1 /* Frameworks */,
@@ -185,6 +222,7 @@
 			children = (
 				607FACD01AFB9204008FA782 /* Passenger_Example.app */,
 				607FACE51AFB9204008FA782 /* Passenger_Tests.xctest */,
+				76DDAD5D1B548F4A00995049 /* Ravelry_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,7 +256,6 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* RavleryTests.swift */,
 				761EC4391B4CE37600B89DBB /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
@@ -313,12 +350,30 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		76DDAD5E1B548F4A00995049 /* Ravelry_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				76DDAD611B548F4A00995049 /* Ravelry_Tests.swift */,
+				76DDAD5F1B548F4A00995049 /* Supporting Files */,
+			);
+			path = Ravelry_Tests;
+			sourceTree = "<group>";
+		};
+		76DDAD5F1B548F4A00995049 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76DDAD601B548F4A00995049 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		AB024B775D98632BE727A6E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				9867F67A10121F115FFE0024 /* Pods.framework */,
 				2922571166838D80E17F358E /* Pods_Passenger_Example.framework */,
 				F12F276ADB9DB6E47ED13DB1 /* Pods_Passenger_Tests.framework */,
+				1EACD6D3D45DB6D7708A6FB5 /* Pods_Ravelry_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -368,6 +423,27 @@
 			productReference = 607FACE51AFB9204008FA782 /* Passenger_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		76DDAD5C1B548F4A00995049 /* Ravelry_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76DDAD671B548F4A00995049 /* Build configuration list for PBXNativeTarget "Ravelry_Tests" */;
+			buildPhases = (
+				BD7CD400639B04F5097BA7A6 /* Check Pods Manifest.lock */,
+				76DDAD591B548F4A00995049 /* Sources */,
+				76DDAD5A1B548F4A00995049 /* Frameworks */,
+				76DDAD5B1B548F4A00995049 /* Resources */,
+				A114426804C16A083EBBA3E9 /* Embed Pods Frameworks */,
+				DE0797E789C323E17BF5E5C2 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76DDAD641B548F4A00995049 /* PBXTargetDependency */,
+			);
+			name = Ravelry_Tests;
+			productName = Ravelry_Tests;
+			productReference = 76DDAD5D1B548F4A00995049 /* Ravelry_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -382,6 +458,10 @@
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+					76DDAD5C1B548F4A00995049 = {
+						CreatedOnToolsVersion = 6.3.2;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -401,6 +481,7 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* Passenger_Example */,
 				607FACE41AFB9204008FA782 /* Passenger_Tests */,
+				76DDAD5C1B548F4A00995049 /* Ravelry_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -411,12 +492,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				76C609291B540A150004B684 /* Images.xcassets in Resources */,
-				763C38281B5472E600F4A124 /* ravelry.api.plist in Resources */,
-				763C38241B5472B000F4A124 /* api.plist in Resources */,
+				76DDAD711B54933800995049 /* api.plist in Resources */,
+				76DDAD731B54934400995049 /* ravelry.api.plist in Resources */,
 				76C609301B540ABE0004B684 /* Main.storyboard in Resources */,
-				763C38251B5472B000F4A124 /* endpoints.plist in Resources */,
+				76DDAD721B54933B00995049 /* endpoints.plist in Resources */,
+				76DDAD741B54934700995049 /* ravelry.endpoints.plist in Resources */,
 				76C6092F1B540ABE0004B684 /* LaunchScreen.xib in Resources */,
-				763C38291B5472E600F4A124 /* ravelry.endpoints.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +505,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76DDAD751B54943B00995049 /* api.plist in Resources */,
+				76DDAD761B54943F00995049 /* endpoints.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76DDAD5B1B548F4A00995049 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DDAD791B54944700995049 /* ravelry.endpoints.plist in Resources */,
+				76DDAD781B54944400995049 /* ravelry.api.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +597,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passenger_Example/Pods-Passenger_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A114426804C16A083EBBA3E9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ravelry_Tests/Pods-Ravelry_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD7CD400639B04F5097BA7A6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		CD56F1B825E983A43859C658 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,6 +640,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passenger_Tests/Pods-Passenger_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE0797E789C323E17BF5E5C2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ravelry_Tests/Pods-Ravelry_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -562,7 +699,6 @@
 				766AF5681B5441E700CF2529 /* OAuth1Helper.swift in Sources */,
 				766AF55E1B5441A900CF2529 /* Status.swift in Sources */,
 				766AF55F1B5441AD00CF2529 /* Media.swift in Sources */,
-				607FACEC1AFB9204008FA782 /* RavleryTests.swift in Sources */,
 				766AF55C1B5441A500CF2529 /* Hashtag.swift in Sources */,
 				766AF5621B5441B600CF2529 /* TwitterOAuth1Helper.swift in Sources */,
 				766AF5611B5441B300CF2529 /* Symbol.swift in Sources */,
@@ -575,6 +711,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		76DDAD591B548F4A00995049 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DDAD6F1B548FD800995049 /* RavelryUser.swift in Sources */,
+				76DDAD6C1B548FD000995049 /* Pattern.swift in Sources */,
+				76DDAD6A1B548FC900995049 /* BaseRavelryResource.swift in Sources */,
+				76DDAD621B548F4A00995049 /* Ravelry_Tests.swift in Sources */,
+				76DDAD6E1B548FD500995049 /* RavelryOAuth1Helper.swift in Sources */,
+				76DDAD6B1B548FCC00995049 /* Craft.swift in Sources */,
+				76DDAD691B548FC700995049 /* BaseRavelryModel.swift in Sources */,
+				76DDAD6D1B548FD200995049 /* Project.swift in Sources */,
+				76DDAD681B548FC100995049 /* Comment.swift in Sources */,
+				76DDAD701B54905500995049 /* OAuth1Helper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -582,6 +735,11 @@
 			isa = PBXTargetDependency;
 			target = 607FACCF1AFB9204008FA782 /* Passenger_Example */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+		};
+		76DDAD641B548F4A00995049 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 607FACCF1AFB9204008FA782 /* Passenger_Example */;
+			targetProxy = 76DDAD631B548F4A00995049 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -772,6 +930,42 @@
 			};
 			name = Release;
 		};
+		76DDAD651B548F4A00995049 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2179310FD9FF9253FF9BEAC8 /* Pods-Ravelry_Tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Ravelry_Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passenger_Example.app/Passenger_Example";
+			};
+			name = Debug;
+		};
+		76DDAD661B548F4A00995049 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C94238C1D3D97DC8AC3873D /* Pods-Ravelry_Tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Ravelry_Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passenger_Example.app/Passenger_Example";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -798,6 +992,15 @@
 			buildConfigurations = (
 				607FACF31AFB9204008FA782 /* Debug */,
 				607FACF41AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76DDAD671B548F4A00995049 /* Build configuration list for PBXNativeTarget "Ravelry_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76DDAD651B548F4A00995049 /* Debug */,
+				76DDAD661B548F4A00995049 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

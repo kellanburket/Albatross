@@ -17,10 +17,6 @@ internal class BaseRelationship<T: Passenger>: BaseObject {
         return String()
     }
 
-    func construct(args: AnyObject, node: String? = nil) -> AnyObject {
-        return T.parse(args, node: node)
-    }
-
     var endpoint: String {
         return T.className
     }

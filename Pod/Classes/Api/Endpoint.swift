@@ -52,6 +52,7 @@ internal class Endpoint: ActiveUrlPath {
     }
     
     func getRoute(action: String) -> Route? {
+        //println("Routes (\(action)): \(routes)")
         return routes[action]
     }
     

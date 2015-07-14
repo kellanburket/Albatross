@@ -15,8 +15,8 @@ class RavelryOAuth1Helper: OAuth1Helper, OAuth1Delegate {
         super.init()
         
         if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
-            service.token = ""
-            service.secret = ""
+            service.token = "FOVjUhuZN1Y9VeuXDJjnvk7JCgRir8Ob9uTJHv00"
+            service.secret = "AhzI4ti7nXi28CrtYCYGWn1M037MJGn4RIt13MVj"
         }
     }
     

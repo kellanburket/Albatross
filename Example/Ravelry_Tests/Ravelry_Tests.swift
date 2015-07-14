@@ -1,4 +1,3 @@
-/*
 import UIKit
 import XCTest
 import Passenger
@@ -8,7 +7,7 @@ class Tests: XCTestCase, ImageLoadDelegate {
     
     override func setUp() {
         super.setUp()
-        if let service = Api.shared.getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
             if service.token == nil || service.secret == nil {
                 service.token = "OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X"
                 service.secret = "D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT"
@@ -23,19 +22,19 @@ class Tests: XCTestCase, ImageLoadDelegate {
     func imageDidLoad(image: Image) {
         XCTAssert(true, "Image did load, \(image)");
     }
-
+    
     func imageDidNotLoad(image: Image) {
         XCTFail("Image did load, \(image)")
     }
-
+    
     func testFlight() {
         var q = expectationWithDescription("deferred")
-        /*
-        User.find(userId) { record in
-            if let user = record as? User {
+        
+        RavelryUser.find(userId) { record in
+            if let user = record as? RavelryUser {
                 XCTAssert(user.username == "kellanbc", "\(user.username) not true")
                 XCTAssert(user.id == self.userId, "\(user.id)")
-
+                
                 //user.largePhotoUrl?.load(delegate: self)
                 //user.smallPhotoUrl?.load(delegate: self)
                 //user.photoUrl?.load(delegate: self)
@@ -44,38 +43,36 @@ class Tests: XCTestCase, ImageLoadDelegate {
                 user.projects.list { flight in
                     
                     XCTAssert(flight != nil, "No Members in Flight")
-                                        
+                    
                     Project.search(["query": "untitled"]) { flight in
-
+                        
                         XCTAssert(flight != nil, "No Members in Flight")
                         
                         q.fulfill()
                     }
                 }
-            
+                
             } else {
                 XCTAssert(false, "Could Not Locate user \(self.userId)")
                 q.fulfill()
             }
         }
-
-        waitForExpectationsWithTimeout(5) { error in
+        
+        waitForExpectationsWithTimeout(15) { error in
             XCTAssertNil(error, "Timeout")
         }
-        */
     }
     
     func testPassenger() {
-        /*
         var q = expectationWithDescription("deferred")
         
-        User.find(userId) { record in
-            println("User has been identified")
-            if let user = record as? User {
+        RavelryUser.find(userId) { record in
+            if let user = record as? RavelryUser {
+                println("User has been identified \(user.username)")
+
                 XCTAssert(user.username == "kellanbc", "\(user.username) not true")
                 XCTAssert(user.id == self.userId, "\(user.id)")
-
-
+                
                 if let username = user.username {
                     
                     var params = [
@@ -92,7 +89,7 @@ class Tests: XCTestCase, ImageLoadDelegate {
                             let startDate = project.started!.format("yyyy-MM-dd")
                             XCTAssert(startDate == params["started"]!, "Start dates don't match")
                             let completedDate = project.completed!.format("yyyy-MM-dd")
-
+                            
                             XCTAssert(completedDate == params["completed"]!, "End dates don't match")
                             
                             let newProjectName = "new project"
@@ -102,7 +99,7 @@ class Tests: XCTestCase, ImageLoadDelegate {
                             project.save { obj in
                                 
                                 XCTAssert((obj as? Project)?.id ?? 0 == project.id, "Project has not been saved")
-
+                                
                                 //println("Project has been saved. \(project.id)")
                                 user.projects.find(project.id) { obj in
                                     //println("Project has been found")
@@ -115,7 +112,7 @@ class Tests: XCTestCase, ImageLoadDelegate {
                                             
                                             if let image = UIImage(named: "test") {
                                                 var data = ["test": image]
-
+                                                
                                                 project.createPhoto(data) { obj in
                                                     println("Photo Created: \(obj)")
                                                     
@@ -155,10 +152,8 @@ class Tests: XCTestCase, ImageLoadDelegate {
             }
         }
         
-        waitForExpectationsWithTimeout(10) { error in
+        waitForExpectationsWithTimeout(15) { error in
             XCTAssertNil(error, "Timeout")
         }
-        */
     }
 }
-*/

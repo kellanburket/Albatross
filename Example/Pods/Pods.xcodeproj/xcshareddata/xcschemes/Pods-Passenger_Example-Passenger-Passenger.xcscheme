@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "32031929A3A88F5290C307AD"
+               BlueprintIdentifier = "3F51398A2DAEEF5B810D5D1A"
                BuildableName = "Passenger.bundle"
                BlueprintName = "Pods-Passenger_Example-Passenger-Passenger"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "32031929A3A88F5290C307AD"
-            BuildableName = "Passenger.bundle"
-            BlueprintName = "Pods-Passenger_Example-Passenger-Passenger"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

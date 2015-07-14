@@ -48,9 +48,19 @@ public class BelongsTo<T: Passenger>: BaseRelationship<T>, BelongsToRouter {
         return components.reverse()
     }
 
+    func construct(args: AnyObject, node: String? = nil) -> AnyObject {
+        var obj: AnyObject = T.parse(args, node: node)
+        if let passenger = obj as? Passenger {
+            registerPassenger(passenger)
+        }
+
+        return obj
+    }
+
     internal func registerPassenger(passenger: Passenger) {
         if let passenger = passenger as? T{
             self.passenger = passenger
+            self.owner?.parent = passenger
         }
     }
     

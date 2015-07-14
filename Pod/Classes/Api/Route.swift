@@ -65,25 +65,31 @@ class Route: ActiveUrlPath {
         var hash = [String: Router]()
 
         for component in components {
-            hash[component.endpoint.decapitalize()] = component
+            //println("\tEndpoint: \(component.endpoint.toSnakecase())")
+            hash[component.endpoint.toSnakecase()] = component
         }
         
-        //println("Path: \(str)")
+        //println("\nPath: \(str)")
         if let matches = str.scan("(?<=:)[\\w_\\-\\.\\d]+(?=\\/|$)") {
-            //println("Setting Path Variables \(matches)")
+            //println("\tSetting Path Variables \(matches)")
             for arrMatch in matches {
                 for match in arrMatch {
                     if let submatch: [String] = match.match("([\\w_\\-\\d]+?)\\.([\\w_\\-\\d]+)") {
                         var type = submatch[1]
                         var field = submatch[2]
                         
+                        //println("\t\tSubmatch: \(type) : \(field)")
+                        
                         if let obj = hash[type] as? Passenger {
-                            //println("\tobj is passenger: \(obj), \(field)")
-                            if let value: AnyObject = obj.getFieldValue(field) {
+                            if let value: AnyObject = obj.getProperty(field) {
                                 str = str.gsub(":\(match)", "\(value)")
+                            } else {
+                                fatalError("\t\t\tCould Not Get Field Value for '\(field)'.")
                             }
+                        } else {
+                            fatalError("\t\t\tComponent `\(type)` is not a Passenger.")
                         }
-                    } else if let obj = components[0] as? Passenger, value: AnyObject = obj.getFieldValue(match)  {
+                    } else if let obj = components[0] as? Passenger, value: AnyObject = obj.getProperty(match)  {
                         str = str.gsub(":\(match)", "\(value)")
                     }
                 }

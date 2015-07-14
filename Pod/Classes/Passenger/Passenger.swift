@@ -197,6 +197,7 @@ public class Passenger: BaseObject, Router {
     
     private func unserialize(data: Json) {
         //println("Unserializing \(self.endpoint)")
+        //println(data)
 
         for (name, mirror) in mirrors {
             if !(name =~ "\\.storage$") {
@@ -208,9 +209,16 @@ public class Passenger: BaseObject, Router {
         //println("Unserializing Finished for \(self.endpoint)")
     }
     
-    internal func getFieldValue(name: String) -> AnyObject? {
+    internal func getProperty(name: String) -> AnyObject? {
         if let mirror = mirrors[name] {
-            return getMirrorValue(mirror)
+            if let value: AnyObject = getMirrorValue(mirror) {
+                return value
+            } else {
+                println(self)
+                fatalError("Property '\(name)' unset for '\(endpoint)'")
+            }
+        } else {
+            fatalError("Unable to get value for property `\(endpoint)`.`\(name)`")
         }
         
         return nil
@@ -219,18 +227,22 @@ public class Passenger: BaseObject, Router {
     private func setMirrorValue(name: String, mirror: MirrorType, data: [String:AnyObject]) {
         let type = mirror.valueType
         
-        if let item: AnyObject = data[name], value: AnyObject = parseMirrorValue(name, value: item, type: mirror.valueType, mirror: mirror) {
-            //println("\tSetting \(name) : \(value)")
-            setValue(value, forKey: name)
-        } else {
-            if let value: AnyObject = data[name] {
-                //println("\tNot Setting \(name) '\(value)' for \(mirror.valueType)")
+        if let item: AnyObject = data[name] {
+            if let value: AnyObject = parseMirrorValue(name, value: item, type: mirror.valueType, mirror: mirror) {
+                //println("\tSetting \(name) : \(value)")
+                setValue(value, forKey: name)
+            } else {
+                //println("\tNot Setting \(name) for \(mirror.valueType)")
             }
+        } else {
+            //println("\tNil Value for \(name) : \(data[name]) for \(mirror.valueType)")
         }
     }
     
     private func parseMirrorValue(name: String, value: AnyObject?, type: Any.Type, mirror: MirrorType) -> AnyObject? {
-        //println("Fetching \(name) : \(type)")
+        
+        
+        //println("\t\tFetching \(name) : \(type)")
 
         if value == nil {
             return nil
@@ -263,14 +275,14 @@ public class Passenger: BaseObject, Router {
                     //println("\tSetting Image: \(value)")
                     return Image(url: url)
                 } else {
-                    println("\tNot a valid url for image: \(value)")
+                    println("\t\t\tNot a valid url for image: \(value)")
                 }
                 
             } else if type is NSURL.Type || type is Optional<NSURL>.Type {
                 if let url = NSURL(string: value) {
                     return url
                 } else {
-                    println("\tNot a valid url: \(value)")
+                    println("\t\t\tNot a valid url: \(value)")
                 }
             } else if type is NSAttributedString.Type || type is Optional<NSAttributedString>.Type {
                 //println("\tSetting NSAttributedString")
@@ -278,7 +290,7 @@ public class Passenger: BaseObject, Router {
             } else if type is UIColor.Type || type is Optional<UIColor>.Type {
                 //return UIColor.parse(Int(i))
             } else {
-                //println("Can't parse string '\(value)' for '\(type)'")
+                //println("\t\t\tCan't parse string '\(value)' for '\(type)'")
             }
         } else if let value = value as? Double {
             if type is Float.Type {
@@ -474,10 +486,14 @@ public class Passenger: BaseObject, Router {
             
             return serialized
         } else {
+            println("\tUnable to parse Mirror Value.")
+            println("\t\tCount: \(fieldMirror.count)")
+            println("\t\tDisposition: \(self.dynamicType.getDisposition(fieldMirror.disposition))")
+            println("\t\tValue: \(fieldMirror.value)")
+            println("\t\tValue Type: \(fieldMirror.valueType)\n")
+
             return nil
         }
-
-        //fatalError("Cannot parse value of type \(fieldMirror.valueType)")
     }
     
     override internal func parseOptionalMirror(mirror: MirrorType) -> Any? {

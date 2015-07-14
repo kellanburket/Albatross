@@ -19,6 +19,7 @@ public class Model: Passenger {
     public func create(onComplete: onPassengerRetrieved) {
         Api.shared(self.dynamicType.api()).create(self, params: serialize() as? Json ?? Json()) { [unowned self] obj in
             if let passenger = obj as? Model {
+                passenger.parent = self
                 onComplete(passenger)
             } else {
                 onComplete(nil)
@@ -39,7 +40,11 @@ public class Model: Passenger {
     }
 
     final public class func upload(data: [String: NSData], params: [String: AnyObject], onComplete: AnyObject? -> Void) {
-        Api.shared(self.api()).upload(getRouter(), data: data, params: params) { objs in
+        self.upload(getRouter(), data: data, params: params, onComplete: onComplete)
+    }
+    
+    final internal class func upload(router: Router, data: [String: NSData], params: [String: AnyObject], onComplete: AnyObject? -> Void) {
+        Api.shared(self.api()).upload(router, data: data, params: params) { objs in
             if objs?.count > 0 {
                 onComplete(objs?[0])
             } else {
@@ -47,9 +52,13 @@ public class Model: Passenger {
             }
         }
     }
+   
+    final public class func doAction(endpoint: String, params: [String: AnyObject], onOneRetrieved: onPassengerRetrieved) {
+        self.doAction(getRouter(), endpoint: endpoint, params: params, onOneRetrieved: onOneRetrieved)
+    }
     
-    public class func doAction(endpoint: String, params: [String: AnyObject], onOneRetrieved: onPassengerRetrieved) {
-        Api.shared(self.api()).request(getRouter(), endpoint: endpoint, params: params) { obj in
+    final internal class func doAction(router: Router, endpoint: String, params: [String: AnyObject], onOneRetrieved: onPassengerRetrieved) {
+        Api.shared(self.api()).request(router, endpoint: endpoint, params: params) { obj in
             if let obj: AnyObject = obj, one = self.parse(obj) as? Model {
                 onOneRetrieved(one)
             } else {
@@ -58,8 +67,12 @@ public class Model: Passenger {
         }
     }
 
-    public class func doAction(endpoint: String, params: [String: AnyObject], onManyRetrieved: onPassengersRetrieved) {
-        Api.shared(self.api()).request(getRouter(), endpoint: endpoint, params: params) { objs in
+    final public class func doAction(endpoint: String, params: [String: AnyObject], onManyRetrieved: onPassengersRetrieved) {
+        self.doAction(getRouter(), endpoint: endpoint, params: params, onManyRetrieved: onManyRetrieved)
+    }
+    
+    final internal class func doAction(router: Router, endpoint: String, params: [String: AnyObject], onManyRetrieved: onPassengersRetrieved) {
+        Api.shared(self.api()).request(router, endpoint: endpoint, params: params) { objs in
             if let objs: AnyObject = objs, passengers = self.parse(objs) as? [Model] {
                 onManyRetrieved(passengers)
             } else {
@@ -67,21 +80,15 @@ public class Model: Passenger {
             }
         }
     }
-    
+
     final public class func find(id: Int, onComplete: onPassengerRetrieved) {
-        Api.shared(self.api()).find(self(["id": id])) { obj in
-            if let record = obj as? Model {
-                onComplete(record)
-            } else {
-                onComplete(nil)
-            }
-        }
+        self.find(self(["id": id]), id: id, onComplete: onComplete)
     }
 
-    final public class func create(params: [String: AnyObject], onComplete: onPassengerRetrieved) {
-        Api.shared(self.api()).create(getRouter(), params: params) { obj in
-            if let passenger = obj as? Model {
-                onComplete(passenger)
+    final internal class func find(router: Router, id: Int, onComplete: onPassengerRetrieved) {
+        Api.shared(self.api()).find(router) { obj in
+            if let record = obj as? Model {
+                onComplete(record)
             } else {
                 onComplete(nil)
             }
@@ -91,9 +98,28 @@ public class Model: Passenger {
     final public class func create(onComplete: onPassengerRetrieved) {
         self.create([String: AnyObject](), onComplete: onComplete)
     }
+
+    final public class func create(params: [String: AnyObject], onComplete: onPassengerRetrieved) {
+        self.create(getRouter(), params: params, onComplete: onComplete)
+    }
     
+    final internal class func create(router: Router, params: [String: AnyObject], onComplete: onPassengerRetrieved) {
+        Api.shared(self.api()).create(router, params: params) { obj in
+            if let passenger = obj as? Model {
+
+                onComplete(passenger)
+            } else {
+                onComplete(nil)
+            }
+        }
+    }
+
     final public class func list(onComplete: onPassengersRetrieved) {
-        Api.shared(self.api()).list(self.getRouter()) { records in
+        self.list(getRouter(), onComplete: onComplete)
+    }
+
+    final internal class func list(router: Router, onComplete: onPassengersRetrieved) {
+        Api.shared(self.api()).list(router) { records in
             if let arr = records as? [Model] {
                 onComplete(arr)
             } else {
@@ -101,9 +127,13 @@ public class Model: Passenger {
             }
         }
     }
-    
+
     final public class func search(params: [String: AnyObject], onComplete: onPassengersRetrieved) {
-        Api.shared(self.api()).search(self.getRouter(), params: params) { records in
+        self.search(getRouter(), params: params, onComplete: onComplete)
+    }
+    
+    final internal class func search(router: Router, params: [String: AnyObject], onComplete: onPassengersRetrieved) {
+        Api.shared(self.api()).search(router, params: params) { records in
             if let arr = records as? [Model] {
                 onComplete(arr)
             } else {
@@ -111,9 +141,13 @@ public class Model: Passenger {
             }
         }
     }
-    
+
     final public class func show(params: [String: AnyObject], onComplete: onPassengerRetrieved) {
-        Api.shared(self.api()).search(self.getRouter(), params: params) { record in
+        self.show(getRouter(), params: params, onComplete: onComplete)
+    }
+
+    final internal class func show(router: Router, params: [String: AnyObject], onComplete: onPassengerRetrieved) {
+        Api.shared(self.api()).search(router, params: params) { record in
             if let passenger = record as? Model {
                 onComplete(passenger)
             } else {

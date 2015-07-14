@@ -7,8 +7,10 @@ end
 
 target 'Passenger_Tests', :exclusive => true do
     pod "Passenger", :path => "../"
+end
 
-    #pod 'FBSnapshotTestCase'
+target 'Ravelry_Tests', :exclusive => true do
+    pod "Passenger", :path => "../"
 end
 
 pod 'Wildcard'

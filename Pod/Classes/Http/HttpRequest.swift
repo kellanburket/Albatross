@@ -103,12 +103,11 @@ public class HttpRequest {
     }
     
     public func prepare(onComplete: (NSMutableURLRequest) -> ()) {
-        println("Preparing Request")
+        //println("Preparing Request")
         if let service = self.authenticationService {
-            println("Prepping Authorization Service \(service)")
+            //println("Prepping Authorization Service \(service)")
             service.setSignature(self.baseUrl, parameters: self.parameters, method: method.description) {
-                println("Signature has been set")
-                //self.headers["oauth_signature"] = signature
+                //println("Signature has been set")
                 //println("Parameters: \(self.parameters)")
                 
                 var request = self.generateRequestObject()
@@ -118,7 +117,7 @@ public class HttpRequest {
                 onComplete(request)
             }
         } else {
-            println("Returning Generated Request Object")
+            //println("Returning Generated Request Object")
             onComplete(self.generateRequestObject())
         }
     }
