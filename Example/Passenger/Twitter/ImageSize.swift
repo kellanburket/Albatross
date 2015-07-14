@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class ImageSize: Passenger.Entity {
+class ImageSize: Entity {
     var h = Int()
     var w = Int()
     var resize: String?

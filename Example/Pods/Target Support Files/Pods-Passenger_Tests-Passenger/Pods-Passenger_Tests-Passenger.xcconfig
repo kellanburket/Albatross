@@ -1,1 +1,2 @@
-PODS_Passenger_TESTS_Passenger_OTHER_LDFLAGS = -framework "UIKit"
+PODS_PASSENGER_TESTS_PASSENGER_FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/../../Frameworks"
+PODS_PASSENGER_TESTS_PASSENGER_OTHER_LDFLAGS = -framework "CommonCrypto" -framework "UIKit"

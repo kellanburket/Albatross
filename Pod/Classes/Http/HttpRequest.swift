@@ -22,7 +22,7 @@ public protocol HttpResultsDelegate {
 
 public class HttpRequest {
 
-    private var authorizationService: AuthorizationService?
+    private var authenticationService: AuthenticationService?
     private var handler: HttpResponseHandler
     
     internal var headers = [String:String]()
@@ -98,13 +98,13 @@ public class HttpRequest {
         self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(handler))
     }
 
-    public func authorize(service: AuthorizationService) {
-        self.authorizationService = service
+    public func authenticate(service: AuthenticationService) {
+        self.authenticationService = service
     }
     
     public func prepare(onComplete: (NSMutableURLRequest) -> ()) {
         println("Preparing Request")
-        if let service = self.authorizationService {
+        if let service = self.authenticationService {
             println("Prepping Authorization Service \(service)")
             service.setSignature(self.baseUrl, parameters: self.parameters, method: method.description) {
                 println("Signature has been set")

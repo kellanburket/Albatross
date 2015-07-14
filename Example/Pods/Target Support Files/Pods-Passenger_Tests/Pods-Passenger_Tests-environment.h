@@ -10,11 +10,65 @@
 #define COCOAPODS_POD_AVAILABLE_Passenger
 #define COCOAPODS_VERSION_MAJOR_Passenger 0
 #define COCOAPODS_VERSION_MINOR_Passenger 1
-#define COCOAPODS_VERSION_PATCH_Passenger 0
+#define COCOAPODS_VERSION_PATCH_Passenger 1
+
+// Passenger/Api
+#define COCOAPODS_POD_AVAILABLE_Passenger_Api
+#define COCOAPODS_VERSION_MAJOR_Passenger_Api 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Api 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Api 1
+
+// Passenger/Authentication
+#define COCOAPODS_POD_AVAILABLE_Passenger_Authentication
+#define COCOAPODS_VERSION_MAJOR_Passenger_Authentication 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Authentication 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Authentication 1
+
+// Passenger/Extensions
+#define COCOAPODS_POD_AVAILABLE_Passenger_Extensions
+#define COCOAPODS_VERSION_MAJOR_Passenger_Extensions 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Extensions 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Extensions 1
+
+// Passenger/Http
+#define COCOAPODS_POD_AVAILABLE_Passenger_Http
+#define COCOAPODS_VERSION_MAJOR_Passenger_Http 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Http 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Http 1
+
+// Passenger/Media
+#define COCOAPODS_POD_AVAILABLE_Passenger_Media
+#define COCOAPODS_VERSION_MAJOR_Passenger_Media 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Media 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Media 1
+
+// Passenger/Passenger
+#define COCOAPODS_POD_AVAILABLE_Passenger_Passenger
+#define COCOAPODS_VERSION_MAJOR_Passenger_Passenger 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Passenger 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Passenger 1
+
+// Passenger/Protocols
+#define COCOAPODS_POD_AVAILABLE_Passenger_Protocols
+#define COCOAPODS_VERSION_MAJOR_Passenger_Protocols 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Protocols 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Protocols 1
+
+// Passenger/Relationships
+#define COCOAPODS_POD_AVAILABLE_Passenger_Relationships
+#define COCOAPODS_VERSION_MAJOR_Passenger_Relationships 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Relationships 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Relationships 1
+
+// Passenger/Utilities
+#define COCOAPODS_POD_AVAILABLE_Passenger_Utilities
+#define COCOAPODS_VERSION_MAJOR_Passenger_Utilities 0
+#define COCOAPODS_VERSION_MINOR_Passenger_Utilities 1
+#define COCOAPODS_VERSION_PATCH_Passenger_Utilities 1
 
 // Wildcard
 #define COCOAPODS_POD_AVAILABLE_Wildcard
 #define COCOAPODS_VERSION_MAJOR_Wildcard 1
 #define COCOAPODS_VERSION_MINOR_Wildcard 0
-#define COCOAPODS_VERSION_PATCH_Wildcard 5
+#define COCOAPODS_VERSION_PATCH_Wildcard 6
 

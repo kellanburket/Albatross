@@ -1,8 +1,8 @@
 {
   "name": "Passenger",
-  "version": "0.1.0",
-  "summary": "A short description of Passenger.",
-  "description": "                       An optional longer description of Passenger\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
+  "version": "0.1.1",
+  "summary": "An API mapping library that handles your authentication requests(OAuth1, Basic), JSON parsing, and object instantiation, mapping your API calls to Swift models.",
+  "description": "An API mapping library that handles your authentication requests(OAuth1, Basic), JSON parsing, and object instantiation, mapping your API calls to Swift models.",
   "homepage": "https://github.com/kellanburket/Passenger",
   "license": "MIT",
   "authors": {
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/kellanburket/Passenger.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "8.3"
@@ -23,12 +23,56 @@
     ]
   },
   "frameworks": "UIKit",
-  "vendored_frameworks": [
-    "Frameworks/CommonCrypto.framework"
-  ],
+  "vendored_frameworks": "Frameworks/CommonCrypto.framework",
   "dependencies": {
     "Wildcard": [
 
     ]
-  }
+  },
+  "subspecs": [
+    {
+      "name": "Utilities",
+      "source_files": "Classes/Utilities/*.swift"
+    },
+    {
+      "name": "Http",
+      "source_files": "Classes/Http/*.swift"
+    },
+    {
+      "name": "Passenger",
+      "source_files": "Classes/Passenger/*.swift"
+    },
+    {
+      "name": "Protocols",
+      "source_files": "Classes/Passenger/Protocols/*.swift"
+    },
+    {
+      "name": "Relationships",
+      "source_files": "Classes/Passenger/Relationships/*.swift"
+    },
+    {
+      "name": "Protocols",
+      "source_files": "Classes/Passenger/Relationships/Protocols/*.swift"
+    },
+    {
+      "name": "Media",
+      "source_files": "Classes/Passenger/Media/*.swift"
+    },
+    {
+      "name": "Protocols",
+      "source_files": "Classes/Protocols/*.swift"
+    },
+    {
+      "name": "Api",
+      "source_files": "Classes/Api/*.swift"
+    },
+    {
+      "name": "Extensions",
+      "source_files": "Classes/Extensions/*.swift"
+    },
+    {
+      "name": "Authentication",
+      "source_files": "Classes/Authentication/*.swift"
+    }
+  ]
 }

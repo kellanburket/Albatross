@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class Url: Passenger.Entity {
+class Url: Entity {
     var url: NSURL?
     var expandedUrl: NSURL?
     var displayUrl: NSURL?

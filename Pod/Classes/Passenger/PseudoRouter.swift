@@ -31,7 +31,7 @@ internal class PseudoRouter: NSObject, Router {
     }
     
     func getOwnershipHierarchy() -> [Router] {
-        return [self]
+        return [type()]
     }
 
     internal func describeSelf(_ tabs: Int = 0) -> String {

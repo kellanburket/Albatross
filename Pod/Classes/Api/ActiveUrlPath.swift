@@ -8,24 +8,24 @@
 
 import Foundation
 
-public class ActiveUrlPath: NSObject {
+internal class ActiveUrlPath: NSObject {
     var parent: ActiveUrlPath?
     var endpoints = [String: Endpoint]()
     var path: String = ""
     
-    public init(parent: ActiveUrlPath? = nil) {
+    init(parent: ActiveUrlPath? = nil) {
         self.parent = parent
     }
     
-    override public var description: String {
+    override var description: String {
         return getDescription()
     }
 
-    public func getDescription(_ tabs: Int = 0) -> String {
+    func getDescription(_ tabs: Int = 0) -> String {
         return ""
     }
 
-    public func getFullUrlString() -> String {
+    func getFullUrlString() -> String {
         var path = ""
         
         //println("PATH IN: \(self.path)")

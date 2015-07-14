@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class Media: Passenger.Entity {
+class Media: Entity {
     var type: String?
 
     var sizes = [

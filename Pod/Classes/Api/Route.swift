@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Route: ActiveUrlPath {
+class Route: ActiveUrlPath {
     
     var method: HttpMethod?
     var action: String
@@ -17,7 +17,7 @@ public class Route: ActiveUrlPath {
     var contentType: HttpMediaType = HttpMediaType.Json
     var accept: [HttpMediaType] = [HttpMediaType.Json]
 
-    public init(action: String, endpoint: ActiveUrlPath, args: [String: AnyObject]) {
+    init(action: String, endpoint: ActiveUrlPath, args: [String: AnyObject]) {
         self.action = action
         super.init(parent: endpoint)
 
@@ -57,7 +57,7 @@ public class Route: ActiveUrlPath {
         }
     }
 
-    internal func applyArguments(router: Router) -> String {
+    func applyArguments(router: Router) -> String {
         var str = getFullUrlString()        
         //println("Applying Args")
         var components: [Router] = router.getOwnershipHierarchy().reverse()
@@ -93,7 +93,7 @@ public class Route: ActiveUrlPath {
         return str
     }
     
-    override public func getDescription(_ tabs: Int = 0) -> String {
+    override func getDescription(_ tabs: Int = 0) -> String {
         var str = "\t".repeat(tabs) + "\(path)\n"
         
         for (key, ep) in endpoints {

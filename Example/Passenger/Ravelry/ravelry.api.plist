@@ -4,37 +4,39 @@
 <dict>
 	<key>namespace</key>
 	<string>Passenger_Example</string>
-	<key>version</key>
-	<string>1.1</string>
 	<key>consumer_key</key>
-	<string>QJvtp1ayB6FnDqmObf2Yhi983</string>
-	<key>authorization</key>
+	<string>070C505B63E50C3BAD3D</string>
+	<key>authentication</key>
 	<dict>
-		<key>OAuth1</key>
-		<dict>
-			<key>consumer_secret</key>
-			<string>6KKzY3AG7zaT3jbrw4YUMJIunCp482LYAuwxvGhSxDh3eJwqxM</string>
-			<key>signature_method</key>
-			<string>HMAC-SHA1</string>
-			<key>request_token_url</key>
-			<string>https://api.twitter.com/oauth/request_token</string>
-			<key>access_token_url</key>
-			<string>https://api.twitter.com/oauth/access_token</string>
-			<key>request_token_callback</key>
-			<string>Passenger://com.fkcomp.Passenger</string>
-			<key>authorize_url</key>
-			<string>https://api.twitter.com/oauth/authorize</string>
-		</dict>
 		<key>OAuth2</key>
 		<dict/>
+		<key>OAuth1</key>
+		<dict>
+			<key>signature_method</key>
+			<string>HMAC-SHA1</string>
+			<key>consumer_secret</key>
+			<string>ap3PxaF4l20xYOLf5+NcgHy5mTi1/pVWkojgP7jg</string>
+			<key>access_token_url</key>
+			<string>https://www.ravelry.com/oauth/access_token</string>
+			<key>request_token_callback</key>
+			<string>passenger://com.fkcomp.passenger</string>
+			<key>authorize_url</key>
+			<string>https://www.ravelry.com/oauth/authorize</string>
+			<key>request_token_url</key>
+			<string>https://www.ravelry.com/oauth/request_token</string>
+		</dict>
 		<key>BasicAuth</key>
 		<dict>
 			<key>personal_key</key>
-			<string></string>
+			<string>_jP_2lOVBjSsYtC36hYacGbpjohCtzr8HSdzJBE2</string>
 			<key>username</key>
-			<string></string>
+			<string>kellanbc</string>
 		</dict>
 	</dict>
+	<key>url</key>
+	<string>https://api.ravelry.com</string>
+	<key>version</key>
+	<string></string>
 	<key>options</key>
 	<dict>
 		<key>use_file_extensions</key>
@@ -42,9 +44,7 @@
 		<key>use_accept_headers</key>
 		<false/>
 		<key>show_version_in_path</key>
-		<true/>
+		<false/>
 	</dict>
-	<key>url</key>
-	<string>https://api.twitter.com</string>
 </dict>
 </plist>

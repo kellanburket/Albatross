@@ -1,18 +1,47 @@
 PODS:
-  - Albatross (0.1.0):
+  - Passenger (0.1.1):
+    - Passenger/Api (= 0.1.1)
+    - Passenger/Authentication (= 0.1.1)
+    - Passenger/Extensions (= 0.1.1)
+    - Passenger/Http (= 0.1.1)
+    - Passenger/Media (= 0.1.1)
+    - Passenger/Passenger (= 0.1.1)
+    - Passenger/Protocols (= 0.1.1)
+    - Passenger/Protocols (= 0.1.1)
+    - Passenger/Protocols (= 0.1.1)
+    - Passenger/Relationships (= 0.1.1)
+    - Passenger/Utilities (= 0.1.1)
     - Wildcard
-  - Wildcard (1.0.5)
+  - Passenger/Api (0.1.1):
+    - Wildcard
+  - Passenger/Authentication (0.1.1):
+    - Wildcard
+  - Passenger/Extensions (0.1.1):
+    - Wildcard
+  - Passenger/Http (0.1.1):
+    - Wildcard
+  - Passenger/Media (0.1.1):
+    - Wildcard
+  - Passenger/Passenger (0.1.1):
+    - Wildcard
+  - Passenger/Protocols (0.1.1):
+    - Wildcard
+  - Passenger/Relationships (0.1.1):
+    - Wildcard
+  - Passenger/Utilities (0.1.1):
+    - Wildcard
+  - Wildcard (1.0.6)
 
 DEPENDENCIES:
-  - Albatross (from `../`)
+  - Passenger (from `../`)
   - Wildcard
 
 EXTERNAL SOURCES:
-  Albatross:
+  Passenger:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Albatross: 4252180b88df641d44889fe2b30d38f9a42f269e
-  Wildcard: 8279bd3eb02016240f2354012746372ad624a637
+  Passenger: 1cf5f2e849c34e925bf3105cd9bc37c27c23d413
+  Wildcard: f0bef2e66f69a7e0e57962701072aa46fe016853
 
 COCOAPODS: 0.37.2

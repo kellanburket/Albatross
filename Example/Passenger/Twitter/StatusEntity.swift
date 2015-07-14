@@ -10,11 +10,11 @@ import Foundation
 import Passenger
 
 class StatusEntity: Entity {
-    var userMentions = HasMany<UserMention>()
-    var urls = HasMany<Url>()
-    var hashtags = HasMany<Hashtag>()
-    var media = HasMany<Media>()
-    var symbols = HasMany<Symbol>()
+    var userMentions = Entities<UserMention>()
+    var urls = Entities<Url>()
+    var hashtags = Entities<Hashtag>()
+    var media = Entities<Media>()
+    var symbols = Entities<Symbol>()
     
     var status = BelongsTo<Status>()
 }

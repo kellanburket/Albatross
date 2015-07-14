@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class Symbol: Passenger.Entity {
+class Symbol: Entity {
     var text: String?
     var indices = [Int]()
 

@@ -8,6 +8,6 @@
 
 import Foundation
 
-public class OAuth2: AuthorizationService {
+public class OAuth2: AuthenticationService {
     
 }

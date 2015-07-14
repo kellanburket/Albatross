@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class Pattern: Passenger {
+class Pattern: BaseRavelryModel {
     
     var commentsCount: Int = 0
     var currency: String?

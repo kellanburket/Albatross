@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Reflektor
 
-private var api: Api?
+private var api = [String: Api]()
+
 internal let SHOW_VERSION_IN_PATH: UInt64 = 1
 internal let USE_ACCEPT_HEADERS: UInt64 = 2
 internal let USE_FILE_EXTENSIONS: UInt64 = 4
@@ -18,21 +18,37 @@ public class Api: NSObject {
     
     private var url: NSURL?
     private var version: String = ""
-    public var namespace: String = ""
+    private var namespace: String = ""
     private var flags: UInt64 = 0
     private var consumerKey: String
-    
-    private var authorization = [AuthorizationType: AuthorizationService]()
-    public var endpoints = [String: Endpoint]()
+    private var authentication = [AuthenticationType: AuthenticationService]()
+
+    internal var endpoints = [String: Endpoint]()
     
     public var key: String {
         return consumerKey
     }
-    
-    internal override init() {
-        //println("Initializing API")
+
+    public var basepath: String? {
+        return url?.absoluteString
+    }
+
+    override public var description: String {
+        var str = ""
         
-        if let apiPath = NSBundle.mainBundle().pathForResource("api", ofType: "plist") {
+        for (key, endpoint) in endpoints {
+            var description = endpoint.getDescription()
+            str += "\n\(description)"
+        }
+        
+        return str
+    }
+
+    internal init(_ apiName: String) {
+        let apiFilename = "\(apiName)api"
+        let endpointsFilename = "\(apiName)endpoints"
+
+        if let apiPath = NSBundle.mainBundle().pathForResource(apiFilename, ofType: "plist") {
             if let data = NSDictionary(contentsOfFile: apiPath) {
                 //println("API Config \(data)")
                 
@@ -50,20 +66,20 @@ public class Api: NSObject {
                     self.url = NSURL(string: urlString)
                 }
 
-                if let auth = data["authorization"] as? [String: AnyObject] {
+                if let auth = data["authentication"] as? [String: AnyObject] {
                     for (key, value) in auth {
-                        if let hash = value as? [String: AnyObject], key = AuthorizationType(rawValue: key) {
+                        if let hash = value as? [String: AnyObject], key = AuthenticationType(rawValue: key) {
                             //println("\(key) \(value)")
                             switch key {
                                 case .OAuth1:
-                                    authorization[key] = OAuth1(key: self.consumerKey, params: hash)
+                                    authentication[key] = OAuth1(key: self.consumerKey, params: hash)
                                 case .OAuth2:
-                                    authorization[key] = OAuth2(key: self.consumerKey, params: hash)
+                                    authentication[key] = OAuth2(key: self.consumerKey, params: hash)
                                 default:
-                                    authorization[key] = BasicAuth(key: self.consumerKey, params: hash)
+                                    authentication[key] = BasicAuth(key: self.consumerKey, params: hash)
                             }
                         }
-                        //if let authService = ClassReflektor.create(key as! String) as? AuthorizationService {   authorization["\(key)"] = authService }
+                        //if let authService = ClassReflektor.create(key as! String) as? AuthenticationService {   authentication["\(key)"] = authService }
                     }
                 }
                 
@@ -94,7 +110,7 @@ public class Api: NSObject {
             fatalError("api.plist file not found in main directory.")
         }
         
-        if let endpointsPath = NSBundle.mainBundle().pathForResource("endpoints", ofType: "plist") {
+        if let endpointsPath = NSBundle.mainBundle().pathForResource(endpointsFilename, ofType: "plist") {
             if let data = NSDictionary(contentsOfFile: endpointsPath) {
                 //println("Endpoints \(data)")
                 for (key, value) in data {
@@ -111,15 +127,45 @@ public class Api: NSObject {
         }
     }
     
-    public class var shared: Api {
-        if let singleton = api {
-            return singleton
+    /**
+        Retrieve a shared singleton `Api` instance. The name parameter should correspond to the name of you 'endpoints.plist' and 'api.plist' files. For instance, if you're using the Twitter API, name your property lists 'twitter.api.plist' and 'twitter.endpoints.plist', respectively, and pass in "twitter" as the `name` parameter when accessing your Api.
+    
+        If `name` is left blank it will look for the generic files 'endpoints.plist' and 'api.plist'.
+    
+        :param:     name    the name of the Api
+    
+        :returns:       an `Api` instance
+    
+    */
+    public class func shared(_ name: String? = nil) -> Api {
+        if let name = name {
+            if let singleton = api[name] {
+                return singleton
+            } else {
+                api[name] = Api("\(name).")
+                return api[name]!
+            }
         } else {
-            api = Api()
-            return api!
+            if let singleton = api[""] {
+                return singleton
+            } else {
+                api[""] = Api("")
+                return api[""]!
+            }
         }
     }
+
+    /**
+        Retrieves the named `AuthenticationService`
     
+        :param: method  an `AuthenticationType`. Currently restricted to `.Oauth1` and `.BasicAuth`.
+    
+        :returns:   an AuthenticationService
+    */
+    public func getAuthenticationService(method: AuthenticationType) -> AuthenticationService? {
+        return authentication[method]
+    }
+
     //Get all from collection
     internal func list(router: Router, onComplete: AnyObject? -> Void) -> Api {
         return request(router, endpoint: "list", params: [String: AnyObject](), handler: onComplete)
@@ -176,14 +222,6 @@ public class Api: NSObject {
         return self
     }
     
-    public var basepath: String? {
-        return url?.absoluteString
-    }
-    
-    public func getAuthorizationService(method: AuthorizationType) -> AuthorizationService? {
-        return authorization[method]
-    }
-
     private func getRequest(router: Router, action: String, var params: [String: AnyObject], handler: (AnyObject?) -> ()) -> HttpRequest? {
 
         if let route = getRoute(router, action: action), let url = getUrl(router, route: route, params: &params) {
@@ -205,8 +243,8 @@ public class Api: NSObject {
                 )
             }
             
-            if let rawauth = route.auth, auth = AuthorizationType(rawValue: rawauth), service = Api.shared.getAuthorizationService(auth) {
-                request.authorize(service)
+            if let rawauth = route.auth, auth = AuthenticationType(rawValue: rawauth), service = getAuthenticationService(auth) {
+                request.authenticate(service)
             }
             
             return request
@@ -227,8 +265,8 @@ public class Api: NSObject {
                 handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
             )
             
-            if let rawauth = route.auth, auth = AuthorizationType(rawValue: rawauth), service = Api.shared.getAuthorizationService(auth) {
-                request.authorize(service)
+            if let rawauth = route.auth, auth = AuthenticationType(rawValue: rawauth), service = getAuthenticationService(auth) {
+                request.authenticate(service)
             }
             
             return request
@@ -295,6 +333,8 @@ public class Api: NSObject {
         var endpoints = self.endpoints
         var lastEndpoint: Endpoint? = nil
 
+        //println("Endpoints: \(endpoints)")
+        
         var components: [Router] = router?.getOwnershipHierarchy() ?? [Router]()
         
         for component in components {
@@ -309,17 +349,6 @@ public class Api: NSObject {
         }
         
         return lastEndpoint
-    }
-    
-    override public var description: String {
-        var str = ""
-        
-        for (key, endpoint) in endpoints {
-            var description = endpoint.getDescription()
-            str += "\n\(description)"
-        }
-        
-        return str
     }
 }
 

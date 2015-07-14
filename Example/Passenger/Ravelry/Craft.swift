@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class Craft: Passenger {
+class Craft: BaseRavelryModel {
     var permalink: String?
     var name: String?
 }

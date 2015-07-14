@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BasicAuth: AuthorizationService {
+public class BasicAuth: AuthenticationService {
     
     var personalKey: String = ""
 

@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class Endpoint: ActiveUrlPath {
+internal class Endpoint: ActiveUrlPath {
     
     var type: String
     var routes = [String: Route]()
     
-    public init(type: String, values: [String: AnyObject], parent: ActiveUrlPath? = nil) {
+    init(type: String, values: [String: AnyObject], parent: ActiveUrlPath? = nil) {
         self.type = type
         super.init(parent: parent)
 
@@ -51,11 +51,11 @@ public class Endpoint: ActiveUrlPath {
         }
     }
     
-    public func getRoute(action: String) -> Route? {
+    func getRoute(action: String) -> Route? {
         return routes[action]
     }
     
-    override public func getDescription(_ tabs: Int = 0) -> String {
+    override func getDescription(_ tabs: Int = 0) -> String {
         var str = "\t".repeat(tabs) + "(\(type)):\(path)\n"
         
         for (key, ep) in endpoints {

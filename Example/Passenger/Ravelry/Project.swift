@@ -9,7 +9,7 @@
 import UIKit
 import Passenger
 
-class Project: Model {
+class Project: BaseRavelryModel {
     var craft: Craft?
     var pattern: Pattern?
     var name: String?
@@ -56,14 +56,14 @@ class Project: Model {
                 
                 var params: [String: AnyObject] = [
                     "upload_token": token,
-                    "access_key": Api.shared.key
+                    "access_key": Api.shared("twitter").key
                 ]
                 
                 upload.resource("Image").upload(data, params: params, onComplete: { raw in
                     if let medias = raw as? Json {
                         for (name, file) in medias {
                             if let media = file as? Json {
-                                self.dynamicType.doAction("create_photo", params: media, onComplete: onComplete)
+                                self.doAction("create_photo", params: media, onJsonRetrieved: onComplete)
                             }
                         }
                     }

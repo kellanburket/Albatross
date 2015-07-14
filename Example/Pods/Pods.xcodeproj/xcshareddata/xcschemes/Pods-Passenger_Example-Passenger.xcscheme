@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F227751C6F6B8B09F8AFDF44"
-               BuildableName = "Albatross.framework"
+               BlueprintIdentifier = "6AF9C0095EB7F805DBC10858"
+               BuildableName = "Passenger.framework"
                BlueprintName = "Pods-Passenger_Example-Passenger"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
@@ -42,8 +42,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F227751C6F6B8B09F8AFDF44"
-            BuildableName = "Albatross.framework"
+            BlueprintIdentifier = "6AF9C0095EB7F805DBC10858"
+            BuildableName = "Passenger.framework"
             BlueprintName = "Pods-Passenger_Example-Passenger"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>

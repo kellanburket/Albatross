@@ -8,11 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		607FACEC1AFB9204008FA782 /* RavleryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* RavleryTests.swift */; };
-		761EC4371B4CE09A00B89DBB /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761EC4351B4CE09A00B89DBB /* api.plist */; };
-		761EC4381B4CE09A00B89DBB /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761EC4361B4CE09A00B89DBB /* endpoints.plist */; };
 		7631FD591B32BE99006476DC /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; };
 		7631FD5A1B32BE99006476DC /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7631FD571B32BE99006476DC /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		763B03771B51CF5C0095A56B /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761EC4391B4CE37600B89DBB /* Tests.swift */; };
+		763C38241B5472B000F4A124 /* api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38221B5472B000F4A124 /* api.plist */; };
+		763C38251B5472B000F4A124 /* endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38231B5472B000F4A124 /* endpoints.plist */; };
+		763C38281B5472E600F4A124 /* ravelry.api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38261B5472E600F4A124 /* ravelry.api.plist */; };
+		763C38291B5472E600F4A124 /* ravelry.endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 763C38271B5472E600F4A124 /* ravelry.endpoints.plist */; };
+		763C382B1B54743C00F4A124 /* BaseRavelryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C382A1B54743C00F4A124 /* BaseRavelryModel.swift */; };
+		763C38351B54826300F4A124 /* BaseRavelryResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C38341B54826300F4A124 /* BaseRavelryResource.swift */; };
+		766AF55C1B5441A500CF2529 /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609041B5409B60004B684 /* Hashtag.swift */; };
+		766AF55D1B5441A700CF2529 /* ImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609051B5409B60004B684 /* ImageSize.swift */; };
+		766AF55E1B5441A900CF2529 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609071B5409B60004B684 /* Status.swift */; };
+		766AF55F1B5441AD00CF2529 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609061B5409B60004B684 /* Media.swift */; };
+		766AF5601B5441B100CF2529 /* StatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609081B5409B60004B684 /* StatusEntity.swift */; };
+		766AF5611B5441B300CF2529 /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609091B5409B60004B684 /* Symbol.swift */; };
+		766AF5621B5441B600CF2529 /* TwitterOAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6090A1B5409B60004B684 /* TwitterOAuth1Helper.swift */; };
+		766AF5631B5441B900CF2529 /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6090B1B5409B60004B684 /* Url.swift */; };
+		766AF5641B5441BB00CF2529 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6090C1B5409B60004B684 /* User.swift */; };
+		766AF5651B5441BE00CF2529 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6090D1B5409B60004B684 /* UserEntity.swift */; };
+		766AF5661B5441C000CF2529 /* UserMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6090E1B5409B60004B684 /* UserMention.swift */; };
+		766AF5681B5441E700CF2529 /* OAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609251B540A150004B684 /* OAuth1Helper.swift */; };
 		76C608F21B5409430004B684 /* OptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608F01B5409430004B684 /* OptionsController.swift */; };
 		76C608F31B5409430004B684 /* StatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608F11B5409430004B684 /* StatusController.swift */; };
 		76C608F51B54095C0004B684 /* StatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608F41B54095C0004B684 /* StatusCell.swift */; };
@@ -22,7 +38,6 @@
 		76C608FF1B5409740004B684 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608F91B5409740004B684 /* Project.swift */; };
 		76C609001B5409740004B684 /* RavelryOAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608FA1B5409740004B684 /* RavelryOAuth1Helper.swift */; };
 		76C609011B5409740004B684 /* RavelryUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C608FB1B5409740004B684 /* RavelryUser.swift */; };
-		76C609031B5409870004B684 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76C609021B5409870004B684 /* Info.plist */; };
 		76C6090F1B5409B60004B684 /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609041B5409B60004B684 /* Hashtag.swift */; };
 		76C609101B5409B60004B684 /* ImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609051B5409B60004B684 /* ImageSize.swift */; };
 		76C609111B5409B60004B684 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609061B5409B60004B684 /* Media.swift */; };
@@ -34,13 +49,14 @@
 		76C609171B5409B60004B684 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6090C1B5409B60004B684 /* User.swift */; };
 		76C609181B5409B60004B684 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6090D1B5409B60004B684 /* UserEntity.swift */; };
 		76C609191B5409B60004B684 /* UserMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6090E1B5409B60004B684 /* UserMention.swift */; };
-		76C6091C1B5409D10004B684 /* api-ravelry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76C6091A1B5409D10004B684 /* api-ravelry.plist */; };
-		76C6091D1B5409D10004B684 /* endpoints-ravelry.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76C6091B1B5409D10004B684 /* endpoints-ravelry.plist */; };
 		76C609261B540A150004B684 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6091E1B540A150004B684 /* AppDelegate.swift */; };
 		76C609291B540A150004B684 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76C609241B540A150004B684 /* Images.xcassets */; };
 		76C6092A1B540A150004B684 /* OAuth1Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C609251B540A150004B684 /* OAuth1Helper.swift */; };
 		76C6092F1B540ABE0004B684 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C6092B1B540ABE0004B684 /* LaunchScreen.xib */; };
 		76C609301B540ABE0004B684 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76C6092D1B540ABE0004B684 /* Main.storyboard */; };
+		953180E911FD0B30D9EC86F5 /* Pods_Passenger_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F12F276ADB9DB6E47ED13DB1 /* Pods_Passenger_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D605A63336FCC352DB0AE0C0 /* Pods_Passenger_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2922571166838D80E17F358E /* Pods_Passenger_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E2C1F27E04DF0F146F0562F5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9867F67A10121F115FFE0024 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,16 +84,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07562246D1C56807C75094B8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		09384601B1C0968C38D858BD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2922571166838D80E17F358E /* Pods_Passenger_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passenger_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36DAC0EBB277E6B4417A2D9A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3D3253241466E56B38FCAB0C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Passenger_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passenger_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACE51AFB9204008FA782 /* Passenger_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* RavleryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavleryTests.swift; sourceTree = "<group>"; };
-		761EC4351B4CE09A00B89DBB /* api.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = api.plist; sourceTree = SOURCE_ROOT; };
-		761EC4361B4CE09A00B89DBB /* endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = endpoints.plist; sourceTree = SOURCE_ROOT; };
+		71E369C6F90810F77C6EED65 /* Pods-Passenger_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passenger_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Passenger_Tests/Pods-Passenger_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		761EC4391B4CE37600B89DBB /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7631FD571B32BE99006476DC /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = ../Frameworks/CommonCrypto.framework; sourceTree = "<group>"; };
+		763C38221B5472B000F4A124 /* api.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = api.plist; path = Passenger/Twitter/api.plist; sourceTree = SOURCE_ROOT; };
+		763C38231B5472B000F4A124 /* endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = endpoints.plist; path = Passenger/Twitter/endpoints.plist; sourceTree = SOURCE_ROOT; };
+		763C38261B5472E600F4A124 /* ravelry.api.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ravelry.api.plist; path = Passenger/Ravelry/ravelry.api.plist; sourceTree = SOURCE_ROOT; };
+		763C38271B5472E600F4A124 /* ravelry.endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ravelry.endpoints.plist; path = Passenger/Ravelry/ravelry.endpoints.plist; sourceTree = SOURCE_ROOT; };
+		763C382A1B54743C00F4A124 /* BaseRavelryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRavelryModel.swift; sourceTree = SOURCE_ROOT; };
+		763C38341B54826300F4A124 /* BaseRavelryResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRavelryResource.swift; sourceTree = SOURCE_ROOT; };
 		76C608F01B5409430004B684 /* OptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsController.swift; path = Passenger/OptionsController.swift; sourceTree = SOURCE_ROOT; };
 		76C608F11B5409430004B684 /* StatusController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusController.swift; path = Passenger/StatusController.swift; sourceTree = SOURCE_ROOT; };
 		76C608F41B54095C0004B684 /* StatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusCell.swift; path = Passenger/StatusCell.swift; sourceTree = SOURCE_ROOT; };
@@ -99,14 +123,15 @@
 		76C6090C1B5409B60004B684 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Passenger/Twitter/User.swift; sourceTree = SOURCE_ROOT; };
 		76C6090D1B5409B60004B684 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserEntity.swift; path = Passenger/Twitter/UserEntity.swift; sourceTree = SOURCE_ROOT; };
 		76C6090E1B5409B60004B684 /* UserMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserMention.swift; path = Passenger/Twitter/UserMention.swift; sourceTree = SOURCE_ROOT; };
-		76C6091A1B5409D10004B684 /* api-ravelry.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "api-ravelry.plist"; path = "Passenger/api-ravelry.plist"; sourceTree = SOURCE_ROOT; };
-		76C6091B1B5409D10004B684 /* endpoints-ravelry.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "endpoints-ravelry.plist"; path = "Passenger/endpoints-ravelry.plist"; sourceTree = SOURCE_ROOT; };
 		76C6091E1B540A150004B684 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Passenger/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		76C609241B540A150004B684 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Passenger/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		76C609251B540A150004B684 /* OAuth1Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OAuth1Helper.swift; path = Passenger/OAuth1Helper.swift; sourceTree = SOURCE_ROOT; };
 		76C6092C1B540ABE0004B684 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Passenger/Base.lproj/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		76C6092E1B540ABE0004B684 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Passenger/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		95BC4E282AC5C2B9CF4B8EC6 /* Passenger.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Passenger.podspec; path = ../Passenger.podspec; sourceTree = "<group>"; };
+		9867F67A10121F115FFE0024 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F12F276ADB9DB6E47ED13DB1 /* Pods_Passenger_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passenger_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1C27BC7C8F6C656A159FFB0 /* Pods-Passenger_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passenger_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Passenger_Tests/Pods-Passenger_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +140,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7631FD591B32BE99006476DC /* CommonCrypto.framework in Frameworks */,
+				E2C1F27E04DF0F146F0562F5 /* Pods.framework in Frameworks */,
+				D605A63336FCC352DB0AE0C0 /* Pods_Passenger_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953180E911FD0B30D9EC86F5 /* Pods_Passenger_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +159,10 @@
 		106744BB00003D9139B2C3B9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				07562246D1C56807C75094B8 /* Pods.debug.xcconfig */,
+				09384601B1C0968C38D858BD /* Pods.release.xcconfig */,
+				71E369C6F90810F77C6EED65 /* Pods-Passenger_Tests.debug.xcconfig */,
+				F1C27BC7C8F6C656A159FFB0 /* Pods-Passenger_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -214,9 +246,10 @@
 		761EC43B1B4CFCD300B89DBB /* Ravelry */ = {
 			isa = PBXGroup;
 			children = (
-				76C6091A1B5409D10004B684 /* api-ravelry.plist */,
-				76C6091B1B5409D10004B684 /* endpoints-ravelry.plist */,
+				763C383E1B54861D00F4A124 /* Supporting Files */,
 				76C608F61B5409740004B684 /* Comment.swift */,
+				763C382A1B54743C00F4A124 /* BaseRavelryModel.swift */,
+				763C38341B54826300F4A124 /* BaseRavelryResource.swift */,
 				76C608F71B5409740004B684 /* Craft.swift */,
 				76C608F81B5409740004B684 /* Pattern.swift */,
 				76C608F91B5409740004B684 /* Project.swift */,
@@ -229,6 +262,7 @@
 		761EC43C1B4CFCE700B89DBB /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				763C383D1B54860C00F4A124 /* Supporting Files */,
 				76C609041B5409B60004B684 /* Hashtag.swift */,
 				76C609051B5409B60004B684 /* ImageSize.swift */,
 				76C609061B5409B60004B684 /* Media.swift */,
@@ -240,10 +274,26 @@
 				76C6090C1B5409B60004B684 /* User.swift */,
 				76C6090D1B5409B60004B684 /* UserEntity.swift */,
 				76C6090E1B5409B60004B684 /* UserMention.swift */,
-				761EC4351B4CE09A00B89DBB /* api.plist */,
-				761EC4361B4CE09A00B89DBB /* endpoints.plist */,
 			);
 			name = Twitter;
+			sourceTree = "<group>";
+		};
+		763C383D1B54860C00F4A124 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				763C38221B5472B000F4A124 /* api.plist */,
+				763C38231B5472B000F4A124 /* endpoints.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		763C383E1B54861D00F4A124 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				763C38261B5472E600F4A124 /* ravelry.api.plist */,
+				763C38271B5472E600F4A124 /* ravelry.endpoints.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		76C608E21B523F270004B684 /* Views */ = {
@@ -266,6 +316,9 @@
 		AB024B775D98632BE727A6E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9867F67A10121F115FFE0024 /* Pods.framework */,
+				2922571166838D80E17F358E /* Pods_Passenger_Example.framework */,
+				F12F276ADB9DB6E47ED13DB1 /* Pods_Passenger_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -358,13 +411,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				76C609291B540A150004B684 /* Images.xcassets in Resources */,
-				76C6091D1B5409D10004B684 /* endpoints-ravelry.plist in Resources */,
-				761EC4381B4CE09A00B89DBB /* endpoints.plist in Resources */,
+				763C38281B5472E600F4A124 /* ravelry.api.plist in Resources */,
+				763C38241B5472B000F4A124 /* api.plist in Resources */,
 				76C609301B540ABE0004B684 /* Main.storyboard in Resources */,
+				763C38251B5472B000F4A124 /* endpoints.plist in Resources */,
 				76C6092F1B540ABE0004B684 /* LaunchScreen.xib in Resources */,
-				761EC4371B4CE09A00B89DBB /* api.plist in Resources */,
-				76C609031B5409870004B684 /* Info.plist in Resources */,
-				76C6091C1B5409D10004B684 /* api-ravelry.plist in Resources */,
+				763C38291B5472E600F4A124 /* ravelry.endpoints.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +472,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Albatross_Tests/Pods-Albatross_Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passenger_Tests/Pods-Passenger_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6A36B32B187CE9B1F400B2AE /* Copy Pods Resources */ = {
@@ -435,7 +487,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Albatross_Example/Pods-Albatross_Example-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passenger_Example/Pods-Passenger_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7232D8DF17E3673E4E95AD8A /* Embed Pods Frameworks */ = {
@@ -450,7 +502,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Albatross_Example/Pods-Albatross_Example-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passenger_Example/Pods-Passenger_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CD56F1B825E983A43859C658 /* Embed Pods Frameworks */ = {
@@ -465,7 +517,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Albatross_Tests/Pods-Albatross_Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passenger_Tests/Pods-Passenger_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -476,6 +528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76C609011B5409740004B684 /* RavelryUser.swift in Sources */,
+				763C382B1B54743C00F4A124 /* BaseRavelryModel.swift in Sources */,
 				76C609191B5409B60004B684 /* UserMention.swift in Sources */,
 				76C608FE1B5409740004B684 /* Pattern.swift in Sources */,
 				76C6092A1B540A150004B684 /* OAuth1Helper.swift in Sources */,
@@ -494,6 +547,7 @@
 				76C608FF1B5409740004B684 /* Project.swift in Sources */,
 				76C609171B5409B60004B684 /* User.swift in Sources */,
 				76C609161B5409B60004B684 /* Url.swift in Sources */,
+				763C38351B54826300F4A124 /* BaseRavelryResource.swift in Sources */,
 				76C609261B540A150004B684 /* AppDelegate.swift in Sources */,
 				76C6090F1B5409B60004B684 /* Hashtag.swift in Sources */,
 				76C608FC1B5409740004B684 /* Comment.swift in Sources */,
@@ -504,8 +558,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766AF55D1B5441A700CF2529 /* ImageSize.swift in Sources */,
+				766AF5681B5441E700CF2529 /* OAuth1Helper.swift in Sources */,
+				766AF55E1B5441A900CF2529 /* Status.swift in Sources */,
+				766AF55F1B5441AD00CF2529 /* Media.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* RavleryTests.swift in Sources */,
+				766AF55C1B5441A500CF2529 /* Hashtag.swift in Sources */,
+				766AF5621B5441B600CF2529 /* TwitterOAuth1Helper.swift in Sources */,
+				766AF5611B5441B300CF2529 /* Symbol.swift in Sources */,
+				766AF5651B5441BE00CF2529 /* UserEntity.swift in Sources */,
 				763B03771B51CF5C0095A56B /* Tests.swift in Sources */,
+				766AF5601B5441B100CF2529 /* StatusEntity.swift in Sources */,
+				766AF5631B5441B900CF2529 /* Url.swift in Sources */,
+				766AF5661B5441C000CF2529 /* UserMention.swift in Sources */,
+				766AF5641B5441BB00CF2529 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +692,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07562246D1C56807C75094B8 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -646,6 +713,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09384601B1C0968C38D858BD /* Pods.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -666,6 +734,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71E369C6F90810F77C6EED65 /* Pods-Passenger_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -687,6 +756,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1C27BC7C8F6C656A159FFB0 /* Pods-Passenger_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;

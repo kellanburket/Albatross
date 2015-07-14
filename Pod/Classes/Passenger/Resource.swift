@@ -12,7 +12,7 @@ public class Resource: Passenger {
 
     private var _endpoint: String = ""
     private var _parent: Passenger?
-    
+        
     override public var endpoint: String {
         return _endpoint
     }
@@ -55,11 +55,11 @@ public class Resource: Passenger {
     }
     
     public func doAction(endpoint: String, params: [String: AnyObject], onComplete: AnyObject? -> Void) {
-        Api.shared.request(self, endpoint: endpoint, params: params, handler: onComplete)
+        Api.shared(self.dynamicType.api()).request(self, endpoint: endpoint, params: params, handler: onComplete)
     }
     
     public func upload(data: [String: NSData], params: Json, onComplete: AnyObject? -> Void) {
-        Api.shared.upload(self, data: data, params: params, onComplete: onComplete)
+        Api.shared(self.dynamicType.api()).upload(self, data: data, params: params, onComplete: onComplete)
     }
 
     public func create(onComplete: AnyObject? -> Void) {
@@ -67,15 +67,15 @@ public class Resource: Passenger {
     }
 
     public func create(params: Json, onComplete: AnyObject? -> Void) {
-       Api.shared.create(self, params: params, onComplete: onComplete)
+       Api.shared(self.dynamicType.api()).create(self, params: params, onComplete: onComplete)
     }
     
     public func list(onComplete: AnyObject? -> Void) {
-        Api.shared.list(self, onComplete: onComplete)
+        Api.shared(self.dynamicType.api()).list(self, onComplete: onComplete)
     }
     
     public func search(params: [String: AnyObject], onComplete: AnyObject? -> Void) {
-        Api.shared.search(self, params: params, onComplete: onComplete)
+        Api.shared(self.dynamicType.api()).search(self, params: params, onComplete: onComplete)
     }
     
     private func registerResource(resource: Resource) {

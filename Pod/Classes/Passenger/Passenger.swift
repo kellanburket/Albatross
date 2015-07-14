@@ -32,6 +32,10 @@ import Wildcard
 
 public class Passenger: BaseObject, Router {
     
+    public class func api() -> String? {
+        return nil
+    }
+
     class var className: String {
         return "\(self.self)".split(".").last ?? ""
     }

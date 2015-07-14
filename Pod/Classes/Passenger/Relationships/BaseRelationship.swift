@@ -10,15 +10,13 @@ import Foundation
 import Wildcard
 
 internal class BaseRelationship<T: Passenger>: BaseObject {
-
-    typealias Element = T
     
     var owner: Passenger?
         
     var kind: String {
         return String()
     }
-    
+
     func construct(args: AnyObject, node: String? = nil) -> AnyObject {
         return T.parse(args, node: node)
     }

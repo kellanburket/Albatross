@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class RavelryUser: Model {
+class RavelryUser: BaseRavelryModel {
     var location: String?
     var username: String?
     var faveCurse: String?

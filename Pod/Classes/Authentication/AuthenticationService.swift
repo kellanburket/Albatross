@@ -1,5 +1,5 @@
 //
-//  AuthorizationService.swift
+//  AuthenticationService.swift
 //  Pods
 //
 //  Created by Kellan Cummings on 6/10/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class AuthorizationService: NSObject {
+public class AuthenticationService: NSObject {
  
     internal var consumerKey: String
     var headers = [String: String]()

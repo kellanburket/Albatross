@@ -22,14 +22,4 @@ public class Media: Passenger {
     required public init(_ properties: Json = Json()) {
         super.init(properties)
     }
-
-    final public func upload(name: String, data: NSData, params: [String: AnyObject], onComplete: AnyObject? -> Void) {
-        Api.shared.upload(self, data: [name: data], params: params) { objs in
-            if objs?.count > 0 {
-                onComplete(objs?[0])
-            } else {
-                onComplete(nil)
-            }
-        }
-    }
 }

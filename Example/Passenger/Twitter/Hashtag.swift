@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class Hashtag: Passenger.Entity {
+class Hashtag: Entity {
     var indices = [Int]()
     var text = String()
     

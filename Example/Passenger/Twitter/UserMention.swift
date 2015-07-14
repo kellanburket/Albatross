@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class UserMention: Passenger.Entity {
+class UserMention: Entity {
     var name: String?
     var idStr: String?
     var indices = [Int]()

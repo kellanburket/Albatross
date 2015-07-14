@@ -10,6 +10,6 @@ import Foundation
 import Passenger
 
 class UserEntity: Entity {
-    var url = ["urls": HasMany<Url>()]
+    var url = ["urls": Entities<Url>()]
     var user = BelongsTo<User>()
 }

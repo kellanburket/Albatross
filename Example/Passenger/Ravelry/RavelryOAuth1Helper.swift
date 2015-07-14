@@ -11,9 +11,18 @@ import Passenger
 
 class RavelryOAuth1Helper: OAuth1Helper, OAuth1Delegate {
     
+    override init() {
+        super.init()
+        
+        if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+            service.token = ""
+            service.secret = ""
+        }
+    }
+    
     override func getRequestToken() -> OAuth1Helper {
     
-        if let service = Api.shared.getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
             if service.token == nil || service.secret == nil {
                 service.getRequestTokenURL { secret, url in
                     if let url = url {
@@ -35,7 +44,7 @@ class RavelryOAuth1Helper: OAuth1Helper, OAuth1Delegate {
 
     override func getAccessToken(url: NSURL) -> OAuth1Helper {
 
-        if let service = Api.shared.getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
             service.delegate = self
             let query = HttpRequest.parseQueryString(url)
             

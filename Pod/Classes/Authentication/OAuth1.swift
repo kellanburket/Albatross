@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class OAuth1: AuthorizationService {
+public class OAuth1: AuthenticationService {
 
     public var token: String?
     public var secret: String?
@@ -46,8 +46,8 @@ public class OAuth1: AuthorizationService {
         var params = [
             "oauth_consumer_key": consumerKey,
             "oauth_signature_method": "HMAC-SHA1",
-            "oauth_timestamp": "1436756282", //getCurrentTimestamp(),
-            "oauth_nonce": "ca18991b414c6e4fe04a13aafcc7830c", //generateNonce(),
+            "oauth_timestamp": getCurrentTimestamp(),
+            "oauth_nonce": generateNonce(),
             "oauth_version": "1.0"
         ]
         
@@ -188,7 +188,7 @@ public class OAuth1: AuthorizationService {
             }
         }
 
-        request.authorize(
+        request.authenticate(
             OAuth1RequestToken(key: consumerKey, params: [
                 "consumer_secret": consumerSecret,
                 "request_token_callback": requestTokenCallback,
@@ -223,7 +223,7 @@ public class OAuth1: AuthorizationService {
         }
 
         if let secret = self.secret {
-            request.authorize(
+            request.authenticate(
                 OAuth1AccessToken(key: consumerKey, params: [
                     "consumer_secret": consumerSecret,
                     "request_token_callback": requestTokenCallback,

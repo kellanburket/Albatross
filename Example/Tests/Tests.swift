@@ -9,7 +9,7 @@ class Tests: XCTestCase, ImageLoadDelegate {
     
     override func setUp() {
         super.setUp()
-        if let service = Api.shared.getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared("twitter").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
             if service.token == nil || service.secret == nil {
                 service.token = "OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X"
                 service.secret = "D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT"

@@ -9,7 +9,7 @@
 import Foundation
 import Passenger
 
-class Comment: Passenger {
+class Comment: BaseRavelryModel {
 
     var createdAt: NSDate?
     var commentHtml: String?
