@@ -9,9 +9,9 @@
 
 Pod::Spec.new do |s|
     s.name             = "Passenger"
-    s.version          = "0.1.1"
-    s.summary          = "An API mapping library that handles your authorization requests(OAuth1, Basic), JSON parsing, and object instantiation, mapping your API calls to Swift models."
-    s.description      = "An API mapping library that handles your authorization requests(OAuth1, Basic), JSON parsing, and object instantiation, mapping your API calls to Swift models."
+    s.version          = "1.0.0"
+    s.summary          = "A object-relational mapping library for APIs"
+    s.description      = "A object-relational mapping library for APIs; handles OAuth1 requests, JSON parsing, and object instantiation"
     s.homepage         = "https://github.com/kellanburket/Passenger"
     s.license          = 'MIT'
     s.author           = {
