@@ -10,14 +10,14 @@ import Foundation
 import Wildcard
 import CommonCrypto
 
-public let MIMEBase64Encoding: [Character] = [
+internal let MIMEBase64Encoding: [Character] = [
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
     "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
     "+", "/"
 ]
 
-public let WhitelistedPercentEncodingCharacters: [UnicodeScalar] = [
+internal let WhitelistedPercentEncodingCharacters: [UnicodeScalar] = [
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
     "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
@@ -25,7 +25,7 @@ public let WhitelistedPercentEncodingCharacters: [UnicodeScalar] = [
 ]
 
 
-extension String {
+internal extension String {
 
     internal func sign(algorithm: HMACAlgorithm, key: String) -> String? {
         if let data = self.dataUsingEncoding(NSUTF8StringEncoding) {
@@ -85,11 +85,11 @@ extension String {
         return encoded + padding
     }
     
-    public var urlEncoded: String {
+    internal var urlEncoded: String {
         return self.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
     }
     
-    public func percentEncode(ignore: [UnicodeScalar] = [UnicodeScalar]()) -> String {
+    internal func percentEncode(ignore: [UnicodeScalar] = [UnicodeScalar]()) -> String {
         var output = ""
         
         for char in self.unicodeScalars {
@@ -102,45 +102,8 @@ extension String {
         
         return output
     }
-    
-    /*
-    public var hex: UInt64? {
-        if self =~ "^[0-9a-fA-F]+$" {
-            var total = 0
-            let length = count(self)
-            for (i, char) in enumerate(self.unicodeScalars) {
-                var temp = 0
-        
-                switch String(char).uppercaseString {
-                    case "1": temp = 1
-                    case "2": temp = 2
-                    case "3": temp = 3
-                    case "4": temp = 4
-                    case "5": temp = 5
-                    case "6": temp = 6
-                    case "7": temp = 7
-                    case "8": temp = 8
-                    case "9": temp = 9
-                    case "A": temp = 10
-                    case "B": temp = 11
-                    case "C": temp = 12
-                    case "D": temp = 13
-                    case "E": temp = 14
-                    case "F": temp = 15
-                    default: temp = 0
-                }
-            
-                total += temp * (2 << (length - 1))
-            }
-            
-            return total
-        }
-        
-        return nil
-    }
-    */
-    
-    public func encode(encoding: UInt = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> NSData? {
+   
+    internal func encode(encoding: UInt = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> NSData? {
         return self.dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion)
     }
 }

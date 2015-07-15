@@ -9,7 +9,7 @@
 import UIKit
 import Passenger
 
-class StatusController: UITableViewController, UITableViewDelegate, UITableViewDataSource, ImageLoadDelegate {
+class StatusController: UITableViewController, UITableViewDelegate, UITableViewDataSource, MediaLoadDelegate {
 
     var statuses = [Status]()
     var user: User?
@@ -47,16 +47,17 @@ class StatusController: UITableViewController, UITableViewDelegate, UITableViewD
         return 150
     }
     
-    func imageDidLoad(image: Image) {
+    func mediaDidLoad(media: Passenger.Media) {
         dispatch_async(dispatch_get_main_queue()) {
-            println("Image Loaded")
+            //println("Image Loaded")
             
             self.tableView.reloadData()
         }
     }
+
     
-    func imageDidNotLoad(image: Image) {
-        println("Image Did Not Load")
+    func mediaDidNotLoad(media: Passenger.Media) {
+        //println("Image Did Not Load")
     }
     
 }

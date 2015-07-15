@@ -8,75 +8,50 @@
 
 import Foundation
 
-public protocol ImageLoadDelegate {
-    func imageDidLoad(image: Image)
-    func imageDidNotLoad(image: Image)
-}
-
+/**
+    Base class for Image Media
+*/
 public class Image: Media {
 
+    /**
+        The raw image
+    */
     public var image: UIImage?
 
-    public var delegate: ImageLoadDelegate?
-
-    internal var priority: NSOperationQueuePriority = .Normal
-    
-    private lazy var request: HttpRequest? = {
-        if let url = self.url {
-            return HttpRequest(URL: url, method: HttpMethod.Get, params: Json()) { data, response, error in
-                
-                if let response = response as? NSHTTPURLResponse {
-                    switch response.statusCode {
-                        case 200:
-                            println("\t(200)\tSuccess")
-                            if let image = UIImage(data: data) {
-                                self.loadImage(image)
-                            } else {
-                                if let delegate = self.delegate {
-                                    delegate.imageDidNotLoad(self)
-                                }
-                            }
-                        default:
-                            println("\t\(response.statusCode)\t\(response)")
-                            if let delegate = self.delegate {
-                                delegate.imageDidNotLoad(self)
-                            }
-                    }
-                } else {
-                    println("\tError\t\(error)")
-                    if let delegate = self.delegate {
-                        delegate.imageDidNotLoad(self)
-                    }
-                }
-                
+    override internal func loadMedia(data: NSData) {
+        if let image = UIImage(data: data) {
+            self.image = image
+            if let delegate = delegate {
+                delegate.mediaDidLoad(self)
             }
         } else {
-            println("No Url Set.")
-            return nil
+            if let delegate = self.delegate {
+                delegate.mediaDidNotLoad(self)
+            }
         }
-    }()
-    
-    private lazy var queue: NSOperationQueue = {
-        var queue = NSOperationQueue()
-        queue.name = "ImageLoadingQueue"
-        queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount
-        return queue
-    }()
 
-    public func load(delegate: ImageLoadDelegate? = nil, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
-        self.delegate = delegate
-        
-        if let request = request {
-            Http.get(request, queue: queue ?? self.queue, priority: priority)
-        } else {
-            println("No Http request set for '\(self.url)'")
-        }
     }
     
-    func loadImage(image: UIImage) {
-        self.image = image
-        if let delegate = delegate {
-            delegate.imageDidLoad(self)
-        }
+    /**
+        Converts a `UIImage` to its underlying JEPG data
+    
+        :param: image   the image to convert
+    
+        :returns:   underlying JPEG data
+    */
+    public class func toJpg(image: UIImage) -> NSData? {
+        return image.toJpgData();
     }
+
+    /**
+        Converts a `UIImage` to its underlying PNG data
+        
+        :param: image   the image to convert
+        
+        :returns:   underlying PNG data
+    */
+    public class func toPng(image: UIImage) -> NSData? {
+        return image.toPngData();
+    }
+
 }

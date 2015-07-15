@@ -51,9 +51,9 @@ internal class Endpoint: ActiveUrlPath {
         }
     }
     
-    func getRoute(action: String) -> Route? {
+    func getRoute(route: String) -> Route? {
         //println("Routes (\(action)): \(routes)")
-        return routes[action]
+        return routes[route]
     }
     
     override func getDescription(_ tabs: Int = 0) -> String {

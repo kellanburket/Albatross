@@ -5,8 +5,8 @@
 	<key>namespace</key>
 	<string>Passenger_Example</string>
 	<key>consumer_key</key>
-	<string>070C505B63E50C3BAD3D</string>
-	<key>authentication</key>
+	<string></string>
+	<key>authorization</key>
 	<dict>
 		<key>OAuth2</key>
 		<dict/>
@@ -15,7 +15,7 @@
 			<key>signature_method</key>
 			<string>HMAC-SHA1</string>
 			<key>consumer_secret</key>
-			<string>ap3PxaF4l20xYOLf5+NcgHy5mTi1/pVWkojgP7jg</string>
+			<string></string>
 			<key>access_token_url</key>
 			<string>https://www.ravelry.com/oauth/access_token</string>
 			<key>request_token_callback</key>
@@ -28,9 +28,7 @@
 		<key>BasicAuth</key>
 		<dict>
 			<key>personal_key</key>
-			<string>_jP_2lOVBjSsYtC36hYacGbpjohCtzr8HSdzJBE2</string>
-			<key>username</key>
-			<string>kellanbc</string>
+			<string></string>
 		</dict>
 	</dict>
 	<key>url</key>

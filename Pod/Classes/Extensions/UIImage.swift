@@ -8,17 +8,17 @@
 
 import UIKit
 
-public extension UIImage {
+internal extension UIImage {
 
-    func toPngData() -> NSData {
+    internal func toPngData() -> NSData {
         return UIImagePNGRepresentation(self)
     }
     
-    func toJpgData(compressionQuality quality: CGFloat = 1.0) -> NSData {
+    internal func toJpgData(compressionQuality quality: CGFloat = 1.0) -> NSData {
         return UIImageJPEGRepresentation(self, quality)
     }
     
-    var bytes: [UInt8] {
+    internal var bytes: [UInt8] {
         let provider = CGImageGetDataProvider(self.CGImage)
         let data = CGDataProviderCopyData(provider)
         let length = CFDataGetLength(data)

@@ -8,11 +8,14 @@
 
 import Foundation
 
-public class BasicAuth: AuthenticationService {
+/**
+    Manages the construction of a `BasicAuth` HTTP header.
+*/
+public class BasicAuth: AuthorizationService {
     
-    var personalKey: String = ""
+    private var personalKey: String = ""
 
-    override public init(key: String, params: [String: AnyObject]) {
+    override internal init(key: String, params: [String: AnyObject]) {
         if let pkey = params["personal_key"] as? String {
             self.personalKey = pkey
         }
@@ -20,7 +23,7 @@ public class BasicAuth: AuthenticationService {
         super.init(key: key, params: params)
     }
     
-    override public func setHeader(url: NSURL, inout request: NSMutableURLRequest) {
+    override internal func setHeader(url: NSURL, inout request: NSMutableURLRequest) {
    
         let encodedAuth = "Basic " + "\(consumerKey):\(personalKey)".base64Encoded
         

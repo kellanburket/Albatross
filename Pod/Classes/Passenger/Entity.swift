@@ -8,7 +8,10 @@
 
 import Foundation
 
-public class Entity: Passenger {
+/**
+    Represent a type that is not accessible through direct Api calls but makes up a subsection of a `Model`
+*/
+public class Entity: ApiObject {
 
     
 }

@@ -9,15 +9,15 @@
 import Foundation
 import Wildcard
 
-func +=<T>(left: [T], right: [T]) -> [T] {
+internal func +=<T>(left: [T], right: [T]) -> [T] {
     return left + right
 }
 
-func <<<T>(inout left: [T], right: T) {
+internal func <<<T>(inout left: [T], right: T) {
     left.append(right)
 }
 
-extension Array {
+internal extension Array {
     mutating func shift() -> T? {
         return self.count > 0 ? self.removeAtIndex(0) : nil
     }

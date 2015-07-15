@@ -8,7 +8,9 @@
 
 import Foundation
 
-protocol Primitive {}
+internal protocol Primitive {
+
+}
 
 extension String: Primitive {}
 extension Character: Primitive {}

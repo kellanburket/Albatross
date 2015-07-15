@@ -8,30 +8,29 @@
 
 import Foundation
 
-public class BelongsTo<T: Passenger>: BaseRelationship<T>, BelongsToRouter {
+/**
+    If a `Passenger` has a one-to-one or one-to-many relationship with another `Passenger`, the subordinate `Passenger` must have a `BelongsTo<Passenger>` property pointing back to the owning class.
+
+    This class should never be optional or constructed. Preinitialize all BelongsTo properties.
+*/
+public class BelongsTo<T: ApiObject>: BaseRelationship<T>, BelongsToRouter {
  
     private var passenger: T?
-
-    public var model: T? {
-        return passenger
-    }
-
-    override public var kind: String {
-        return "belongsTo"
-    }
     
-    public var parent: Passenger? {
+    /*
+        The parent `Model`
+    */
+    public var parent: ApiObject? {
         return passenger
     }
     
+    /**
+        Initializer
+    */
     override public init() {
         super.init()
     }
     
-    public func one() -> Passenger? {
-        return passenger
-    }
-
     internal func getOwnershipHierarchy() -> [Router] {
         var components = [Router]()
         var router: Router? = self
@@ -48,16 +47,16 @@ public class BelongsTo<T: Passenger>: BaseRelationship<T>, BelongsToRouter {
         return components.reverse()
     }
 
-    func construct(args: AnyObject, node: String? = nil) -> AnyObject {
+    internal func construct(args: AnyObject, node: String? = nil) -> AnyObject {
         var obj: AnyObject = T.parse(args, node: node)
-        if let passenger = obj as? Passenger {
+        if let passenger = obj as? ApiObject {
             registerPassenger(passenger)
         }
 
         return obj
     }
 
-    internal func registerPassenger(passenger: Passenger) {
+    internal func registerPassenger(passenger: ApiObject) {
         if let passenger = passenger as? T{
             self.passenger = passenger
             self.owner?.parent = passenger

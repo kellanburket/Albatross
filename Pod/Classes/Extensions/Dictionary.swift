@@ -8,7 +8,7 @@
 
 import Foundation
 
-func +<T, E>(left: [T: E], right: [T: E]) -> [T: E] {
+internal func +<T, E>(left: [T: E], right: [T: E]) -> [T: E] {
     var d = [T: E]()
     
     for (k, v) in left {
@@ -22,11 +22,11 @@ func +<T, E>(left: [T: E], right: [T: E]) -> [T: E] {
     return d
 }
 
-func +=<T, E>(inout left: [T: E], right: [T: E]) {
+internal func +=<T, E>(inout left: [T: E], right: [T: E]) {
     left = left + right
 }
 
-extension Dictionary {
+internal extension Dictionary {
     
     func flip() -> Dictionary<Key, Value>? {
         if Key.self is Value.Type {

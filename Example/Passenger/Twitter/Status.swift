@@ -36,7 +36,7 @@ class Status: Model {
     var inReplyToUserIdStr = String()
     var inReplyToUserScreenName = String()
     
-    class func user(params: Json, onComplete: [Status]? -> Void) {
+    class func user(params: [String: AnyObject], onComplete: [Status]? -> Void) {
         self.search(params) { obj in
             if let tweets = obj as? [Status] {
                 onComplete(tweets)
@@ -46,7 +46,7 @@ class Status: Model {
         }
     }
 
-    class func home(params: Json, onComplete: [Status]? -> Void) {
+    class func home(params: [String: AnyObject], onComplete: [Status]? -> Void) {
         self.doAction("home", params: params) { (obj: [Model]?) in
             if let tweets = obj as? [Status] {
                 onComplete(tweets)
@@ -56,7 +56,7 @@ class Status: Model {
         }
     }
     
-    class func mentions(params: Json, onComplete: [Status]? -> Void) {
+    class func mentions(params: [String: AnyObject], onComplete: [Status]? -> Void) {
         self.doAction("mentions", params: params) { (obj: [Model]?) in
             if let tweets = obj as? [Status] {
                 onComplete(tweets)

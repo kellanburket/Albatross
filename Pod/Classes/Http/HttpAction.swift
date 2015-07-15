@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HttpAction: String {
+internal enum HttpAction: String {
     case List = "list"
     case Find = "find"
     case Destroy = "destroy"

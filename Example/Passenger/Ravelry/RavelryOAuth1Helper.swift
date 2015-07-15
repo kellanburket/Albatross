@@ -14,7 +14,7 @@ class RavelryOAuth1Helper: OAuth1Helper, OAuth1Delegate {
     override init() {
         super.init()
         
-        if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared("ravelry").getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
             service.token = "FOVjUhuZN1Y9VeuXDJjnvk7JCgRir8Ob9uTJHv00"
             service.secret = "AhzI4ti7nXi28CrtYCYGWn1M037MJGn4RIt13MVj"
         }
@@ -22,9 +22,9 @@ class RavelryOAuth1Helper: OAuth1Helper, OAuth1Delegate {
     
     override func getRequestToken() -> OAuth1Helper {
     
-        if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared("ravelry").getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
             if service.token == nil || service.secret == nil {
-                service.getRequestTokenURL { secret, url in
+                service.getRequestTokenUrl { secret, url in
                     if let url = url {
                         UIApplication.sharedApplication().openURL(url)
                     } else {
@@ -44,7 +44,7 @@ class RavelryOAuth1Helper: OAuth1Helper, OAuth1Delegate {
 
     override func getAccessToken(url: NSURL) -> OAuth1Helper {
 
-        if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared("ravelry").getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
             service.delegate = self
             let query = HttpRequest.parseQueryString(url)
             

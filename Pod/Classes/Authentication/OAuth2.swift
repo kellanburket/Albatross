@@ -8,6 +8,9 @@
 
 import Foundation
 
-public class OAuth2: AuthenticationService {
+/**
+    Not yet implemented!
+*/
+internal class OAuth2: AuthorizationService {
     
 }

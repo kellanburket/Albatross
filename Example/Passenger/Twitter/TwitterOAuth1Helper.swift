@@ -14,7 +14,7 @@ class TwitterOAuth1Helper: OAuth1Helper {
     override init() {
         super.init()
         
-        if let service = Api.shared().getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared().getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
             service.token = "3270562178-EKvfMjCLUJinVd2CzSXRB1fASUTMHwR5jng4O8J"
             service.secret = "mt3K6B05FOebpcD6dE51CXcv4Y7AywYU1gQnvx5lO8W3M"
         }
@@ -22,9 +22,9 @@ class TwitterOAuth1Helper: OAuth1Helper {
     
     override func getRequestToken() -> OAuth1Helper {
         
-        if let service = Api.shared().getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared().getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
             if service.token == nil || service.secret == nil {
-                service.getRequestTokenURL { secret, url in
+                service.getRequestTokenUrl { secret, url in
                     if let url = url {
                         UIApplication.sharedApplication().openURL(url)
                     } else {
@@ -44,7 +44,7 @@ class TwitterOAuth1Helper: OAuth1Helper {
     
     override func getAccessToken(url: NSURL) -> OAuth1Helper {
         
-        if let service = Api.shared().getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared().getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
             service.delegate = self
             let query = HttpRequest.parseQueryString(url)
             

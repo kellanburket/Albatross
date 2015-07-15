@@ -9,8 +9,7 @@
 import Foundation
 
 internal protocol RelationshipRouter: Router {
-    var owner: Passenger? { get set }
-    var kind: String { get }
-    func registerPassenger(passenger: Passenger)
-    func setOwner(passenger: Passenger)
+    var owner: ApiObject? { get set }
+    func registerPassenger(passenger: ApiObject)
+    func setOwner(passenger: ApiObject)
 }

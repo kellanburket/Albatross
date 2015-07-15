@@ -9,7 +9,7 @@
 import Foundation
 import Wildcard
 
-public class Http: NSObject {
+internal class Http: NSObject {
     
     var operationQueue: NSOperationQueue!
     var operationQueuePriority: NSOperationQueuePriority
@@ -34,7 +34,7 @@ public class Http: NSObject {
         override func main() {
             //println("Preparing Request")
             request.prepare() { result in
-                println("Sending Request \(self.method.rawValue) \(self.request.url)")
+                //println("Sending Request \(self.method.rawValue) \(self.request.url)")
                 self.getSession().dataTaskWithRequest(result, completionHandler: self.request.onComplete).resume()
             }
         }
@@ -55,23 +55,23 @@ public class Http: NSObject {
         self.operationQueue = queue ?? defaultOperationQueue
     }
     
-    public class func start(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
+    class func start(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
         Http(queue: queue, priority: priority).doAsyncRequest(request, method: request.method ?? HttpMethod.Get)
     }
     
-    public class func post(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
+    class func post(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
         Http(queue: queue, priority: priority).doAsyncRequest(request, method: HttpMethod.Post)
     }
 
-    public class func get(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
+    class func get(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
         Http(queue: queue, priority: priority).doAsyncRequest(request, method: HttpMethod.Get)
     }
 
-    public class func put(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
+    class func put(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
         Http(queue: queue, priority: priority).doAsyncRequest(request, method: HttpMethod.Put)
     }
 
-    public class func delete(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
+    class func delete(request: HttpRequest, queue: NSOperationQueue? = nil, priority: NSOperationQueuePriority = .Normal) {
         Http(queue: queue, priority: priority).doAsyncRequest(request, method: HttpMethod.Delete)
     }
     

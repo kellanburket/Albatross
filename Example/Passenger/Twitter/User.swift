@@ -35,7 +35,7 @@ class User: Model {
 
     var status = BelongsTo<Status>()
 
-    class func lookup(params: Json, onComplete: [User]? -> Void) {
+    class func lookup(params: [String: AnyObject], onComplete: [User]? -> Void) {
         self.doAction("lookup", params: params) { (objs: [Model]?) in
             if let objs = objs as? [User] {
                 onComplete(objs)

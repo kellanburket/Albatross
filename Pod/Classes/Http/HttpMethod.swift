@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum HttpMethod: String {
+internal enum HttpMethod: String {
     case Post = "POST"
     case Put = "PUT"
     case Delete = "DELETE"

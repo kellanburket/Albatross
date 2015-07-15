@@ -7,13 +7,13 @@
 	<key>version</key>
 	<string>1.1</string>
 	<key>consumer_key</key>
-	<string>QJvtp1ayB6FnDqmObf2Yhi983</string>
-	<key>authentication</key>
+	<string></string>
+	<key>authorization</key>
 	<dict>
 		<key>OAuth1</key>
 		<dict>
 			<key>consumer_secret</key>
-			<string>6KKzY3AG7zaT3jbrw4YUMJIunCp482LYAuwxvGhSxDh3eJwqxM</string>
+			<string></string>
 			<key>signature_method</key>
 			<string>HMAC-SHA1</string>
 			<key>request_token_url</key>
@@ -30,8 +30,6 @@
 		<key>BasicAuth</key>
 		<dict>
 			<key>personal_key</key>
-			<string></string>
-			<key>username</key>
 			<string></string>
 		</dict>
 	</dict>

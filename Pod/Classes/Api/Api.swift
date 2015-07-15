@@ -21,18 +21,20 @@ public class Api: NSObject {
     private var namespace: String = ""
     private var flags: UInt64 = 0
     private var consumerKey: String
-    private var authentication = [AuthenticationType: AuthenticationService]()
+    private var authorization = [AuthorizationType: AuthorizationService]()
 
     internal var endpoints = [String: Endpoint]()
-    
+
+    /*
+        Consumer key.
+    */
     public var key: String {
         return consumerKey
     }
 
-    public var basepath: String? {
-        return url?.absoluteString
-    }
-
+    /**
+        Returns a string description of the object for console output
+    */
     override public var description: String {
         var str = ""
         
@@ -42,6 +44,10 @@ public class Api: NSObject {
         }
         
         return str
+    }
+    
+    internal var basepath: String? {
+        return url?.absoluteString
     }
 
     internal init(_ apiName: String) {
@@ -66,20 +72,19 @@ public class Api: NSObject {
                     self.url = NSURL(string: urlString)
                 }
 
-                if let auth = data["authentication"] as? [String: AnyObject] {
+                if let auth = data["authorization"] as? [String: AnyObject] {
                     for (key, value) in auth {
-                        if let hash = value as? [String: AnyObject], key = AuthenticationType(rawValue: key) {
+                        if let hash = value as? [String: AnyObject], key = AuthorizationType(rawValue: key) {
                             //println("\(key) \(value)")
                             switch key {
                                 case .OAuth1:
-                                    authentication[key] = OAuth1(key: self.consumerKey, params: hash)
+                                    authorization[key] = OAuth1(key: self.consumerKey, params: hash)
                                 case .OAuth2:
-                                    authentication[key] = OAuth2(key: self.consumerKey, params: hash)
+                                    authorization[key] = OAuth2(key: self.consumerKey, params: hash)
                                 default:
-                                    authentication[key] = BasicAuth(key: self.consumerKey, params: hash)
+                                    authorization[key] = BasicAuth(key: self.consumerKey, params: hash)
                             }
                         }
-                        //if let authService = ClassReflektor.create(key as! String) as? AuthenticationService {   authentication["\(key)"] = authService }
                     }
                 }
                 
@@ -156,49 +161,49 @@ public class Api: NSObject {
     }
 
     /**
-        Retrieves the named `AuthenticationService`
+        Retrieves the named `AuthorizationService`
     
-        :param: method  an `AuthenticationType`. Currently restricted to `.Oauth1` and `.BasicAuth`.
+        :param: method  an `AuthorizationType`. Currently restricted to `.Oauth1` and `.BasicAuth`.
     
-        :returns:   an AuthenticationService
+        :returns:   an AuthorizationService
     */
-    public func getAuthenticationService(method: AuthenticationType) -> AuthenticationService? {
-        return authentication[method]
+    public func getAuthorizationService(method: AuthorizationType) -> AuthorizationService? {
+        return authorization[method]
     }
 
     //Get all from collection
     internal func list(router: Router, onComplete: AnyObject? -> Void) -> Api {
-        return request(router, endpoint: "list", params: [String: AnyObject](), handler: onComplete)
+        return request(router, route: "list", params: [String: AnyObject](), handler: onComplete)
     }
 
     //Get all in acollection that meet parameter
     internal func search(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
-        return request(router, endpoint: "search", params: params, handler: onComplete)
+        return request(router, route: "search", params: params, handler: onComplete)
     }
 
     //Get One Element In Collection
     internal func find(router: Router, onComplete: (AnyObject?) -> ()) -> Api {
-        return request(router, endpoint: "find", params: [String: AnyObject](), handler: onComplete)
+        return request(router, route: "find", params: [String: AnyObject](), handler: onComplete)
     }
 
     //Get One Element in Collection with Parameters
     internal func show(router: Router, params: [String: AnyObject], onComplete: (AnyObject?) -> ()) -> Api {
-        return request(router, endpoint: "show", params: [String: AnyObject](), handler: onComplete)
+        return request(router, route: "show", params: [String: AnyObject](), handler: onComplete)
     }
 
     //Create One in Collection
     internal func create(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
-        return request(router, endpoint: "create", params: params, handler: onComplete)
+        return request(router, route: "create", params: params, handler: onComplete)
     }
     
     //Destroy One Element
     internal func destroy(passenger: Model, onComplete:  AnyObject? -> Void) -> Api {
-        return request(passenger, endpoint: "destroy", params: ["id": passenger.id], handler: onComplete)
+        return request(passenger, route: "destroy", params: ["id": passenger.id], handler: onComplete)
     }
     
     //Save Element
     internal func save(router: Router, params: [String: AnyObject], onComplete: AnyObject? -> Void) -> Api {
-        return request(router, endpoint: "save", params: params, handler: onComplete)
+        return request(router, route: "save", params: params, handler: onComplete)
     }
     
     internal func upload(router: Router, data: [String: NSData], params: [String:AnyObject], onComplete: AnyObject? -> Void) -> Api {
@@ -211,9 +216,9 @@ public class Api: NSObject {
         return self
     }
     
-    internal func request(router: Router, endpoint: String, params: [String: AnyObject], handler: AnyObject? -> Void) -> Api {
+    internal func request(router: Router, route: String, params: [String: AnyObject], handler: AnyObject? -> Void) -> Api {
         
-        if let request = getRequest(router, action: endpoint, params: params, handler: handler) {
+        if let request = getRequest(router, route: route, params: params, handler: handler) {
             Http.start(request)
         } else {
             handler(nil)
@@ -222,9 +227,9 @@ public class Api: NSObject {
         return self
     }
     
-    private func getRequest(router: Router, action: String, var params: [String: AnyObject], handler: (AnyObject?) -> ()) -> HttpRequest? {
+    private func getRequest(router: Router, route: String, var params: [String: AnyObject], handler: (AnyObject?) -> ()) -> HttpRequest? {
 
-        if let route = getRoute(router, action: action) {
+        if let route = getRoute(router, route: route) {
             if let url = getUrl(router, route: route, params: &params) {
                 var request: HttpRequest
                 
@@ -243,16 +248,16 @@ public class Api: NSObject {
                     )
                 }
                 
-                if let rawauth = route.auth, auth = AuthenticationType(rawValue: rawauth), service = getAuthenticationService(auth) {
+                if let rawauth = route.auth, auth = AuthorizationType(rawValue: rawauth), service = getAuthorizationService(auth) {
                     request.authenticate(service)
                 }
                 
                 return request
             } else {
-                fatalError("No Url for \(router).\(action)")
+                fatalError("No Url for \(router).\(route)")
             }
         } else {
-            fatalError("No Route for \(router.endpoint).\(action)")
+            fatalError("No Route for \(router.endpoint).\(route)")
         }
         
         return nil
@@ -260,7 +265,7 @@ public class Api: NSObject {
 
     private func getMultipartRequest(router: Router, var data: [String: NSData], var params: [String: AnyObject], handler: (AnyObject?) -> ()) -> HttpMultipartRequest? {
         
-        if let route = getRoute(router, action: "upload"), let url = getUrl(router, route: route, params: &params) {
+        if let route = getRoute(router, route: "upload"), let url = getUrl(router, route: route, params: &params) {
             var request = HttpMultipartRequest(
                 URL: url,
                 data: data,
@@ -268,7 +273,7 @@ public class Api: NSObject {
                 handler: prepareHttpRequestHandler(router, route: route, onComplete: handler)
             )
             
-            if let rawauth = route.auth, auth = AuthenticationType(rawValue: rawauth), service = getAuthenticationService(auth) {
+            if let rawauth = route.auth, auth = AuthorizationType(rawValue: rawauth), service = getAuthorizationService(auth) {
                 request.authenticate(service)
             }
             
@@ -280,9 +285,9 @@ public class Api: NSObject {
         return nil
     }
 
-    private func getRoute(router: Router, action: String) -> Route? {
+    private func getRoute(router: Router, route: String) -> Route? {
         if let endpoint = getEndpoint(router) {
-            if let route = endpoint.getRoute(action) {
+            if let route = endpoint.getRoute(route) {
                 return route
             } else {
                 println("No Route.")
@@ -346,9 +351,9 @@ public class Api: NSObject {
         
         var components: [Router] = router?.getOwnershipHierarchy() ?? [Router]()
         
-        println("Endpoints:")
+        //println("Endpoints:")
         for component in components {
-            println("\t\(component.dynamicType) : \(component.endpoint)")
+            //println("\t\(component.dynamicType) : \(component.endpoint)")
             if let endpoint = endpoints[component.endpoint] {
                 lastEndpoint = endpoint
                 endpoints = lastEndpoint!.endpoints

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OneToManyRelationship<T: Passenger>: BaseRelationship<T>, HasManyRouter {
+internal class OneToManyRelationship<T: ApiObject>: BaseRelationship<T>, HasManyRouter {
 
     internal var passengers = [T]()
     
@@ -16,7 +16,7 @@ class OneToManyRelationship<T: Passenger>: BaseRelationship<T>, HasManyRouter {
         return passengers.count
     }
 
-    var parent: Passenger? {
+    var parent: ApiObject? {
         return owner
     }
 
@@ -26,10 +26,6 @@ class OneToManyRelationship<T: Passenger>: BaseRelationship<T>, HasManyRouter {
         }
         
         return nil
-    }
-    
-    func all() -> [Passenger] {
-        return passengers
     }
     
     func getOwnershipHierarchy() -> [Router] {
@@ -44,7 +40,7 @@ class OneToManyRelationship<T: Passenger>: BaseRelationship<T>, HasManyRouter {
         return components.reverse()
     }
     
-    internal func registerPassenger(passenger: Passenger) {
+    internal func registerPassenger(passenger: ApiObject) {
         if let passenger = passenger as? T, method = owner?.asMethodName() {
             
             if let relationship = passenger.belongsTos[method], owner = owner {
@@ -68,9 +64,9 @@ class OneToManyRelationship<T: Passenger>: BaseRelationship<T>, HasManyRouter {
     
     func construct(args: AnyObject, node: String? = nil) -> AnyObject {
         var obj: AnyObject = T.parse(args, node: node)
-        if let passenger = obj as? Passenger {
+        if let passenger = obj as? ApiObject {
             registerPassenger(passenger)
-        } else if let passengers = obj as? [Passenger] {
+        } else if let passengers = obj as? [ApiObject] {
             for passenger in passengers {
                 registerPassenger(passenger)
             }

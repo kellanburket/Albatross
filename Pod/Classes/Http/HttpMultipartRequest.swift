@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class HttpMultipartRequest: HttpRequest {
+internal class HttpMultipartRequest: HttpRequest {
 
     private var fileData: [String: NSData]
     
@@ -21,7 +21,7 @@ public class HttpMultipartRequest: HttpRequest {
         return  "------WebKitFormBoundary\(uniqueId)"
     }
 
-    public init(URL: NSURL, data: [String: NSData], params: [String: AnyObject] = [String: AnyObject](), handler: NSData! -> Void = { data in }) {
+    init(URL: NSURL, data: [String: NSData], params: [String: AnyObject] = [String: AnyObject](), handler: NSData! -> Void = { data in }) {
         self.fileData = data
         
         super.init(URL: URL, method: HttpMethod.Post, params: params, handler: HttpRequest.getDefaultCompletionHandler(handler))

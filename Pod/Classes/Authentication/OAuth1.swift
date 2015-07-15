@@ -8,34 +8,36 @@
 
 import Foundation
 
-public class OAuth1: AuthenticationService {
+/**
+    Manages the construction of an `OAuth1` HTTP header.
+*/
+public class OAuth1: AuthorizationService {
 
     public var token: String?
     public var secret: String?
     public var delegate: OAuth1Delegate?
-    
-    private var consumerSecret: String
 
+    public var requestTokenUrl: NSURL {
+        return _requestTokenUrl
+    }
+    
+    public var accessTokenUrl: NSURL {
+        return _accessTokenUrl
+    }
+    
+    public var authorizeUrl: NSURL {
+        return _authorizeUrl
+    }
+    
+    public var requestTokenCallback: String {
+        return _requestTokenCallback
+    }
+
+    private var consumerSecret: String
     private var _requestTokenCallback: String
     private var _accessTokenUrl: NSURL
     private var _requestTokenUrl: NSURL
     private var _authorizeUrl: NSURL
-    
-    public var requestTokenUrl: NSURL {
-        return _requestTokenUrl
-    }
-
-    public var accessTokenUrl: NSURL {
-        return _accessTokenUrl
-    }
-
-    public var authorizeUrl: NSURL {
-        return _authorizeUrl
-    }
-
-    public var requestTokenCallback: String {
-        return _requestTokenCallback
-    }
     
     private var signingKey: String {
         var secret = self.secret?.percentEncode() ?? ""
@@ -58,7 +60,7 @@ public class OAuth1: AuthenticationService {
         return params
     }
     
-    override public init(key: String, params: [String: AnyObject]) {
+    override internal init(key: String, params: [String: AnyObject]) {
         
         if let consumerSecret = params["consumer_secret"] as? String {
             self.consumerSecret = consumerSecret
@@ -101,7 +103,7 @@ public class OAuth1: AuthenticationService {
         super.init(key: key, params: params)
     }
 
-    override public func setSignature(url: NSURL, parameters: [String:AnyObject], method: String, onComplete: () -> ()) {
+    override internal func setSignature(url: NSURL, parameters: [String:AnyObject], method: String, onComplete: () -> ()) {
         //println("Setting Signature")
         headers = [String:String]()
         
@@ -117,16 +119,10 @@ public class OAuth1: AuthenticationService {
         
         headers += requestHeaders
         
-        //println("Building Signature")
         var output = ""
-        
-        //println("Getting Header Keys")
         var keys = [String](headers.keys)
-        
-        //println("Sorting Header Keys")
         keys.sort { $0 < $1 }
         
-        //println("Encoding Keys")
         for key in keys {
             if let header = headers[key] {
                 output += (key.percentEncode() + "=" + "\(header)".percentEncode() + "&")
@@ -146,7 +142,7 @@ public class OAuth1: AuthenticationService {
         }
     }
     
-    override public func setHeader(url: NSURL, inout request: NSMutableURLRequest) {
+    override internal func setHeader(url: NSURL, inout request: NSMutableURLRequest) {
         var header: String = "OAuth "//realm=\"\(url.absoluteString!)\", "
         
         var keys = [String](headers.keys)
@@ -164,15 +160,20 @@ public class OAuth1: AuthenticationService {
         request.setValue(header, forHTTPHeaderField: "Authorization")
     }
     
-    public func getRequestTokenURL(onComplete: (String?, NSURL?) -> Void) {
+    /**
+        Gets the request token URL.
+    
+        :param: onComplete  anonymous function called when the url has been fetched; returns the request token secret as its first parameter and the url as its second
+    */
+    public func getRequestTokenUrl(onComplete: (String?, NSURL?) -> Void) {
         
-        let request = HttpRequest(URL: requestTokenUrl, method: HttpMethod.Post, params: Json()) { data, response, url in
+        let request = HttpRequest(URL: requestTokenUrl, method: HttpMethod.Post, params: [String: AnyObject]()) { data, response, url in
             
             let query = HttpRequest.parseQueryString(data, encoding: self.encoding)
             if let requestToken = query["oauth_token"] as? String, requestTokenSecret = query["oauth_token_secret"] as? String {
             
-                println("Request Token: \(requestToken)")
-                println("Request Token Secret: \(requestTokenSecret)")
+                //println("Request Token: \(requestToken)")
+                //println("Request Token Secret: \(requestTokenSecret)")
                 self.secret = requestTokenSecret
                 self.token = requestToken
                 
@@ -201,6 +202,12 @@ public class OAuth1: AuthenticationService {
         Http.start(request)
     }
     
+    /*
+        Fetches the OAuth1 access token
+    
+        :param: token   token returned in the `getRequestToken` response
+        :param: verifier    verifier returned in the `getRequestToken` response
+    */
     public func fetchAccessToken(#token: String, verifier: String) {
         
         let request = HttpRequest(URL: accessTokenUrl, method: HttpMethod.Get, params: [String: AnyObject]()) { data, response, url in

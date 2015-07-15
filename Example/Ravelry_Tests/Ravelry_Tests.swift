@@ -2,15 +2,16 @@ import UIKit
 import XCTest
 import Passenger
 
-class Tests: XCTestCase, ImageLoadDelegate {
-    let userId = 4952800
+class Tests: XCTestCase, MediaLoadDelegate {
+    let userId = 0
     
     override func setUp() {
         super.setUp()
-        if let service = Api.shared("ravelry").getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared("ravelry").getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
             if service.token == nil || service.secret == nil {
-                service.token = "OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X"
-                service.secret = "D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT"
+                //Set token/secret here to run tests
+                service.token = ""
+                service.secret = ""
             }
         }
     }
@@ -19,12 +20,12 @@ class Tests: XCTestCase, ImageLoadDelegate {
         super.tearDown()
     }
     
-    func imageDidLoad(image: Image) {
-        XCTAssert(true, "Image did load, \(image)");
+    func mediaDidLoad(media: Passenger.Media) {
+        XCTAssert(true, "Image did load, \(media)");
     }
     
-    func imageDidNotLoad(image: Image) {
-        XCTFail("Image did load, \(image)")
+    func mediaDidNotLoad(media: Passenger.Media) {
+        XCTFail("Image did load, \(media)")
     }
     
     func testFlight() {
@@ -32,13 +33,10 @@ class Tests: XCTestCase, ImageLoadDelegate {
         
         RavelryUser.find(userId) { record in
             if let user = record as? RavelryUser {
-                XCTAssert(user.username == "kellanbc", "\(user.username) not true")
+
+                //Set username here
+                XCTAssert(user.username == "", "\(user.username) not true")
                 XCTAssert(user.id == self.userId, "\(user.id)")
-                
-                //user.largePhotoUrl?.load(delegate: self)
-                //user.smallPhotoUrl?.load(delegate: self)
-                //user.photoUrl?.load(delegate: self)
-                //user.tinyPhotoUrl?.load(delegate: self)
                 
                 user.projects.list { flight in
                     
@@ -68,17 +66,17 @@ class Tests: XCTestCase, ImageLoadDelegate {
         
         RavelryUser.find(userId) { record in
             if let user = record as? RavelryUser {
-                println("User has been identified \(user.username)")
 
-                XCTAssert(user.username == "kellanbc", "\(user.username) not true")
+                //Set username here
+                XCTAssert(user.username == "", "\(user.username) not true")
                 XCTAssert(user.id == self.userId, "\(user.id)")
                 
                 if let username = user.username {
                     
                     var params = [
-                        "name": "purlie",
+                        "name": "123",
                         "progress": 102,
-                        "started": "1983-01-06",
+                        "started": "1983-01-01",
                         "completed": "2015-06-26",
                     ]
                     
@@ -86,11 +84,6 @@ class Tests: XCTestCase, ImageLoadDelegate {
                         if let project = record {
                             XCTAssert(project.name! == params["name"], "\(project.name!)")
                             XCTAssert(project.progress == 100, "\(project.progress)")
-                            let startDate = project.started!.format("yyyy-MM-dd")
-                            XCTAssert(startDate == params["started"]!, "Start dates don't match")
-                            let completedDate = project.completed!.format("yyyy-MM-dd")
-                            
-                            XCTAssert(completedDate == params["completed"]!, "End dates don't match")
                             
                             let newProjectName = "new project"
                             project.name = newProjectName
@@ -116,7 +109,7 @@ class Tests: XCTestCase, ImageLoadDelegate {
                                                 project.createPhoto(data) { obj in
                                                     println("Photo Created: \(obj)")
                                                     
-                                                    if let json = obj as? Json {
+                                                    if let json = obj as? [String: AnyObject] {
                                                         
                                                         XCTAssert(json["status_token"] != nil, "No Status Token Returned")
                                                         

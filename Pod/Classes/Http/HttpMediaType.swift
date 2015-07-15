@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum HttpMediaType: String {
+internal enum HttpMediaType: String {
     case Json = "application/json"
     case Html = "text/html"
     case Csv = "text/csv"

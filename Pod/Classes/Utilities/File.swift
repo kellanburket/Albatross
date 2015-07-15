@@ -8,7 +8,7 @@
 
 import Foundation
 
-class File {
+internal class File {
     
     class func mkdir(path: String) -> Bool {
         if !NSFileManager.defaultManager().fileExistsAtPath(path) {

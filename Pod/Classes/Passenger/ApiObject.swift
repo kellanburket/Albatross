@@ -7,31 +7,32 @@
 //
 
 import Foundation
-//import Reflektor
 import Wildcard
 
 /**
-    When extending the Passenger class, please note that all so-called primitive types with the exception of String (e.g., Int, Float, Double, Bool) must be declared as non-optionals or an `NSUnknownKeyException` will be thrown when attempting to set values. We hope that future releases of Swift will expand the reflection API and allow for more robust key-value coding.
+    When extending the ApiObject class, please note that all so-called primitive types with the exception of String (e.g., Int, Float, Double, Bool) must be declared as non-optionals or an `NSUnknownKeyException` will be thrown when attempting to set values. We hope that future releases of Swift will expand the reflection API and allow for more robust key-value coding.
 
     Currently the following types are supported:
     
     * Int, UInt, Int8, UInt8, Int16, UInt16, Int32, UInt32, Int64, UInt64
     * Bool
     * Float, Double
-    * String
+    * String, Optional<String>
     * Character
-    * NSDate
-    * NSURL
-    * UIColor
-    * NSAttributedString
+    * NSDate, Optional<NSDate>
+    * NSURL, Optional<NSURL>
+    * NSAttributedString, Optional<NSAttributedString>
     * Image
-    * Passenger
+    * Model
+    * Entity
     * Array<T>
     * Dictionary<T, E>
 */
-
-public class Passenger: BaseObject, Router {
+public class ApiObject: BaseObject, Router {
     
+    /**
+        returns an API; ovverride this method in your custom class returning the name of your desired API; e.g. if you create a plist called 'twitter.endpoints.plist' to manage your endpoints, return 'twitter' from this method in your child class
+    */
     public class func api() -> String? {
         return nil
     }
@@ -48,8 +49,8 @@ public class Passenger: BaseObject, Router {
         return self.getRelationships(HasManyRouter.self)
     }()
 
-    internal lazy var hasOnes: [String: Passenger] = {
-        return self.getRelationships(Passenger.self)
+    internal lazy var hasOnes: [String: ApiObject] = {
+        return self.getRelationships(ApiObject.self)
     }()
     
     internal lazy var belongsTos: [String: BelongsToRouter] = {
@@ -64,9 +65,17 @@ public class Passenger: BaseObject, Router {
         return self.dynamicType.className
     }
     
-    public var parent: Passenger?
+    /**
+        Parent object; set to nil by default
+    */
+    public var parent: ApiObject? = nil
     
-    required public init(_ properties: Json = Json()) {
+    /**
+        Initialize a new instance of the passenger
+    
+        :param: properties  an optional dictionary of instance properties, the keys of which should match properties and the values of which should be convertible to the object property type; if initialized without properties, will create a default object of type
+    */
+    required public init(_ properties: [String: AnyObject] = [String: AnyObject]()) {
         super.init()
 
 
@@ -84,8 +93,8 @@ public class Passenger: BaseObject, Router {
     internal class func parse(raw: AnyObject, node: String? = nil) -> AnyObject {
         if let arr = raw as? [AnyObject] {
 
-            if let list = arr as? [Json] {
-                var passengers = [Passenger]()
+            if let list = arr as? [[String: AnyObject]] {
+                var passengers = [ApiObject]()
 
                 for dictionary in list {
                     passengers << self.self(dictionary.formatKeys())
@@ -103,7 +112,7 @@ public class Passenger: BaseObject, Router {
                         if let dictionary = item as? [String: AnyObject] {
                             return self.self(dictionary)
                         } else if let list = item as? [[String: AnyObject]] {
-                            var passengers = [Passenger]()
+                            var passengers = [ApiObject]()
                             
                             for dictionary in list {
                                 passengers << self.self(dictionary)
@@ -119,7 +128,7 @@ public class Passenger: BaseObject, Router {
                         }
                     } else if i.capitalize() == className.pluralize() {
                         if let list = item as? [[String: AnyObject]]  {
-                            var passengers = [Passenger]()
+                            var passengers = [ApiObject]()
                             for dictionary in list {
                                 passengers << self.self(dictionary)
                             }
@@ -133,7 +142,7 @@ public class Passenger: BaseObject, Router {
         }
 
         println("WARNING: cannot parse return values!")
-        return self.self(Json())
+        return self.self([String: AnyObject]())
     }
     
     private func getRelationships<T>(type: T.Type) -> [String: T] {
@@ -172,7 +181,7 @@ public class Passenger: BaseObject, Router {
         return relationships
     }
         
-    public func serialize() -> AnyObject? {
+    internal func serialize() -> AnyObject? {
         var serial = [String: AnyObject]()
         
         for (fieldName, fieldMirror) in mirrors {
@@ -186,7 +195,7 @@ public class Passenger: BaseObject, Router {
         return serial
     }
 
-    public func update(var data: Json, parent: Passenger?) {
+    internal func update(var data: [String: AnyObject], parent: ApiObject?) {
         
         if let parent = parent {
             self.parent = parent
@@ -195,7 +204,7 @@ public class Passenger: BaseObject, Router {
         unserialize(data)
     }
     
-    private func unserialize(data: Json) {
+    private func unserialize(data: [String: AnyObject]) {
         //println("Unserializing \(self.endpoint)")
         //println(data)
 
@@ -214,7 +223,6 @@ public class Passenger: BaseObject, Router {
             if let value: AnyObject = getMirrorValue(mirror) {
                 return value
             } else {
-                println(self)
                 fatalError("Property '\(name)' unset for '\(endpoint)'")
             }
         } else {
@@ -300,7 +308,7 @@ public class Passenger: BaseObject, Router {
                 //println("\tSetting Double")
                 return value
             }
-        } else if let value = value as? Passenger {
+        } else if let value = value as? ApiObject {
             //println("\tSetting Passenger")
             return value
         } else if let values = value as? [String: AnyObject] {
@@ -320,7 +328,7 @@ public class Passenger: BaseObject, Router {
                 
                 if let dictionary = value as? [String: AnyObject] {
                     var hash = [String: AnyObject]()
-                    if let data = value as? Json {
+                    if let data = value as? [String: AnyObject] {
                         for i in 0..<mirror.count {
                             let (_, submirror) = mirror[i]
                             
@@ -331,7 +339,7 @@ public class Passenger: BaseObject, Router {
                                 
                                 if let key = hashKey.value as? String {
                                     if let pvalue: AnyObject = parseMirrorValue(key, value: data[key], type: hashValue.valueType, mirror: hashValue) {
-                                        println("Setting Key \(hashValue.valueType)")
+                                        //println("Setting Key \(hashValue.valueType)")
 
                                         hash[key] = pvalue
                                     } else {
@@ -510,16 +518,16 @@ public class Passenger: BaseObject, Router {
         return nil
     }
     
-    private func constructType(name: String, mirror: MirrorType, values: [String: AnyObject]) -> Passenger? {
+    private func constructType(name: String, mirror: MirrorType, values: [String: AnyObject]) -> ApiObject? {
         if let relationship = mirror.value as? RelationshipRouter {
             
-            if let obj = relationship.construct(values, node: nil) as? Passenger {
+            if let obj = relationship.construct(values, node: nil) as? ApiObject {
                 //println("\tRegistering Passenger \(obj.endpoint)")
                 relationship.registerPassenger(obj)
                 return nil
             }
             
-        } else if let passenger = mirror.value as? Passenger {
+        } else if let passenger = mirror.value as? ApiObject {
             passenger.update(values, parent: self)
             return nil
         }

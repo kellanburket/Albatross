@@ -9,20 +9,25 @@
 import Foundation
 import UIKit
 
-public typealias HttpResponseHandler = (NSData!, NSURLResponse!, NSError!) -> ()
+internal typealias HttpResponseHandler = (NSData!, NSURLResponse!, NSError!) -> ()
 
-public protocol HttpSuccessDelegate {
+internal protocol HttpSuccessDelegate {
     func actionHasSucceededWhereOthersHaveFailed()
     func actionHasFailedWhereOthersHaveSucceeded()
 }
 
-public protocol HttpResultsDelegate {
+internal protocol HttpResultsDelegate {
     func resultsHaveBeenFetched(data: NSData!)
 }
 
+/**
+    Represents an Http Request
+
+    Currently only visible to expose class helper methods
+*/
 public class HttpRequest {
 
-    private var authenticationService: AuthenticationService?
+    private var authorizationService: AuthorizationService?
     private var handler: HttpResponseHandler
     
     internal var headers = [String:String]()
@@ -30,13 +35,13 @@ public class HttpRequest {
 
     internal var baseUrl: NSURL
     
-    public var url: String {
+    var url: String {
         return baseUrl.absoluteString!
     }
     
-    public var method: HttpMethod
+    var method: HttpMethod
     
-    public var contentType: String? {
+    var contentType: String? {
         get {
             return headers["Content-Type"]
         }
@@ -45,7 +50,7 @@ public class HttpRequest {
         }
     }
 
-    public var accept: String? {
+    var accept: String? {
         get {
             return headers["Accept"]
         }
@@ -54,11 +59,11 @@ public class HttpRequest {
         }
     }
     
-    public var onComplete: HttpResponseHandler {
+    var onComplete: HttpResponseHandler {
         return handler
     }
   
-    public init(URL: NSURL, method: HttpMethod, params: [String: AnyObject] = [String: AnyObject](), handler: HttpResponseHandler = { data, response, error in }) {
+    init(URL: NSURL, method: HttpMethod, params: [String: AnyObject] = [String: AnyObject](), handler: HttpResponseHandler = { data, response, error in }) {
         self.baseUrl = URL
         self.method = method
         self.parameters = params
@@ -70,41 +75,41 @@ public class HttpRequest {
         ]
     }
 
-    public convenience init(URL: NSURL, method: HttpMethod, handler: HttpResponseHandler = { data, response, url in }) {
+    convenience init(URL: NSURL, method: HttpMethod, handler: HttpResponseHandler = { data, response, url in }) {
         self.init(URL: URL, method: method, params: [String: AnyObject](), handler: handler)
     }
     
-    public convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], handler: NSData! -> Void) {
+    convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], handler: NSData! -> Void) {
         self.init(URL: URL, method: method, params: params, handler: HttpRequest.getDefaultCompletionHandler(handler))
     }
     
-    public convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], delegate: HttpResultsDelegate) {
+    convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], delegate: HttpResultsDelegate) {
         self.init(URL: URL, method: method, params: params, handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
     
-    public convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], delegate: HttpSuccessDelegate) {
+    convenience init(URL: NSURL, method: HttpMethod, params: [String:AnyObject], delegate: HttpSuccessDelegate) {
         self.init(URL: URL, method: method, params: params, handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
     
-    public convenience init(URL: NSURL, method: HttpMethod, delegate: HttpResultsDelegate) {
+    convenience init(URL: NSURL, method: HttpMethod, delegate: HttpResultsDelegate) {
         self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
     
-    public convenience init(URL: NSURL, method: HttpMethod, delegate: HttpSuccessDelegate) {
+    convenience init(URL: NSURL, method: HttpMethod, delegate: HttpSuccessDelegate) {
         self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(delegate))
     }
 
-    public convenience init(URL: NSURL, method: HttpMethod, handler: NSData! -> Void) {
+    convenience init(URL: NSURL, method: HttpMethod, handler: NSData! -> Void) {
         self.init(URL: URL, method: method, params: [String:AnyObject](), handler: HttpRequest.getDefaultCompletionHandler(handler))
     }
 
-    public func authenticate(service: AuthenticationService) {
-        self.authenticationService = service
+    func authenticate(service: AuthorizationService) {
+        self.authorizationService = service
     }
     
-    public func prepare(onComplete: (NSMutableURLRequest) -> ()) {
+    func prepare(onComplete: (NSMutableURLRequest) -> ()) {
         //println("Preparing Request")
-        if let service = self.authenticationService {
+        if let service = self.authorizationService {
             //println("Prepping Authorization Service \(service)")
             service.setSignature(self.baseUrl, parameters: self.parameters, method: method.description) {
                 //println("Signature has been set")
@@ -122,8 +127,8 @@ public class HttpRequest {
         }
     }
     
-    public class func parseQueryString(data: NSData, encoding: UInt = NSUTF8StringEncoding) -> Json {
-        var arr = Json()
+    class func parseQueryString(data: NSData, encoding: UInt = NSUTF8StringEncoding) -> [String: AnyObject] {
+        var arr = [String: AnyObject]()
         
         if let urlString = data.stringify(encoding: encoding) {
             //println("URL STRING: \(urlString)")
@@ -133,8 +138,15 @@ public class HttpRequest {
         return arr
     }
     
+    /*
+        Parse a URL query string
+    
+        :param: url self-explanatory
+        
+        :returns:   a dictionary of key value pairs
+    */
     public class func parseQueryString(url: NSURL) -> [String: AnyObject] {
-        var arr = Json()
+        var arr = [String: AnyObject]()
         
         if let urlString = url.absoluteString {
             var urlParts = urlString.split("?")
@@ -146,8 +158,8 @@ public class HttpRequest {
         return arr
     }
     
-    public class func parseQueryString(query: String) -> [String: AnyObject] {
-        var arr = Json()
+    class func parseQueryString(query: String) -> [String: AnyObject] {
+        var arr = [String: AnyObject]()
 
         var keyValuePairs = query.split("&")
         //println("keyValuePairs: \(keyValuePairs)")
@@ -162,13 +174,13 @@ public class HttpRequest {
         return arr
     }
     
-    public func setHeaders(headers: [String: String]) {
+    func setHeaders(headers: [String: String]) {
         for (header, value) in headers {
             setHeader(header, value: value)
         }
     }
     
-    public func setHeader(header: String, value: String) {
+    func setHeader(header: String, value: String) {
         self.headers[header] = value
     }
 
@@ -286,7 +298,7 @@ public class HttpRequest {
                 var statusCode = r.statusCode
                 switch statusCode {
                     case 200:
-                        println("\t(200)\tSuccess")
+                        //println("\t(200)\tSuccess")
                         //if let data = data.stringify() { //Log.d(data) }
                         handler(data)
                     case 401:

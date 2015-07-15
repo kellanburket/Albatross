@@ -8,11 +8,10 @@
 
 import Foundation
 
-public extension NSDate {
-    public func format(format: String) -> String {
+internal extension NSDate {
+    internal func format(format: String) -> String {
         var formatter = NSDateFormatter()
         formatter.dateFormat = format
-        //println("\(self.) \(formatter)")
         return formatter.stringFromDate(self)
     }
 }

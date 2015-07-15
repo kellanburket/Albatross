@@ -8,16 +8,21 @@
 
 import Foundation
 
+/**
+    a OneToManyRelationship wrapper for Entities. Use in place of an array of `Entity`s when setting `ApiObject` properties.
+*/
 public class Entities<T: Entity>: OneToManyRelationship<T>, SequenceType {
     
-    override public var kind: String {
-        return "hasMany"
-    }
-    
+    /** 
+        Default initializer
+    */
     override public init() {
         super.init()
     }
 
+    /**
+        Generator used to iterate over `passengers` array
+    */
     public func generate() -> GeneratorOf<T> {
         var index = 0
         return GeneratorOf {

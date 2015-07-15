@@ -12,13 +12,13 @@ internal class PseudoRouter: NSObject, Router {
     
     var id = Int()
 
-    private var type: Passenger.Type
+    private var type: ApiObject.Type
     
-    init(type: Passenger.Type) {
+    init(type: ApiObject.Type) {
         self.type = type
     }
 
-    internal var parent: Passenger? {
+    internal var parent: ApiObject? {
         return nil
     }
 

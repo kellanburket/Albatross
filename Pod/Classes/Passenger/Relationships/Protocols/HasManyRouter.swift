@@ -9,5 +9,4 @@
 import Foundation
 
 internal protocol HasManyRouter: RelationshipRouter {
-    func all() -> [Passenger]
 }

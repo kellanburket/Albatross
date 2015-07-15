@@ -37,7 +37,7 @@ class Project: BaseRavelryModel {
     var updated: NSDate?
     var toStart: NSDate?
     
-    func reorderPhotos(sortOrder: [Int], onComplete: onPassengerOperationSuccess) {
+    func reorderPhotos(sortOrder: [Int], onComplete: Bool -> Void) {
         
     }
     
@@ -45,13 +45,13 @@ class Project: BaseRavelryModel {
         let upload = BaseRavelryResource("Upload")
 
         upload.create { data in
-            if let json = data as? Json, token = json["upload_token"] as? String {
+            if let json = data as? [String: AnyObject], token = json["upload_token"] as? String {
                 
                 //println("About to Upload Image")
                 var data = [String: NSData]()
 
                 for (name, image) in images {
-                    data[name] = image.toJpgData()
+                    data[name] = Image.toJpg(image)
                 }
                 
                 var params: [String: AnyObject] = [
@@ -60,10 +60,10 @@ class Project: BaseRavelryModel {
                 ]
                 
                 upload.resource("Image").upload(data, params: params, onComplete: { raw in
-                    if let medias = raw as? Json {
+                    if let medias = raw as? [String: AnyObject] {
                         for (name, file) in medias {
-                            if let media = file as? Json {
-                                self.doAction("create_photo", params: media, onJsonRetrieved: onComplete)
+                            if let media = file as? [String: AnyObject] {
+                                self.doAction("create_photo", params: media, onComplete: onComplete)
                             } else {
                                 onComplete(nil)
                             }

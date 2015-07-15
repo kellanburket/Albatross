@@ -7,21 +7,16 @@
 //
 
 import Foundation
-import Wildcard
 
-internal class BaseRelationship<T: Passenger>: BaseObject {
+internal class BaseRelationship<T: ApiObject>: BaseObject {
     
-    var owner: Passenger?
-        
-    var kind: String {
-        return String()
-    }
-
+    var owner: ApiObject?
+    
     var endpoint: String {
         return T.className
     }
     
-    func setOwner(owner: Passenger) {
+    func setOwner(owner: ApiObject) {
         self.owner = owner
     }
 }

@@ -28,7 +28,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.fkcomp.Passenger</string>
+			<string>com.fkcomp.passenger</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>passenger</string>

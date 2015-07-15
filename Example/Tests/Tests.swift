@@ -2,17 +2,18 @@ import UIKit
 import XCTest
 import Passenger
 
-class Tests: XCTestCase, ImageLoadDelegate {
+class Tests: XCTestCase, MediaLoadDelegate {
 
     let userId = 4952800
     var q: XCTestExpectation? = nil
     
     override func setUp() {
         super.setUp()
-        if let service = Api.shared().getAuthenticationService(AuthenticationType.OAuth1) as? OAuth1 {
+        if let service = Api.shared().getAuthorizationService(AuthorizationType.OAuth1) as? OAuth1 {
             if service.token == nil || service.secret == nil {
-                service.token = "OpuJqmxlvry6z3VEMXOeLNl4Lzln9gWRD8PHEa6X"
-                service.secret = "D7BAObzZNdUS2BA6HCfLfILg8BnkDWlAO486ObNT"
+                //Set test tokens here
+                service.token = ""
+                service.secret = ""
             }
         }
     }
@@ -21,7 +22,6 @@ class Tests: XCTestCase, ImageLoadDelegate {
         super.tearDown()
     }
 
-    /*
     func testSearch() {
         var q = expectationWithDescription("deferred")
 
@@ -31,54 +31,20 @@ class Tests: XCTestCase, ImageLoadDelegate {
                     println(status)
                     println(status.user)
                 }
+                XCTAssert(true, "Loaded Statuses.")
             } else {
-            
+                XCTAssert(false, "Could not search statuses.")
             }
+
+            q.fulfill()
         }
         
-        XCTAssert(true, "Yes")
-        q.fulfill()
 
         waitForExpectationsWithTimeout(10) { error in
             XCTAssertNil(error, "Timeout")
         }
 
     }
-
-    func testFlight() {
-        var q = expectationWithDescription("deferred")
-
-        Status.find(618893613221568512) { status in
-            //println("\n\n<< Testing Status with User Mentions >>")
-            if let status = status as? Status {
-                //println(status)
-                //println(status.user)
-                
-                if let urls = status.user.model?.entities.model?.url["urls"] {
-                    //println(urls)
-                }
-                
-                if let userMentions = status.entities.model?.userMentions {
-                    for userMention in userMentions {
-                        //println(userMention)
-                    }
-                }
-                
-                if let profileImageUrl = status.user.model?.profileImageUrl {
-                    //println(profileImageUrl)
-
-                }
-                
-                XCTAssert(true, "Yes")
-            }
-        }
-
-        waitForExpectationsWithTimeout(10) { error in
-            XCTAssertNil(error, "Timeout")
-        }
-    }
-    */
-    
 
     func testMedia() {
         q = expectationWithDescription("deferred")
@@ -103,21 +69,21 @@ class Tests: XCTestCase, ImageLoadDelegate {
                 XCTAssert(true, "Status Object was constructed.")
             } else {
                 XCTAssert(false, "Could not construct Status Object")
-            }
+            }            
+
+            self.q?.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10) { error in
+        waitForExpectationsWithTimeout(15) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
     
-    func imageDidNotLoad(image: Image) {
+    func mediaDidNotLoad(image: Passenger.Media) {
         XCTAssert(false, "Image Did Not Load")
-        q?.fulfill()
     }
     
-    func imageDidLoad(image: Image) {
+    func mediaDidLoad(image: Passenger.Media) {
         XCTAssert(true, "Image Did Load")
-        q?.fulfill()
     }
 }

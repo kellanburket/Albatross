@@ -9,7 +9,7 @@
 import Foundation
 
 internal protocol Router {
-    var parent: Passenger? { get }
+    var parent: ApiObject? { get }
     var endpoint: String { get }
     func construct(args: AnyObject, node: String?) -> AnyObject
     func getOwnershipHierarchy() -> [Router]

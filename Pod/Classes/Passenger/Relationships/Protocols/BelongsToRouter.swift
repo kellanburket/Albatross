@@ -9,5 +9,4 @@
 import Foundation
 
 internal protocol BelongsToRouter: RelationshipRouter {
-    func one() -> Passenger?
 }

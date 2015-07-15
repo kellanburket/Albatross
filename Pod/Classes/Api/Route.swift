@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Route: ActiveUrlPath {
+internal class Route: ActiveUrlPath {
     
     var method: HttpMethod?
     var action: String
@@ -80,16 +80,16 @@ class Route: ActiveUrlPath {
                         
                         //println("\t\tSubmatch: \(type) : \(field)")
                         
-                        if let obj = hash[type] as? Passenger {
+                        if let obj = hash[type] as? ApiObject {
                             if let value: AnyObject = obj.getProperty(field) {
                                 str = str.gsub(":\(match)", "\(value)")
                             } else {
                                 fatalError("\t\t\tCould Not Get Field Value for '\(field)'.")
                             }
                         } else {
-                            fatalError("\t\t\tComponent `\(type)` is not a Passenger.")
+                            fatalError("\t\t\tComponent `\(type)` is not an ApiObject.")
                         }
-                    } else if let obj = components[0] as? Passenger, value: AnyObject = obj.getProperty(match)  {
+                    } else if let obj = components[0] as? ApiObject, value: AnyObject = obj.getProperty(match)  {
                         str = str.gsub(":\(match)", "\(value)")
                     }
                 }

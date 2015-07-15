@@ -9,6 +9,10 @@
 import Foundation
 import Wildcard
 
+/**
+    Base object upon which Passenger's `Passenger`, `Model`, `Entity`, and `Resource` classes are based. Provides a number of useful reflection methods, which are used internally.
+
+*/
 public class BaseObject: NSObject {
     
     internal var mirrors: [String: MirrorType] {
@@ -38,10 +42,14 @@ public class BaseObject: NSObject {
         return mirrors
     }
 
+    
+    /**
+        Returns a string description of the object for console output
+    */
     override public var description: String {
         return describeSelf()
     }
-    
+
     internal func describeSelf(_ tabs: Int = 0) -> String {
         return ""
     }
@@ -57,10 +65,10 @@ public class BaseObject: NSObject {
             
             return mirror.value //parseObjectMirror(mirror)
         } else if mirror.count >= 1 && mirror.disposition == .Struct {
-            println("\tCount: \(mirror.count)")
-            println("\tDisposition: \(self.dynamicType.getDisposition(mirror.disposition))")
-            println("\tValue: \(mirror.value)")
-            println("\tValue Type: \(mirror.valueType)\n")
+            //println("\tCount: \(mirror.count)")
+            //println("\tDisposition: \(self.dynamicType.getDisposition(mirror.disposition))")
+            //println("\tValue: \(mirror.value)")
+            //println("\tValue Type: \(mirror.valueType)\n")
             
             return mirror.value //parseObjectMirror(mirror)
         } else if mirror.count >= 1 && mirror.disposition == .KeyContainer {

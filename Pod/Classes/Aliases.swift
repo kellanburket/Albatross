@@ -8,11 +8,10 @@
 
 import Foundation
 
-public typealias Json = [String: AnyObject]
-public typealias onJsonRetrieved = Json? -> Void
-
+/**
+    Convenience typealiases for common operations
+*/
 public typealias onMediaRetrieved = Media? -> Void
 public typealias onMediasRetrieved = [Media]? -> Void
-public typealias onPassengerRetrieved = Model? -> Void
-public typealias onPassengersRetrieved = [Model]? -> Void
-public typealias onPassengerOperationSuccess = Bool -> Void
+public typealias onModelRetrieved = Model? -> Void
+public typealias onModelsRetrieved = [Model]? -> Void
