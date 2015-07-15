@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F51398A2DAEEF5B810D5D1A"
+               BlueprintIdentifier = "C34638AD9AAB2DA6344F124C"
                BuildableName = "Passenger.bundle"
                BlueprintName = "Pods-Passenger_Example-Passenger-Passenger"
                ReferencedContainer = "container:Pods.xcodeproj">

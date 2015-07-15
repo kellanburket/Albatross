@@ -25,12 +25,7 @@ Pod::Spec.new do |s|
     s.platform     = :ios, '8.3'
     s.requires_arc = true
 
-    s.source_files = 'Pod/Classes/**/*'
-    s.resource_bundles = {
-        'Passenger' => [
-            'Pod/Assets/*.png'
-        ]
-    }
+    s.source_files = 'Pod/Classes/*.swift'
 
     set_subspec = lambda do |name, subspec, path|
         s.subspec name do |f|
@@ -59,7 +54,7 @@ Pod::Spec.new do |s|
         'Extensions' => nil,
         'Authentication' => nil
     }.each do |name, subspec|
-        set_subspec.call(name, subspec, "Classes/")
+        set_subspec.call(name, subspec, "Pod/Classes/")
     end
 
     s.frameworks = 'UIKit'

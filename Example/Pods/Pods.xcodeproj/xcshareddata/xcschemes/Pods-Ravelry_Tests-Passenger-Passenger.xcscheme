@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AA114FCDD979A2024CE88844"
+               BlueprintIdentifier = "EA7D1BF66F35BBD3EF663CCD"
                BuildableName = "Passenger.bundle"
                BlueprintName = "Pods-Ravelry_Tests-Passenger-Passenger"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -1,34 +1,34 @@
 PODS:
-  - Passenger (0.1.1):
-    - Passenger/Api (= 0.1.1)
-    - Passenger/Authentication (= 0.1.1)
-    - Passenger/Extensions (= 0.1.1)
-    - Passenger/Http (= 0.1.1)
-    - Passenger/Media (= 0.1.1)
-    - Passenger/Passenger (= 0.1.1)
-    - Passenger/Protocols (= 0.1.1)
-    - Passenger/Protocols (= 0.1.1)
-    - Passenger/Protocols (= 0.1.1)
-    - Passenger/Relationships (= 0.1.1)
-    - Passenger/Utilities (= 0.1.1)
+  - Passenger (1.0.0):
+    - Passenger/Api (= 1.0.0)
+    - Passenger/Authentication (= 1.0.0)
+    - Passenger/Extensions (= 1.0.0)
+    - Passenger/Http (= 1.0.0)
+    - Passenger/Media (= 1.0.0)
+    - Passenger/Passenger (= 1.0.0)
+    - Passenger/Protocols (= 1.0.0)
+    - Passenger/Protocols (= 1.0.0)
+    - Passenger/Protocols (= 1.0.0)
+    - Passenger/Relationships (= 1.0.0)
+    - Passenger/Utilities (= 1.0.0)
     - Wildcard
-  - Passenger/Api (0.1.1):
+  - Passenger/Api (1.0.0):
     - Wildcard
-  - Passenger/Authentication (0.1.1):
+  - Passenger/Authentication (1.0.0):
     - Wildcard
-  - Passenger/Extensions (0.1.1):
+  - Passenger/Extensions (1.0.0):
     - Wildcard
-  - Passenger/Http (0.1.1):
+  - Passenger/Http (1.0.0):
     - Wildcard
-  - Passenger/Media (0.1.1):
+  - Passenger/Media (1.0.0):
     - Wildcard
-  - Passenger/Passenger (0.1.1):
+  - Passenger/Passenger (1.0.0):
     - Wildcard
-  - Passenger/Protocols (0.1.1):
+  - Passenger/Protocols (1.0.0):
     - Wildcard
-  - Passenger/Relationships (0.1.1):
+  - Passenger/Relationships (1.0.0):
     - Wildcard
-  - Passenger/Utilities (0.1.1):
+  - Passenger/Utilities (1.0.0):
     - Wildcard
   - Wildcard (1.0.6)
 
@@ -41,7 +41,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Passenger: 1cf5f2e849c34e925bf3105cd9bc37c27c23d413
+  Passenger: 6992ead0eb654ecac8efcf6165e9903b46b42259
   Wildcard: f0bef2e66f69a7e0e57962701072aa46fe016853
 
 COCOAPODS: 0.37.2
