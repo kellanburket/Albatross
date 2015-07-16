@@ -18,15 +18,15 @@ internal func <<<T>(inout left: [T], right: T) {
 }
 
 internal extension Array {
-    mutating func shift() -> T? {
+    internal mutating func shift() -> T? {
         return self.count > 0 ? self.removeAtIndex(0) : nil
     }
     
-    mutating func pop() -> T? {
+    internal mutating func pop() -> T? {
         return self.count > 0 ? self.removeLast() : nil
     }
     
-    func join(delimiter: String) -> String {
+    internal func join(delimiter: String) -> String {
         var joined = ""
         for str in self {
             joined += "\(str)\(delimiter)"

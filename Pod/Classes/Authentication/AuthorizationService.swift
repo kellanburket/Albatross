@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-    Manages the construction of the `Authorization` header for HTTP requests.
+    Abstract class that manages the construction of the `Authorization` header for HTTP requests.
 */
 public class AuthorizationService: NSObject {
  

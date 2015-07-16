@@ -28,7 +28,7 @@ internal func +=<T, E>(inout left: [T: E], right: [T: E]) {
 
 internal extension Dictionary {
     
-    func flip() -> Dictionary<Key, Value>? {
+    internal func flip() -> Dictionary<Key, Value>? {
         if Key.self is Value.Type {
             var out = Dictionary<Key, Value>()
             
@@ -44,7 +44,7 @@ internal extension Dictionary {
         return nil
     }
 
-    func formatKeys() -> [String: AnyObject] {
+    internal func formatKeys() -> [String: AnyObject] {
         var output = [String: AnyObject]()
  
         var doRecursion: (AnyObject -> AnyObject) -> (AnyObject -> AnyObject) =  { f in

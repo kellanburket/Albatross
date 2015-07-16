@@ -13,22 +13,47 @@ import Foundation
 */
 public class OAuth1: AuthorizationService {
 
+    /**
+        API access token
+    */
     public var token: String?
+
+    /**
+        API access secret
+    */
     public var secret: String?
+
+    
+    /**
+        Delegate called after access token has been fetched
+    */
     public var delegate: OAuth1Delegate?
 
+
+    /**
+        Request token URL
+    */
     public var requestTokenUrl: NSURL {
         return _requestTokenUrl
     }
     
+    /**
+        Access token URL
+    */
     public var accessTokenUrl: NSURL {
         return _accessTokenUrl
     }
-    
+
+    /**
+        Authorization URL
+    */
     public var authorizeUrl: NSURL {
         return _authorizeUrl
     }
-    
+
+    /**
+        Request Token Callback
+    */
     public var requestTokenCallback: String {
         return _requestTokenCallback
     }
@@ -202,7 +227,7 @@ public class OAuth1: AuthorizationService {
         Http.start(request)
     }
     
-    /*
+    /**
         Fetches the OAuth1 access token
     
         :param: token   token returned in the `getRequestToken` response

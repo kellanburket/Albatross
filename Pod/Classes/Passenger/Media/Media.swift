@@ -87,11 +87,21 @@ public class Media: ApiObject {
         }
     }
     
+    /**
+        Initialize media from URL
+    
+        :param: url the url
+    */
     convenience public init(url: NSURL) {
         self.init()
         self.url = url
     }
 
+    /**
+        Initialize media with properties
+        
+        :param: properties  an array of properties to parse
+    */
     required public init(_ properties: [String: AnyObject] = [String: AnyObject]()) {
         super.init(properties)
     }

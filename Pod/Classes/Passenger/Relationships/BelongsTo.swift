@@ -17,7 +17,7 @@ public class BelongsTo<T: ApiObject>: BaseRelationship<T>, BelongsToRouter {
  
     private var passenger: T?
     
-    /*
+    /**
         The parent `Model`
     */
     public var parent: ApiObject? {

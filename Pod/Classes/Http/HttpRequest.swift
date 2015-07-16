@@ -138,7 +138,7 @@ public class HttpRequest {
         return arr
     }
     
-    /*
+    /**
         Parse a URL query string
     
         :param: url self-explanatory

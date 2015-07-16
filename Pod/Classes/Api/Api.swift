@@ -14,6 +14,10 @@ internal let SHOW_VERSION_IN_PATH: UInt64 = 1
 internal let USE_ACCEPT_HEADERS: UInt64 = 2
 internal let USE_FILE_EXTENSIONS: UInt64 = 4
 
+/**
+    API class; instantiated when calling its class `shared` with or without a namespace; built from your api.plist and endpoints.plist files.
+
+*/
 public class Api: NSObject {
     
     private var url: NSURL?
@@ -25,7 +29,7 @@ public class Api: NSObject {
 
     internal var endpoints = [String: Endpoint]()
 
-    /*
+    /**
         Consumer key.
     */
     public var key: String {

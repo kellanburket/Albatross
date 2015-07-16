@@ -13,6 +13,9 @@ import Foundation
 */
 public class Model: ApiObject {
     
+    /**
+        The identify value of the model
+    */
     public var id: Int = 0
 
     /**
